@@ -1,8 +1,7 @@
 import pinataSDK from "@pinata/sdk";
 import { NFTStorage } from "nft.storage";
 require("dotenv").config();
-const NFT_STORAGE_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDYxNDQ2QWY3RWFCMTM3Yzg2MWJCRDdhNTNENzk2MjVGODEzOTdjOUIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3MzQyNTQ1NDYxNiwibmFtZSI6IkJsZXV3YXRlcl9maXJzdF9iYXRjaCJ9.swhRJX3oRA4GO89fLCVnraayl2KSkUx9xvPEtENGfVg";
+const NFT_STORAGE_KEY = process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY;
 const PINATA_API_KEY = process.env.NEXT_PUBLIC_PINATA_API_KEY;
 const PINATA_API_SECRET = process.env.NEXT_PUBLIC_PINATA_API_SECRET;
 const PINATA_API_JWT = process.env.NEXT_PUBLIC_JWT;

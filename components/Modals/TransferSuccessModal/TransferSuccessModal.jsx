@@ -18,15 +18,12 @@ const TransferSuccessModal = ({ asset, tx }) => {
           <SuccessIcon />
         </div>
         <div className={classes.heading}>Transfer Success!</div>
-        <div className={classes.description}>
-          You've successfully transfered {asset.name} to {"0xt4423w803tf"}
-        </div>
+        <div className={classes.description}>{`You've successfully transfered ${asset.name}`}</div>
         <a
           className={classes.linkBtn}
           href={`https://mumbai.polygonscan.com/tx/${tx.transactionHash}`}
           target="_blank"
-          rel="noreferrer"
-        >
+          rel="noreferrer">
           View transaction
         </a>
         <Link className={classes.button} href={"/account"}>

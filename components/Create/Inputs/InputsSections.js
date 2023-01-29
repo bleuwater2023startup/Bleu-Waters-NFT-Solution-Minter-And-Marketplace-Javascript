@@ -8,8 +8,8 @@ export const newCollection = () => [
     <TextInput type="text" name="Contract Name" required />
     <TextInput type="text" name="Symbol" required />
   </>,
-  <FileInput name="File" collection />,
-  <RoyaltyInput name="Royalty" />,
+  <FileInput key={1} name="File" collection />,
+  <RoyaltyInput key={2} name="Royalty" />,
   <>
     <FileInput name="File" preview collection />
     <RoyaltyInput name="Royalty" preview />
@@ -27,7 +27,7 @@ export const newContract = () => [
     <TextInput type="text-area" name="Description" required />
     <AttributeInput name="Attributes" />
   </>,
-  <RoyaltyInput name="Royalty" />,
+  <RoyaltyInput key={3} name="Royalty" />,
   <>
     <FileInput name="File" preview />
     <TextInput type="text" name="Name" required preview />

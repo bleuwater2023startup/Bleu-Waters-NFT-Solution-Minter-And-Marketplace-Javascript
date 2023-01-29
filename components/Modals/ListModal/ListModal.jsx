@@ -18,7 +18,7 @@ const ListModal = ({ onClose, onList, listPrice, nftDetails }) => {
         </div>
         <div className={classes.heading}>Confirm listing</div>
         <div className={classes.info}>
-          You'll be asked to review and sign this list action from your wallet.
+          {`You'll be asked to review and sign this list action from your wallet.`}
         </div>
         <div className={classes.assetContainer}>
           <img src={formatIpfsUrl(image)} alt="" className={classes.asset} />
