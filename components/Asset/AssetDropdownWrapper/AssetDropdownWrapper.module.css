@@ -1,0 +1,51 @@
+.container {
+  width: 100%;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 0.8em;
+  overflow: hidden;
+}
+
+.heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6em;
+  background: var(--card-bg);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chevronIcon {
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6em;
+  background: var(--bg-light);
+}
+
+.chevronIcon svg {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-accent);
+  transform: rotate(180deg);
+  transition: transform 50ms;
+}
+
+.content {
+  height: 0;
+  overflow: hidden;
+}
+
+.container.active .content {
+  height: auto;
+}
+
+.container.active .chevronIcon svg {
+  transform: rotate(0);
+}

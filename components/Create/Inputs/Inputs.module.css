@@ -1,0 +1,68 @@
+.container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2em;
+  padding-top: 12em;
+}
+
+.container.reset {
+  animation: fadein 650ms forwards;
+}
+
+@keyframes fadein {
+  from {
+    transform: translateY(1em);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2em;
+}
+
+.royaltyButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  gap: 2em;
+}
+
+.button {
+  align-self: center;
+  width: 220px;
+  margin-top: 2em;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    padding-top: 2em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
+  @keyframes fadein {
+    from {
+      transform: translateY(-1em);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+}

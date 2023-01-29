@@ -1,0 +1,132 @@
+.container {
+  width: 100%;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 20px;
+  padding: 2em 1em;
+  position: relative;
+}
+
+
+.container img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.8em;
+}
+
+
+.container {
+  width: 100%;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 20px;
+  padding: 2em 1em;
+  position: relative;
+}
+
+.container:hover .closeIcon svg {
+  transform: rotate(45deg);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 2.4em;
+  height: 2.4em;
+  background: var(--color-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.closeIcon svg {
+  width: 1em;
+  height: 1em;
+  stroke: var(--bg-light);
+  transition: transform 300ms;
+}
+
+.wrapper {
+  position: relative;
+  width: 28em;
+  height: 20em;
+  margin-top: 4em;
+}
+
+.image1,
+.image2,
+.image3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* border-radius: 0.8em; */
+}
+
+.image1 {
+  transform: translate(4em, -4em);
+  border: 3px solid #FFFFFF;
+  filter: blur(2px);
+  border-radius: 10px;
+}
+
+.image2 {
+  transform: translate(2em, -2em);
+  border: 3px solid #FFFFFF;
+  filter: blur(2px);
+  border-radius: 14px;
+}
+
+.image3 {
+  border: 3px solid #FFFFFF;
+  border-radius: 11px;
+}
+
+@media screen and (max-width: 1200px) {
+  .wrapper {
+    width: 16em;
+    height: 14em;
+  }
+
+  .closeIcon {
+    width: 1.8em;
+    height: 1.8em;
+  }
+
+  .closeIcon svg {
+    width: 0.8em;
+    height: 0.8em;
+    stroke: var(--bg-light);
+    transition: transform 300ms;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    width: calc(100% - 6em);
+    height: 20em;
+    margin-top: 4em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper {
+    margin-top: 2em;
+    width: 14em;
+    height: 12em;
+  }
+
+  .image1 {
+    transform: translate(2em, -2em);
+  }
+
+  .image2 {
+    transform: translate(1em, -1em);
+  }
+}

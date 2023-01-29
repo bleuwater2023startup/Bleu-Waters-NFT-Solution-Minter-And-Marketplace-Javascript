@@ -1,0 +1,159 @@
+.container {
+  flex: 0 0 auto;
+  padding: 1em;
+  position: relative;
+  border-radius: 1.2em;
+  max-width: 28em;
+  background: var(--bg-light);
+  border: 1px solid #EFF3F9;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.imageContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.innerImageContainer {
+  border-radius: 0.6em;
+  overflow: hidden;
+}
+
+.innerImageContainer:hover img {
+  transform: scale(1.1);
+}
+
+
+.innerImageContainer img {
+  width: 100%;
+  max-width: 28em;
+  object-fit: cover;
+  border-radius: 0.6em;
+  transition: all 300ms;
+  margin-bottom: -4px;
+}
+
+.container:hover {
+  box-shadow: 14px 15px 13px rgba(93, 134, 194, 0.14);
+}
+
+.details {
+  width: 100%;
+}
+
+.withDots {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1em;
+  padding-right: 1em;
+  border-bottom: 2px solid var(--color-border);
+  position: relative;
+}
+
+.dropdownContainer {
+  position: absolute;
+  right: 2em;
+  top: 0;
+  width: 16em;
+  transform: translateY(-95%);
+  visibility: hidden;
+  transition: transform 300ms;
+}
+
+.dropdownContainer.active {
+  transform: translateY(-100%);
+  visibility: visible;
+}
+
+.dropdown {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--bg-light);
+  box-shadow: 17px 18px 18px rgba(93, 134, 194, 0.09);
+  border-radius: 0.4em;
+}
+
+.item {
+  width: 100%;
+  border-bottom: 0.3px solid #DDDDEB;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 0.4em;
+  cursor: pointer;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item:hover {
+  background: var(--card-bg);
+}
+
+
+.dotsIcon {
+  transform: rotate(90deg);
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.dotsIcon:hover {
+  background: var(--card-bg);
+}
+
+.name {
+  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.collectionName {
+  font-size: 1rem;
+  color: var(--color-accent);
+}
+
+.name,
+.collectionName {
+  width: 100%;
+  max-width: 12em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  padding: 1em;
+}
+
+.value {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.usdValue {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.tag {
+  margin-top: 1em;
+  text-align: center;
+  background: var(--card-bg);
+  padding: 0.8em;
+  border-radius: 0.8em;
+  font-weight: 500;
+}

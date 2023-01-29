@@ -1,0 +1,146 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background: rgba(50, 50, 86, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+}
+
+.wrapper {
+  width: 100%;
+  min-width: 28em;
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
+  padding: 2em;
+  padding-top: 4em;
+  padding-bottom: 3em;
+  border-radius: 2em;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  animation: scale 150ms;
+  position: relative;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.closeIcon_square,
+.closeIcon_round {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon_square svg,
+.closeIcon_round svg {
+  width: 0.8em;
+  height: 0.8em;
+  stroke: var(--color-dark);
+}
+
+.closeIcon_round {
+  position: absolute;
+  top: 1.4em;
+  right: 1.4em;
+  border-radius: 50%;
+  width: 2.4em;
+  height: 2.4em;
+  background: transparent;
+}
+
+.closeIcon_round:hover {
+  background: var(--card-bg);
+}
+
+.closeIcon_square {
+  position: static;
+  border-radius: 0.6em;
+  height: 100%;
+  width: 2.4em;
+  background: var(--card-bg);
+  border: 1px solid var(--color-border);
+}
+
+.closeIcon_square:hover svg {
+  stroke: var(--color-error);
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.attributes {
+  width: 100%;
+  max-height: 16em;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.attribute {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.4em;
+  padding: 0.1em;
+}
+
+.attribute input {
+  width: 12em;
+  border: 1px solid transparent;
+  background: var(--card-bg);
+  padding: 0.8em;
+  border-radius: 0.6em;
+  border: 1px solid var(--color-border);
+}
+
+.attribute input:hover {
+  border: 1px solid var(--color-border-hover);
+}
+
+.attribute input:focus {
+  outline: 1px solid var(--color-accent);
+}
+
+.addIcon {
+  margin-left: 0.4em;
+  align-self: flex-start;
+}
+
+.addIcon div {
+  margin-bottom: 2px;
+}
+
+.button {
+  width: 100%;
+}
+
+@media screen and (max-width: 540px) {
+  .wrapper {
+    padding: 2em 1em;
+  }
+}

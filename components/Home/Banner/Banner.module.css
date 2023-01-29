@@ -1,0 +1,157 @@
+.container {
+  width: 100%;
+  height: 42em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--color-light);
+}
+
+.bannerVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.512);
+}
+
+.overlay2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: rgb(0, 0, 0);
+}
+
+.textContainer {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.mainText {
+  font-weight: 800;
+  font-size: 4rem;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.subText_2,
+.subText {
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 48px;
+  text-align: center;
+  max-width: 48em;
+  padding: 0 2em;
+}
+
+.subText {
+  margin-top: 1em;
+}
+
+.subText_2 {
+  font-size: 1rem;
+  padding: 0 2em;
+}
+
+.button {
+  margin-bottom: 4em;
+  width: 9em;
+}
+
+.chevronIcon {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 2em; */
+  border: 2px solid transparent;
+  transition: all 300ms;
+}
+
+.chevronIcon svg {
+  width: 1.4em;
+  height: 1.4em;
+  stroke: var(--color-light);
+  transform: rotate(180deg);
+  cursor: pointer;
+  animation: bounce 1250ms infinite alternate;
+}
+
+.chevronIcon:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(-20%) rotate(180deg);
+  }
+
+  to {
+    transform: translateY(20%) rotate(180deg);
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  .mainText {
+    font-size: 3rem;
+  }
+
+  .subText {
+    font-size: 1.4rem;
+    line-height: 40px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .mainText {
+    font-size: 2.4rem;
+  }
+
+  .subText {
+    font-size: 1rem;
+    line-height: 28px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding-top: 2em;
+  }
+
+  .mainText {
+    font-size: 1.8rem;
+  }
+
+  .subText {
+    font-size: 1rem;
+  }
+}

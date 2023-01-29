@@ -1,0 +1,85 @@
+.container {
+  width: 100%;
+  max-width: 28em;
+  position: sticky;
+  top: 8em;
+}
+
+.heading {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 1em;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.flowContainer {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2em;
+}
+
+.checkIcon {
+  width: 100%;
+  position: absolute;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.description {
+  font-size: 0.8rem;
+}
+
+.heading1 {
+  font-weight: 800;
+  font-size: 2.2rem;
+  line-height: 83px;
+  font-family: 'Inter';
+  font-style: normal;
+}
+
+.network {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4em;
+  margin-bottom: 3em;
+}
+
+.chain {
+  padding: 0.4em 1em;
+  padding-bottom: 0.3em;
+  border-radius: 0.4em;
+  background: #F2EAFF;
+  font-weight: 600;
+}
+
+.address {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 24em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    max-width: 100%;
+    position: static;
+    top: 0;
+  }
+}

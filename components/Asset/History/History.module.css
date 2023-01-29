@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2em;
+}
+
+.innerContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.icon {
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #6c4de880 0%, #cfd08780 48.23%, #ee5fe771 100%);
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+}
+
+.account {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.type {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.date_time {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+/* .price {} */
+
+.nativePrice {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.usdPrice {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.loadBtn {
+  margin-top: 2em;
+  width: 20em;
+}

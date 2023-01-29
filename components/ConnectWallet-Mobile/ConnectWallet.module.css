@@ -1,0 +1,111 @@
+.connect,
+.connected {
+  width: 12em;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  position: relative;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  background: var(--bg-dark);
+  border-radius: 1em;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  color: var(--color-light);
+}
+
+.connected {
+  width: 100%;
+  justify-content: flex-start;
+  padding-left: 1em;
+}
+
+.dropdownContainer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18em;
+  transform: translateY(95%);
+  visibility: hidden;
+  transition: transform 300ms;
+}
+
+.dropdownInnerContainer {
+  color: black;
+  padding: 1em;
+  border-radius: 1em;
+  background: var(--bg-light);
+  margin-top: 1em;
+}
+
+.chevron {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.4em;
+}
+
+.chevron svg {
+  transform: rotate(-180deg);
+  transition: transform 100ms 200ms;
+  width: 1.4em;
+  height: 1.4em;
+  stroke: var(--bg-light);
+}
+
+.connected:hover .chevron svg {
+  transform: rotate(0deg);
+}
+
+.connected:hover .dropdownContainer {
+  visibility: visible;
+  transform: translateY(100%);
+}
+
+.dropdown {
+  width: 100%;
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4em;
+}
+
+.listItem {
+  width: 100%;
+  padding: 1em;
+  border-radius: 0.6em;
+}
+
+.listItem:hover {
+  background: var(--card-bg);
+}
+
+.listItem:first-child {
+  background: var(--card-bg);
+}
+
+.connected:hover .disconnect {
+  transform: translateY(0);
+}
+
+.chainIcon {
+  width: 2em;
+  height: 2em;
+}
+
+.account {
+  font-weight: 600;
+}
+
+.address {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 1.2rem;
+}

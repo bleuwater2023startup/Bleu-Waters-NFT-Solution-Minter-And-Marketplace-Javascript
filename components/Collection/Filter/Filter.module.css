@@ -1,0 +1,157 @@
+.container {
+  width: 20em;
+  height: calc(100vh - 11em);
+  position: sticky;
+  top: 10.4em;
+  overflow: auto;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 15px 18px 18px rgba(93, 134, 194, 0.07);
+  border-radius: 1em;
+  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.closeIcon {
+  display: none;
+}
+
+.priceContainer,
+.statusContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em 0;
+}
+
+.priceInnerContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1em;
+  padding: 0 1em;
+}
+
+.button>* {
+  padding: 1em 2.4em;
+  border-radius: 1em;
+  background: var(--card-bg);
+  font-weight: 600;
+}
+
+.status {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.price {
+  width: 100%;
+}
+
+.range {
+  margin-bottom: 0.4em;
+}
+
+.priceInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 1.4em 1em;
+  border-radius: 0.8em;
+  background: var(--card-bg);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.tag {
+  font-size: 0.8rem;
+}
+
+.attributeWrapper {
+  width: 100%;
+  max-height: 20em;
+  overflow: auto;
+}
+
+.attributeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.4em 1em;
+  gap: 1em;
+  cursor: pointer;
+}
+
+.attribute {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 24em;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .closeIcon {
+    display: block;
+    border: 1px solid red;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-right: 1em;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+  }
+
+  .closeIcon svg {
+    stroke: var(--color-dark);
+    width: 0.8em;
+    height: 0.8em;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .container {
+    width: 20em;
+  }
+}

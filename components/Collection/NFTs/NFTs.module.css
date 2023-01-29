@@ -1,0 +1,232 @@
+.container {
+  width: 100%;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+  padding: 1em;
+  position: sticky;
+  top: 4.8em;
+  gap: 2em;
+  background: white;
+  z-index: 2;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em 1em;
+  gap: 1em;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 15px 18px 18px rgba(93, 134, 194, 0.07);
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.chevronIcon {
+  transform: rotate(90deg);
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-accent);
+}
+
+.chevronIcon.isFilter {
+  transform: rotate(-90deg);
+}
+
+.filterIcon {
+  display: none;
+}
+
+.searchContainer {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: 1em;
+  min-width: 20em;
+}
+
+.display {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.innerContainer {
+  flex: 1;
+}
+
+.filterContainer {
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.filterContainer>div {
+  cursor: pointer;
+}
+
+.clearBtn,
+.attribute {
+  flex: 0 0 auto;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 0.4em 1em;
+  border-radius: 0.8em;
+  background: var(--card-bg);
+}
+
+.clearBtn>div:first-child,
+.attribute>div:first-child {
+  margin-bottom: 0.2em;
+}
+
+.closeIcon {
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon svg {
+  width: 0.6em;
+  height: 0.6em;
+  stroke: var(--color-dark);
+}
+
+.closeIcon:hover svg {
+  stroke: var(--color-error);
+}
+
+.clearBtn:hover {
+  color: var(--color-error);
+}
+
+.clearBtn:hover svg {
+  stroke: var(--color-error);
+}
+
+.nfts {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 1em;
+}
+
+@media screen and (max-width: 2400px) {
+  .nfts {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .nfts {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (max-width: 1560px) {
+  .nfts {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .nfts {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .control {
+    top: 4.2em;
+  }
+
+  .nfts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .nfts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .control {
+    gap: 1em;
+  }
+
+  .filterText,
+  .chevronIcon {
+    display: none;
+  }
+
+  .filterIcon {
+    display: block;
+    margin-bottom: -0.2em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .nfts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .nfts {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .nfts.isFilter {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .searchContainer {
+    min-width: 6em;
+  }
+}

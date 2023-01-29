@@ -1,0 +1,51 @@
+.paginate {
+  width: 100%;
+  margin-top: 6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.paginate input {
+  padding: 0.6em;
+  width: 5em;
+  background: var(--card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.4em;
+}
+
+.pageCount {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.iconLeft,
+.iconRight {
+  border: 1px solid var(--color-border);
+  stroke: var(--color-accent);
+  width: 2em;
+  height: 2em;
+  background: var(--card-bg);
+  border-radius: 0.4em;
+  cursor: pointer;
+}
+
+.iconLeft {
+  transform: rotate(-90deg);
+}
+
+.iconRight {
+  transform: rotate(90deg);
+}
+
+.goBtn {
+  color: var(--color-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 300ms;
+}
+
+.goBtn:hover {
+  color: var(--color-border);
+}

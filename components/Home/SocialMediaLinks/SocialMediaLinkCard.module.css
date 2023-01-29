@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em 2em;
+  background: var(--card-bg);
+  border-radius: 1em;
+  transition: transform 300ms;
+  cursor: pointer;
+}
+
+.innerContainer {
+  font-weight: 600;
+}
+
+.container:hover {
+  transform: scale(0.97);
+}

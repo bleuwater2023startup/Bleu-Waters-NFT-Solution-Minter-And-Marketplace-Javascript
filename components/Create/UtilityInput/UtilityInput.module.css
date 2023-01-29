@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  border: 1px solid red;
+}
+
+.innerContainer {
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 168%;
+  border: 1px solid red;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 168%;
+  border: 1px solid red;
+}
+
+.attributes {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.attribute {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.4em 0.8em;
+}

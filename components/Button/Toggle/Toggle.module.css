@@ -1,0 +1,28 @@
+.container {
+  Width: 36px;
+  Height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 18px;
+  padding: 0 2px;
+  cursor: pointer;
+  background: #E2E4E8;
+}
+
+.innerContainer {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transition: all 300ms;
+  background: var(--bg-light);
+}
+
+.container.active .innerContainer {
+  transform: translateX(120%);
+  background: var(--bg-light);
+}
+
+.container.active {
+  background: var(--color-accent);
+}

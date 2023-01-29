@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  height: 3em;
+  padding: 0 1em;
+  border-radius: 1em;
+  background: white;
+}
+
+.container.accent {
+  background: #F6F7FA;
+  border: 1px solid #DDDDEB;
+}
+
+.container input {
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.searchIcon {
+  stroke: var(--color-dark);
+}
+
+.searchIcon.faint {
+  stroke: var(--color-faint);
+}

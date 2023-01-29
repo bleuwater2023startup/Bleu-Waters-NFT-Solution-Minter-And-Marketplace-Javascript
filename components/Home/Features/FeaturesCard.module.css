@@ -1,0 +1,46 @@
+.container {
+  width: auto;
+  max-width: 24em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #E5E8EB;
+  box-shadow: 29px 37px 39px rgba(93, 134, 194, 0.1);
+  border-radius: 20px;
+  padding: 1em;
+  padding-bottom: 3em;
+  transition: transform 300ms;
+  cursor: default;
+  background: black;
+  color: var(--color-light);
+}
+
+.container:hover {
+  transform: translateY(-1em);
+}
+
+.icon {
+  margin-top: -5.4em;
+  margin-bottom: 2em;
+  transition: all 400ms;
+}
+
+.container:hover .icon {
+  transform: translateY(1em);
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 48px;
+  margin-bottom: 1em;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 26px;
+  height: 6em;
+}

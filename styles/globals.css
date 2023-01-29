@@ -1,9 +1,32 @@
+:root {
+  --color-dark: #2C3857;
+  --color-light: #FFFFFF;
+  --color-faint: #A4A9B6;
+  --color-accent: #0CAFFD;
+  --color-accent-light: #138ac1;
+  --color-accent-dark: #0381ff;
+  --bg-dark: linear-gradient(180deg, #0F96FF 0%, #4640FF 100%);
+  --bg-dark-hover: linear-gradient(180deg, #0590fa 0%, #3932fe 100%);
+  --bg-light: #FFFFFF;
+  --card-bg: #F3F4F8;
+  --card-bg-accent: #F5F7FC;
+  --card-bg-accent-light: #D8ECFF;
+  --color-border: #DDDDEB;
+  --color-border-hover: #D1D1D1;
+  --color-success: #14D3B2;
+  --color-error: #F47257;
+  --color-info: #0D99FF;
+  --color-warning: #FFD100;
+}
+
 html,
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  max-width: 2400px;
+  color: #2C3857;
 }
 
 a {
@@ -13,12 +36,15 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;

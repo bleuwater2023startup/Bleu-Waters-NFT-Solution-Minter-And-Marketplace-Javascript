@@ -1,0 +1,159 @@
+.container {
+  width: 100%;
+  max-width: 36em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+.section {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.heading {
+  width: 100%;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 1em;
+}
+
+.saleType {
+  width: 100%;
+  max-width: 24em;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1em;
+}
+
+.type {
+  flex: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2em;
+  padding: 2em;
+  background: var(--bg-light);
+  border: 1px solid var(--color-accent);
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 35px;
+  text-align: center;
+}
+
+.type:last-child {
+  background: var(--card-bg);
+  border: 1px solid var(--color-border);
+}
+
+.priceInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 0.4em 1em;
+  padding: 1em 2em;
+  border-radius: 0.8em;
+  background: var(--card-bg);
+  border: 1px solid var(--color-border);
+}
+
+.priceInput input {
+  flex: 1;
+  font-size: 1rem;
+  border: none;
+  background: transparent;
+}
+
+.priceInput input:focus {
+  outline: none;
+}
+
+.priceInput label {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.usdPrice {
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 0 2em;
+  font-weight: 500;
+}
+
+.fees {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 2em;
+  border-radius: 0.8em;
+  border: 1px solid var(--color-border);
+}
+
+.fee {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.name {
+  flex: 1;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.chain {
+  width: 100%;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 1em 2em;
+  border-radius: 0.8em;
+  background: var(--card-bg);
+  border: 1px solid var(--color-border);
+}
+
+.chain .name {
+  flex: 1;
+  padding-bottom: 0.2em;
+}
+
+.chain .icon {
+  width: 2em;
+  height: 2em;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+.button {
+  width: 100%;
+  height: 3.8em;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .type {
+    gap: 0;
+  }
+}

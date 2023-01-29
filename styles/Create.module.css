@@ -1,0 +1,125 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2em;
+  position: relative;
+}
+
+.mintContainer {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6em;
+}
+
+.mainText {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 0.4em;
+}
+
+.subText {
+  text-align: center;
+  width: 100%;
+  max-width: 32em;
+  margin: 0 auto;
+  margin-bottom: 4em;
+}
+
+.mintTypeContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2em;
+}
+
+.mintType {
+  width: 100%;
+  max-width: 26em;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 1.2em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.mintType:last-child svg {
+  margin-top: -1em;
+}
+
+.mintType:hover {
+  border: 1px solid var(--color-accent);
+  background: rgba(53, 66, 100, 0.03);
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 0.4em;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-bottom: 1em;
+}
+
+.arrow {
+  width: max-content;
+  align-self: flex-start;
+  cursor: pointer;
+  margin-bottom: 2em;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .mintContainer {
+    gap: 4em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .mintContainer {
+    gap: 2em;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mintTypeContainer {
+    flex-direction: column;
+  }
+}

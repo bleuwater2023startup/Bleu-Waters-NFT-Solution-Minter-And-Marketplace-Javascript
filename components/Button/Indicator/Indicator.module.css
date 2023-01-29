@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.container {
+  border: 1px solid gainsboro;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.wrapper.active .container {
+  border: 1px solid #323256;
+}
+
+.wrapper.complete .container {
+  background: #323256;
+}
+
+.innerContainer {
+  background: gainsboro;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.wrapper.active .innerContainer {
+  background: #323256;
+  animation: blink 850ms infinite;
+}
+
+@keyframes blink {
+  from {
+    box-shadow: 0px 0px 0px 6px #32325694;
+  }
+
+  to {
+    box-shadow: 0px 0px 0px 0px #323256;
+  }
+}
+
+.wrapper.complete .innerContainer {
+  background: white;
+}
+
+.line {
+  width: auto;
+  height: 80px;
+  background: gainsboro;
+}
+
+.innerLine {
+  width: 4px;
+}
+
+.wrapper.active .innerLine,
+.wrapper.complete .innerLine {
+  background: #323256;
+  animation: flow 300ms forwards;
+}
+
+@keyframes flow {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+.checkIcon {
+  width: 1.6em;
+  height: 1.6em;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+}
+
+.wrapper.complete .checkIcon {
+  visibility: visible;
+}

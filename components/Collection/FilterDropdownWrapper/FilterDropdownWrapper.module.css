@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  max-width: 36em;
+}
+
+.heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  text-transform: capitalize;
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 600;
+}
+
+.chevronIcon {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-faint);
+  transform: rotate(180deg);
+}
+
+.content {
+  height: 0;
+  overflow: hidden;
+}
+
+.container.active .content {
+  height: auto;
+}
+
+.container.active .chevronIcon {
+  transform: rotate(0);
+}

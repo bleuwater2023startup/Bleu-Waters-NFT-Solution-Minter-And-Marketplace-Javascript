@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  max-width: 20em;
+  flex: 0 0 auto;
+  padding: 1em;
+  padding-bottom: 3em;
+  border-radius: 1em;
+  position: relative;
+  border-radius: 1.2em;
+  background: var(--bg-light);
+  border: 1px solid #EFF3F9;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.08);
+}
+
+.container:hover {
+  box-shadow: 14px 15px 13px rgba(93, 134, 194, 0.14);
+}
+
+.container img {
+  width: 100%;
+  max-width: 28em;
+  object-fit: cover;
+  border-radius: 0.6rem;
+  margin-bottom: 1em;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.collectionName {
+  font-size: 1rem;
+  color: var(--color-accent);
+}

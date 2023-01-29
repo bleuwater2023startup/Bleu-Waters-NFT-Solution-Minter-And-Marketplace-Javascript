@@ -1,0 +1,49 @@
+.container {
+  border: 1px solid red;
+  width: 100%;
+  z-index: 1;
+}
+
+.innerContainer {
+  border: 1px solid red;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.selectContainer {
+  flex: 1;
+  border: 1px solid red;
+  position: relative;
+}
+
+.activeSelect {
+  border: 1px solid red;
+  padding: 0.6em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown {
+  width: 100%;
+  border: 1px solid red;
+  max-height: 0;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  background: white;
+}
+
+.dropdown.active {
+  max-height: 16em;
+}
+
+.contract {
+  border: 1px solid red;
+  padding: 0.6em;
+}

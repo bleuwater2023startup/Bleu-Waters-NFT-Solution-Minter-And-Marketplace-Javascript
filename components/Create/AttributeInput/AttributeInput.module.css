@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+}
+
+.innerContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
+
+.description {
+  font-size: 1rem;
+}
+
+.attributeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.attribute {
+  border: 1px solid var(--color-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.6em 0.8em;
+  border-radius: 0.6em;
+}
+
+.trait_type {
+  color: var(--color-dark);
+  font-weight: 500;
+}

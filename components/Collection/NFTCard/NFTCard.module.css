@@ -1,0 +1,96 @@
+.container {
+  flex: 0 0 auto;
+  padding: 0.6em;
+  padding-bottom: 1.2em;
+  border-radius: 1em;
+  position: relative;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.14);
+  border-radius: 0.8em;
+  max-width: 28em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imageContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.6em;
+}
+
+.innerImageContainer {
+  overflow: hidden;
+  border-radius: 0.6rem;
+}
+
+.container img {
+  width: 100%;
+  max-width: 28em;
+  object-fit: cover;
+  border-radius: 0.6rem;
+  transition: all 300ms;
+}
+
+.container:hover img {
+  transform: scale(1.1);
+}
+
+.details {
+  width: 100%;
+}
+
+.name {
+  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 14em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.8em;
+}
+
+.notListed,
+.price {
+  padding: 0.8em;
+  border-radius: 0.4em;
+  background: var(--card-bg);
+}
+
+.notListed {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.76em;
+}
+
+.value {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.usdValue {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--color-faint);
+}
+
+.buttonContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+.container:hover .buttonContainer {
+  display: flex;
+}

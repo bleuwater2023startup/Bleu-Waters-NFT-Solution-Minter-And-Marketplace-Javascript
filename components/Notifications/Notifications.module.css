@@ -1,0 +1,90 @@
+.container {
+  position: fixed;
+  top: 6em;
+  right: 0;
+  width: 20em;
+  z-index: 25;
+}
+
+.notificationContainer {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 1em;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  animation: movein 300ms forwards;
+  transform: translateX(100%);
+  overflow: hidden;
+  border-radius: 0.6em;
+}
+
+@keyframes movein {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-0.5em);
+  }
+}
+
+.icon {
+  font-size: 3em;
+  cursor: pointer;
+}
+
+.text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-bottom: 0.2em;
+}
+
+.line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  width: 99%;
+  transform: translateX(-100%);
+}
+
+.line.active {
+  animation: slidein 6500ms;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.success {
+  background: var(--color-success);
+}
+
+.error {
+  background: var(--color-error);
+}
+
+.info {
+  background: var(--color-info);
+}
+
+.warning {
+  background: var(--color-warning);
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    top: 5.2em;
+  }
+}

@@ -1,0 +1,15 @@
+.container {
+  cursor: var(--cursor-pointer);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+}
+
+.copyIcon {
+  width: 1.2em;
+}
+
+.copyIcon.active {
+  transform: scale(0.8);
+}

@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  height: 20em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.mainText {
+  font-weight: 800;
+  font-size: 2rem;
+  /* line-height: 83px; */
+}
+
+.subText {
+  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 500;
+  /* line-height: 168%; */
+}
+
+.button {
+  width: 100%;
+  max-width: max-content;
+}

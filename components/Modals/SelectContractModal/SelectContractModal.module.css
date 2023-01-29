@@ -1,0 +1,161 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background: rgba(50, 50, 86, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+}
+
+.wrapper {
+  width: 28em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
+  padding: 2em;
+  padding-top: 4em;
+  padding-bottom: 3em;
+  border-radius: 1.4em;
+  background: white;
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 20px;
+  animation: scale 150ms;
+  position: relative;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 2em;
+  height: 2em;
+  background: var(--card-bg);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon svg {
+  width: 0.8em;
+  height: 0.8em;
+  stroke: var(--color-dark);
+}
+
+.heading {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.description {
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.8rem;
+  max-width: 20em;
+}
+
+.searchContainer {
+  width: 90%;
+  margin-bottom: 1em;
+  border: 1px solid var(--color-border);
+  border-radius: 0.8em;
+}
+
+.contractContainer {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  max-height: 14em;
+  overflow: auto;
+  padding: 0.4em;
+}
+
+.contract {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+  padding: 2em;
+  background: #FFFFFF;
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 5px 18px rgba(93, 134, 194, 0.11);
+  border-radius: 21px;
+}
+
+.innerContainer {
+  flex: 1;
+}
+
+.selectButton {
+  text-align: center;
+  padding: 0.1em 1em;
+  padding-bottom: 0.3em;
+  cursor: pointer;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  border-radius: 0.6em;
+}
+
+.contractName {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.4em;
+}
+
+.contractDescription {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4em;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.createButton {
+  width: 100%;
+  max-width: 14em;
+}
+
+@media screen and (max-width: 540px) {
+  .container {
+    padding: 1em;
+  }
+
+  .wrapper {
+    padding: 1em;
+  }
+
+  .contract {
+    padding: 1em;
+    border-radius: 0.6em;
+  }
+
+  .contractName,
+  .contractDescription {
+    font-size: 0.8rem;
+  }
+}

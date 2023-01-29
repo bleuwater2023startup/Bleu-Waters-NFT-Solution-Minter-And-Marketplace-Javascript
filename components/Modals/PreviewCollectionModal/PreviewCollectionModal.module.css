@@ -1,0 +1,122 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background: rgba(50, 50, 86, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+  padding-top: 6em;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 28em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
+  padding: 2em;
+  padding-bottom: 3em;
+  border-radius: 1.4em;
+  background: white;
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 20px;
+  animation: scale 150ms;
+  position: relative;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.closeIcon {
+  width: 2em;
+  height: 2em;
+  background: var(--card-bg);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon svg {
+  width: 0.8em;
+  height: 0.8em;
+  stroke: var(--color-dark);
+}
+
+.heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.attributeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  flex-wrap: wrap;
+  max-height: 12em;
+  overflow: auto;
+}
+
+.attribute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.4em 0.8em;
+  background: rgba(13, 153, 255, 0.12);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 0.8em;
+}
+
+.container img {
+  width: 100%;
+  height: 14em;
+  object-fit: cover;
+  border-radius: 0.8em;
+}
+
+.attributeLabel {
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 540px) {
+  .wrapper {
+    max-width: 24em;
+  }
+
+  .container img {
+    height: 10em;
+  }
+
+  .attributeContainer {
+    max-height: 10em;
+  }
+
+  .attribute {
+    gap: 0.4em;
+  }
+}

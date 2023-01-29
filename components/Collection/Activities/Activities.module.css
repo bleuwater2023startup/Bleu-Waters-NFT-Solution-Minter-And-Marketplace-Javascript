@@ -1,0 +1,151 @@
+.container {
+  width: 100%;
+  margin-top: 4em;
+}
+
+.tabContainer {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2em;
+  position: sticky;
+  top: 4.8em;
+  background: white;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg);
+  padding: 0.4em;
+  border-radius: 0.8em;
+}
+
+.tabs:hover .dropdownContainer {
+  transform: translateY(94%) translateX(4.4em);
+  visibility: visible;
+}
+
+.tabs:hover .chevronIcon {
+  transform: rotate(0);
+}
+
+.tab,
+.tabBtn {
+  width: auto;
+  padding: 0.6em;
+  text-align: center;
+  border-radius: 0.8em;
+  font-weight: 600;
+}
+
+.tabBtn {
+  background: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  cursor: pointer;
+}
+
+.chevronIcon {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-accent);
+  transform: rotate(180deg);
+  transition: transform 200ms;
+}
+
+.dropdownContainer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 16em;
+  transform: translateY(92%) translateX(4.4em);
+  visibility: hidden;
+  transition: transform 300ms;
+}
+
+.dropdown {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--bg-light);
+  border: 0.3px solid #DDDDEB;
+  box-shadow: 17px 18px 18px rgba(93, 134, 194, 0.09);
+  border-radius: 0.8em;
+}
+
+.button {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 1em;
+}
+
+.button:hover {
+  background: var(--card-bg);
+}
+
+.container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.container th {
+  text-align: left;
+  border-bottom: 2px solid var(--color-border);
+  color: var(--color-faint);
+}
+
+.container th,
+.container td {
+  padding: 15px;
+  font-weight: 500;
+}
+
+.container td:first-child>div {
+  display: inline-block;
+}
+
+.wrapper {
+  width: 100%;
+  overflow: auto;
+}
+
+.linkBtn svg {
+  width: 1em;
+  height: 1em;
+  stroke: var(--color-dark);
+}
+
+.imageContainer {
+  width: 3em;
+  height: 3em;
+  margin-right: 0.4em;
+  border-radius: 0.4em;
+  background: var(--color-dark);
+}
+
+.imageContainer img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 0.4em;
+}
+
+@media screen and (max-width: 1200px) {
+  .tabContainer {
+    top: 4.2em;
+  }
+
+  .container table {
+    width: 76em;
+  }
+}

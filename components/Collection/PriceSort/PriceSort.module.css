@@ -1,0 +1,75 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: 0.8em;
+}
+
+.activeItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 0.8em 1em;
+  border-radius: 0.8em;
+  font-weight: 600;
+}
+
+.chevronIcon {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-accent);
+  transform: rotate(180deg);
+  transition: transform 150ms;
+}
+
+.chevronIcon.active {
+  transform: rotate(0);
+}
+
+.container:hover .chevronIcon {
+  transform: rotate(0);
+}
+
+.container:hover .dropdownContainer {
+  transform: translateY(100%);
+  visibility: visible;
+}
+
+.dropdownContainer {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateY(95%);
+  transition: transform 300ms;
+  visibility: hidden;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em;
+  background: var(--bg-light);
+  border: 1px solid #E5E8EB;
+  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
+  border-radius: 0.8em;
+  margin-top: 1em;
+}
+
+.dropdown .item {
+  width: 100%;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 0.8em;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dropdown .item:hover {
+  background: var(--card-bg);
+}
