@@ -1,6 +1,6 @@
 import classes from "./PurchaseNFTModal.module.css";
 import CloseIcon from "../../../assets/icon-close.svg";
-import InfoIcon from "../../../assets/icon-info.svg";
+import InfoIcon from "../../../assets/icon-info-2.svg";
 import Button from "../../Button/Button";
 import { ethers } from "ethers";
 import { getMaticUsdPrice } from "../../../utils";
@@ -42,9 +42,7 @@ const PurchaseNFTModal = ({ onClose, onPurchaseClick, nft }) => {
         </div>
         <div className={classes.priceDetail}>
           <span>{price} matic</span>
-          <span className={classes.usdPrice}>
-            (${(usd * Number(price)).toFixed(3)})
-          </span>
+          <span className={classes.usdPrice}>(${(usd * Number(price)).toFixed(3)})</span>
         </div>
         <div className={classes.paymentInfo}>
           <div>You will pay</div>
