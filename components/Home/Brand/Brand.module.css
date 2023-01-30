@@ -16,10 +16,9 @@
 
 .mainText {
   max-width: 48em;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.5rem;
   margin-bottom: 1em;
-  line-height: 30px;
   text-align: center;
 }
 

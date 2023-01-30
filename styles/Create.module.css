@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 2em;
   position: relative;
+  margin-bottom: 6em;
 }
 
 .mintContainer {
@@ -24,9 +25,11 @@
 .subText {
   text-align: center;
   width: 100%;
+  line-height: 30px;
   max-width: 32em;
   margin: 0 auto;
   margin-bottom: 4em;
+  font-size: 1rem;
 }
 
 .mintTypeContainer {
@@ -72,8 +75,9 @@
 
 .description {
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-bottom: 1em;
+  line-height: 30px;
 }
 
 .arrow {
@@ -121,5 +125,9 @@
 @media screen and (max-width: 768px) {
   .mintTypeContainer {
     flex-direction: column;
+  }
+
+  .container {
+    padding: 1em;
   }
 }

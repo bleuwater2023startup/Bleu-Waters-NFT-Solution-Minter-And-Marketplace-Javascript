@@ -9,21 +9,9 @@ import CopyText from "../../CopyText/CopyTest";
 import { ethers } from "ethers";
 
 const CollectionInfo = ({ collection }) => {
-  const {
-    name,
-    createdAt,
-    creator,
-    nfts,
-    chainId,
-    priceHistory,
-    owners: _owners,
-  } = collection;
+  const { name, createdAt, creator, nfts, chainId, priceHistory, owners: _owners } = collection;
 
-  console.log({ priceHistory });
-
-  const floor = priceHistory.length
-    ? ethers.utils.formatEther(priceHistory[0].price)
-    : 0;
+  const floor = priceHistory.length ? ethers.utils.formatEther(priceHistory[0].price) : 0;
   const Volume = priceHistory.reduce(
     (acc, curr) => acc + Number(ethers.utils.formatEther(curr.price)),
     0
@@ -34,19 +22,13 @@ const CollectionInfo = ({ collection }) => {
     <div className={classes.container}>
       <div className={classes.DetailContainer}>
         <div className={classes.innerDetailContainer}>
-          <img
-            className={classes.collectionLogo}
-            src={collectionLogo.src}
-            alt=""
-          />
+          <img className={classes.collectionLogo} src={collectionLogo.src} alt="" />
           <div className={classes.collectionDetail}>
             <div className={classes.collectionName}>{name}</div>
             <div className={classes.creator}>
               <div className={classes.property}>Created by</div>
               <div className={classes.value}>
-                <CopyText message={creator.id}>
-                  {formatAccount(creator.id)}
-                </CopyText>
+                <CopyText message={creator.id}>{formatAccount(creator.id)}</CopyText>
               </div>
             </div>
             <div className={classes.moreDetailContainer}>
@@ -72,8 +54,7 @@ const CollectionInfo = ({ collection }) => {
         </div>
       </div>
       <div className={classes.description}>
-        Welcome to the home of {name} on Bleuwater. Discover the best items in
-        this collection.
+        Welcome to the home of {name} on Bleuwater. Discover the best items in this collection.
       </div>
       <div className={classes.data}>
         <div>

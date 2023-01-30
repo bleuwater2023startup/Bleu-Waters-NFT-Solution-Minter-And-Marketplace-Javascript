@@ -75,11 +75,10 @@ const supportedChains = {
     label: "mumbai",
     name: "Polygon (Testnet)",
     icon: <PolygonIcon />,
-    symbol: "MATIC",
+    symbol: "Matic",
     explorer: "https://mumbai.polygonscan.com/address",
     networkId: 80001,
-    livePrice:
-      "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd",
+    livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd",
     add: () => addChain(80001),
     isMainnet: false,
     switch: () => switchChain(80001),

@@ -19,11 +19,12 @@ import CopyText from "../CopyText/CopyTest";
 import supportedChains from "../../utils/supportedChains";
 import { formatAccount } from "../../utils";
 import { useRouter } from "next/router";
+import { disconnectMetamask } from "../MetamaskConnect/MetamaskConnect.script";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const [navOpen, setNavOpen] = useState(false);
-  const { account, chainId } = useContext(StateContext);
+  const { account, chainId, walletProvider, dispatch } = useContext(StateContext);
 
   const router = useRouter();
 
@@ -32,34 +33,34 @@ const Header = () => {
     console.log({ searchValue: e.target.value });
   };
 
+  const handleDisconnect = () => {
+    if (walletProvider?.isWalletConnect) {
+      walletProvider.disconnect();
+    } else {
+      disconnectMetamask({ dispatch });
+    }
+    setNavOpen(false);
+  };
+
   const navDesktop = (
     <div className={`${classes.container} ${classes.desktop}`}>
       <Link href="/">
         <Logo className={classes.logo} />
       </Link>
       <div className={classes.searchContainer}>
-        <Search
-          value={searchValue}
-          onChange={handleChange}
-          placeholder="Search"
-          accent
-        />
+        <Search value={searchValue} onChange={handleChange} placeholder="Search" accent />
       </div>
       <div className={classes.link_connect_box}>
         <Link
           href="/asset/create"
-          className={`${classes.link} ${
-            router.asPath === "/asset/create" && classes.active
-          }`}
-        >
+          className={`${classes.link} ${router.asPath === "/asset/create" && classes.active}`}>
           Create
         </Link>
         <Link
           href="/explore-collections"
           className={`${classes.link} ${
             router.asPath === "/explore-collections" && classes.active
-          }`}
-        >
+          }`}>
           Explore
         </Link>
         <div className={classes.notificationIcon}>
@@ -82,10 +83,7 @@ const Header = () => {
         <div className={classes.notificationIcon}>
           <NotificationIcon />
         </div>
-        <HamburgerIcon
-          onClick={() => setNavOpen(true)}
-          className={classes.openIcon}
-        />
+        <HamburgerIcon onClick={() => setNavOpen(true)} className={classes.openIcon} />
       </div>
     </div>
   );
@@ -96,57 +94,56 @@ const Header = () => {
         <div onClick={() => setNavOpen(false)} className={classes.closeIcon}>
           <CloseIcon />
         </div>
-        <div className={classes.connect}>
+        <div onClick={() => setNavOpen(false)} className={classes.connect}>
           <ConnectWalletMobile />
         </div>
         <div className={classes.addressContainer}>
-          <div className={classes.chain}>
-            {supportedChains[parseInt(chainId)]?.name}
-          </div>
+          <div className={classes.chain}>{supportedChains[parseInt(chainId)]?.name}</div>
           <div className={classes.address}>
-            <CopyText message={account}>
-              {formatAccount(account, 5, 4)}
-            </CopyText>
+            <CopyText message={account}>{formatAccount(account, 5, 4)}</CopyText>
           </div>
         </div>
         <div className={classes.listItemContainer}>
-          <Link href="/account" className={classes.listItem}>
+          <Link onClick={() => setNavOpen(false)} href="/account" className={classes.listItem}>
             <div>My NFTs</div>
             <ChevronIcon className={classes.chevronIcon} />
           </Link>
         </div>
         <div className={classes.listItemContainer}>
-          <Link href="/explore-collections" className={classes.listItem}>
+          <Link
+            onClick={() => setNavOpen(false)}
+            href="/explore-collections"
+            className={classes.listItem}>
             <div>Explore</div>
             <ChevronIcon className={classes.chevronIcon} />
           </Link>
         </div>
         <div className={classes.listItemContainer}>
-          <Link href="/asset/create" className={classes.listItem}>
+          <Link onClick={() => setNavOpen(false)} href="/asset/create" className={classes.listItem}>
             <div>Create</div>
             <ChevronIcon className={classes.chevronIcon} />
           </Link>
         </div>
         <div className={classes.listItemContainer}>
-          <Link href="/" className={classes.listItem}>
+          <Link onClick={() => setNavOpen(false)} href="/" className={classes.listItem}>
             <div>Support</div>
             <ChevronIcon className={classes.chevronIcon} />
           </Link>
         </div>
         <div className={classes.listItemContainer}>
-          <Link href="/" className={classes.listItem}>
+          <div onClick={handleDisconnect} className={classes.listItem}>
             <div>Disconnet wallet</div>
             <ChevronIcon className={classes.chevronIcon} />
-          </Link>
+          </div>
         </div>
         <div className={classes.socialMediaLinks}>
-          <div className={classes.link}>
+          <div onClick={() => setNavOpen(false)} className={classes.link}>
             <Twitter />
           </div>
-          <div className={classes.link}>
+          <div onClick={() => setNavOpen(false)} className={classes.link}>
             <Instagram />
           </div>
-          <div className={classes.link}>
+          <div onClick={() => setNavOpen(false)} className={classes.link}>
             <Telegram />
           </div>
         </div>

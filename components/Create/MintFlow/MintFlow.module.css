@@ -58,6 +58,12 @@
   margin-bottom: 3em;
 }
 
+.notConnected {
+  font-weight: 600;
+  color: var(--color-error);
+  margin-bottom: 1em;
+}
+
 .chain {
   padding: 0.4em 1em;
   padding-bottom: 0.3em;

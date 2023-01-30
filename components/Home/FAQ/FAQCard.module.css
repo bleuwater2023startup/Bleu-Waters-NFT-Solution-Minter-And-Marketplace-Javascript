@@ -23,6 +23,7 @@
   overflow: hidden;
   transition: all 300ms;
   font-size: 1rem;
+  line-height: 30px;
 }
 
 .description.active {
@@ -58,6 +59,6 @@
 
 @media screen and (max-width: 680px) {
   .description.active {
-    height: 16em;
+    height: 20em;
   }
 }

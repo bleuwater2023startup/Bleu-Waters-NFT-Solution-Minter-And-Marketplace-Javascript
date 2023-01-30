@@ -3,10 +3,7 @@ import classes from "./FileInput.module.css";
 import { extractZip } from "./FileInputScript";
 import ZipIcon from "../../../assets/icon-zip.svg";
 import { StateContext } from "../../../context/state.context";
-import {
-  setMintData,
-  setPreviewCollection,
-} from "../../../context/state.actions";
+import { setMintData, setPreviewCollection } from "../../../context/state.actions";
 import ImageUploadPreview from "../ImageUploadPreview/ImageUploadPreview";
 import PreviewInfo from "../PreviewCollection/PreviewInfo";
 
@@ -54,8 +51,7 @@ const FileInput = ({ name, preview, collection }) => {
           href={`https://mumbai.polygonscan.com/address/${mintData["Collection Address"]}`}
           target="_blank"
           rel="noreferrer noopener"
-          className={classes.address}
-        >
+          className={classes.address}>
           {mintData["Collection Address"]}
         </a>
         {collection && !preview && (
@@ -76,8 +72,13 @@ const FileInput = ({ name, preview, collection }) => {
         <div className={classes.imageContainer}>
           <div onClick={handleClick} className={classes.wrapper}>
             <ZipIcon className={classes.zipIcon} />
-            <div>Drag and drop your .ZIP file</div>
-            <div>or</div>
+            {collection && (
+              <>
+                <div>Drag and drop your .ZIP file</div>
+                <div>or</div>
+              </>
+            )}
+
             <div className={classes.uploadBtn}>Click to select file</div>
           </div>
         </div>
@@ -88,22 +89,14 @@ const FileInput = ({ name, preview, collection }) => {
           collection={collection}
         />
       )}
-      {collection && !preview && mintData.File && (
-        <PreviewInfo handlePreview={handlePreview} />
-      )}
+      {collection && !preview && mintData.File && <PreviewInfo handlePreview={handlePreview} />}
     </div>
   );
 };
 
 export default FileInput;
 
-const Input = ({
-  inputRef,
-  collection,
-  handleFileChange,
-  handleImageChange,
-  preview,
-}) => (
+const Input = ({ inputRef, collection, handleFileChange, handleImageChange, preview }) => (
   <input
     ref={inputRef}
     onChange={collection ? handleFileChange : handleImageChange}

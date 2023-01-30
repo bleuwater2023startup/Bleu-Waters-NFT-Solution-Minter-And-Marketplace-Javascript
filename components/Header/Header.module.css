@@ -236,7 +236,7 @@
 
 @media screen and (max-width: 480px) {
   .logo {
-    width: 6em;
+    width: 8em;
   }
 
   .icons {
@@ -245,5 +245,9 @@
 
   .sidebar {
     width: 20em;
+  }
+
+  .container {
+    padding: 1em;
   }
 }

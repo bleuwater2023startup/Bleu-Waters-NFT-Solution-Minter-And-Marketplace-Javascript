@@ -14,15 +14,10 @@ import {
 } from "../CreateScript";
 
 export const _handleCreateCollection = async (createProps) => {
-  const {
-    walletProvider,
-    mintData,
-    mintType,
-    chainId,
-    account,
-    dispatch,
-    handleStep,
-  } = createProps;
+  const { walletProvider, mintData, mintType, chainId, account, dispatch, handleStep } =
+    createProps;
+
+  if (!account) return connectAccountNotification(dispatch);
 
   if (!validateCreateCollectionInput(mintData)) {
     return handleInvalidCreateCollectionInput(dispatch);
@@ -51,8 +46,11 @@ export const _handleCreateCollection = async (createProps) => {
 };
 
 export const _handleUploadToIpfs = async (createProps) => {
-  const { mintType, mintData, dispatch, handleStep } = createProps;
+  const { mintType, mintData, dispatch, handleStep, account } = createProps;
   let ipfsUrl;
+
+  if (!account) return connectAccountNotification(dispatch);
+
   if (mintType === "Single") {
     if (!validateSingleFileInput(mintData)) {
       return handleInvalidSingleFileInput(dispatch);
@@ -78,10 +76,11 @@ export const _handleUploadToIpfs = async (createProps) => {
 };
 
 export const _handleCreateRoyalty = async (createProps) => {
-  const { mintData, walletProvider, dispatch, handleStep } = createProps;
-  const isComplete = mintData["Royalty"].every(
-    ({ address, value }) => address && value
-  );
+  const { mintData, walletProvider, dispatch, handleStep, account } = createProps;
+
+  if (!account) return connectAccountNotification(dispatch);
+
+  const isComplete = mintData["Royalty"].every(({ address, value }) => address && value);
   if (!isComplete) {
     return dispatch(
       setNotification({
@@ -118,8 +117,10 @@ export const _handleCreateRoyalty = async (createProps) => {
 };
 
 export const _handleMint = async (createProps) => {
-  const { walletProvider, mintData, account, mintType, dispatch, router } =
-    createProps;
+  const { walletProvider, mintData, account, mintType, dispatch, router } = createProps;
+
+  if (!account) return connectAccountNotification(dispatch);
+
   dispatch(setLoadingScreen(mintMessage));
   const res = await handleMint({
     walletProvider,
@@ -201,6 +202,15 @@ export const initMint = ({ dispatch }) => {
   );
 };
 
+export const connectAccountNotification = (dispatch) => {
+  dispatch(
+    setNotification({
+      type: "info",
+      message: "Please connect your wallet to continue.",
+    })
+  );
+};
+
 export const validationErrorMessage = {
   type: "error",
   message: "Please fill the required fields.",
@@ -208,8 +218,7 @@ export const validationErrorMessage = {
 
 export const ipfsUploadMessage = {
   title: "Uploading to IPFS",
-  description:
-    "This will take few minutes. Please, wait while we upload your art to IPFS.",
+  description: "This will take few minutes. Please, wait while we upload your art to IPFS.",
 };
 
 export const ipfsErrorUploadMessage = {
@@ -224,8 +233,7 @@ export const ipfsSuccessUploadMessage = {
 
 export const mintMessage = {
   title: "Creating your NFT",
-  description:
-    "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+  description: "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
 };
 
 export const mintErrorMessage = {
@@ -245,14 +253,12 @@ export const createSuccessMessage = {
 
 export const createContractMessage = {
   title: "Creating your collection",
-  description:
-    "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+  description: "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
 };
 
 export const splitMessage = {
   title: "Adding royalty split to your collection",
-  description:
-    "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+  description: "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
 };
 
 export const splitErrorMessage = {

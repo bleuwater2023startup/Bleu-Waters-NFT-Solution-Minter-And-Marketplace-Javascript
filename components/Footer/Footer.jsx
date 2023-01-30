@@ -7,7 +7,7 @@ const Footer = () => {
     <div className={classes.container}>
       <div className={classes.rights}>
         <RightIcon />
-        <div>All Rights reserved 2022</div>
+        <div>All Rights reserved 2023</div>
       </div>
       <div className={classes.protect}>
         <div>Protectd by</div>

@@ -223,6 +223,10 @@
   .nfts.isFilter {
     grid-template-columns: repeat(1, 1fr);
   }
+
+  .selectContainer {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
