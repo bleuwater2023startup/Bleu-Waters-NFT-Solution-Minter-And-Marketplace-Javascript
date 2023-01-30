@@ -52,9 +52,7 @@ const NFTs = ({ collection }) => {
   useEffect(() => {
     if (!nftDetails) return;
     const res = nftDetails.filter(({ attributes }) => {
-      return attributes.some((a) =>
-        activeFilter.includes(`${a.trait_type}:${a.value}`)
-      );
+      return attributes.some((a) => activeFilter.includes(`${a.trait_type}:${a.value}`));
     });
     if (res.length) {
       setFilteredNftDetails(res);
@@ -74,16 +72,9 @@ const NFTs = ({ collection }) => {
   return (
     <div className={classes.container}>
       <div className={classes.control}>
-        <div
-          onClick={() => setShowFilter(!showFilter)}
-          className={classes.filter}
-        >
+        <div onClick={() => setShowFilter(!showFilter)} className={classes.filter}>
           <>
-            <ChevronIcon
-              className={`${classes.chevronIcon} ${
-                showFilter && classes.isFilter
-              }`}
-            />
+            <ChevronIcon className={`${classes.chevronIcon} ${showFilter && classes.isFilter}`} />
             <div className={classes.filterText}>Filter</div>
           </>
           <div className={classes.filterIcon}>
@@ -112,19 +103,13 @@ const NFTs = ({ collection }) => {
             {activeFilter.map((active, idx) => (
               <div key={idx} className={classes.attribute}>
                 <div>{active}</div>
-                <div
-                  className={classes.closeIcon}
-                  onClick={() => handleAttributeClick(idx)}
-                >
+                <div className={classes.closeIcon} onClick={() => handleAttributeClick(idx)}>
                   <CloseIcon />
                 </div>
               </div>
             ))}
             {activeFilter.length ? (
-              <div
-                className={classes.clearBtn}
-                onClick={() => setActiveFilter([])}
-              >
+              <div className={classes.clearBtn} onClick={() => setActiveFilter([])}>
                 <div>clear all</div>
                 <div className={classes.closeIcon}>
                   <CloseIcon />
@@ -138,11 +123,7 @@ const NFTs = ({ collection }) => {
               offsetHeight={860}
               countPerPage={20}
               renderItem={(filteredNftDetails) => (
-                <div
-                  className={`${classes.nfts} ${
-                    showFilter && classes.isFilter
-                  }`}
-                >
+                <div className={`${classes.nfts} ${showFilter && classes.isFilter}`}>
                   {filteredNftDetails.map((nft, idx) => (
                     <NFTCard
                       key={idx}

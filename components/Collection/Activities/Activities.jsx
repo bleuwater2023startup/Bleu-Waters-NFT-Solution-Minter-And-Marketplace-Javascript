@@ -16,11 +16,18 @@ const Activities = ({ collection }) => {
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [storedIpfsData, setStoredIpfsData] = useState({});
 
+  const getImageUrl = (activity) => {
+    if (storedIpfsData) {
+      if (!storedIpfsData[activity.nft.tokenURI]) return null;
+      return formatIpfsUrl(storedIpfsData[activity.nft.tokenURI]?.image);
+    } else {
+      return null;
+    }
+  };
+
   useEffect(() => {
     if (sortValue[activeSort] !== "All") {
-      const newActivities = [...activities].filter(
-        (a) => a.txType === sortValue[activeSort]
-      );
+      const newActivities = [...activities].filter((a) => a.txType === sortValue[activeSort]);
       setFilteredActivities(newActivities);
     } else {
       setFilteredActivities(activities);
@@ -75,12 +82,7 @@ const Activities = ({ collection }) => {
               <tr key={idx}>
                 <td>
                   <div className={classes.imageContainer}>
-                    <img
-                      src={formatIpfsUrl(
-                        storedIpfsData[activity.nft.tokenURI].image
-                      )}
-                      alt=""
-                    />
+                    <img src={getImageUrl(activity)} alt="" />
                   </div>
                   <div>
                     <div>#{name}</div>
@@ -98,8 +100,7 @@ const Activities = ({ collection }) => {
                     className={classes.linkBtn}
                     href={`https://mumbai.polygonscan.com/tx/${activity.txId}`}
                     target="_blank"
-                    rel="noreferrer"
-                  >
+                    rel="noreferrer">
                     <LinkIcon />
                   </a>
                 </td>

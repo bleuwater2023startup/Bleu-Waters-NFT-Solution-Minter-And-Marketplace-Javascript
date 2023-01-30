@@ -79,19 +79,11 @@ const NFTs = ({ nfts, activeListing }) => {
           </div>
         </div> */}
         <div className={classes.searchContainer}>
-          <Search
-            faint
-            placeholder="Search by name, amount..."
-            value={""}
-            onChange={() => {}}
-          />
+          <Search faint placeholder="Search by name, amount..." value={""} onChange={() => {}} />
         </div>
       </div>
       <div className={classes.nftContainer}>
-        {nftDetails &&
-          nftDetails.map((nft, idx) => (
-            <NFTCard key={idx} nft={nft} usd={usd} />
-          ))}
+        {nftDetails && nftDetails.map((nft, idx) => <NFTCard key={idx} nft={nft} usd={usd} />)}
       </div>
     </div>
   );

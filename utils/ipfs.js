@@ -1,13 +1,17 @@
 import axios from "axios";
 
-export const formatIpfsUrl = (ipfsUrl) =>
-  ipfsUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
+export const formatIpfsUrl = (ipfsUrl) => ipfsUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
 
 export const getNft = async (tokenURI) => {
   if (tokenURI) {
     const url = formatIpfsUrl(tokenURI);
-    const { data } = await axios.get(url);
-    return data;
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      logError(error);
+      return null;
+    }
   }
 };
 
@@ -17,13 +21,14 @@ export const getNftDetails = async ({ storedIpfsData, nfts }) => {
   for (let i = 0; i < nfts.length; i++) {
     await new Promise(async (resolve) => {
       let uri = nfts[i].tokenURI;
-      if (!storedIpfsData[uri]) {
+
+      if (!storedIpfsData || !storedIpfsData[uri]) {
         try {
           const _res = await getNft(uri);
           details.push({ ...nfts[i], ..._res, usdPrice: 0 });
           ipfsData[uri] = _res;
         } catch (error) {
-          console.log(error);
+          logError(error);
         }
       } else {
         details.push({ ...nfts[i], ...storedIpfsData[uri] });
@@ -33,4 +38,11 @@ export const getNftDetails = async ({ storedIpfsData, nfts }) => {
   }
 
   return { details, ipfsData };
+};
+
+export const logError = (error) => {
+  console.log(
+    "error is coming =======================*********=======================************===================="
+  );
+  console.log(error.message);
 };

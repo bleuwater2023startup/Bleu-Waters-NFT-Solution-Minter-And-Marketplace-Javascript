@@ -12,8 +12,12 @@ const ExploreCard = ({ collection, flex }) => {
       const _tokenURI = nfts[0]?.tokenURI;
       if (_tokenURI) {
         const _nft = await getNft(_tokenURI);
-        const _nftImage = formatIpfsUrl(_nft.image);
-        setImageUrl(_nftImage);
+        if (_nft) {
+          const _nftImage = formatIpfsUrl(_nft.image);
+          setImageUrl(_nftImage);
+        } else {
+          setImageUrl(null);
+        }
       }
     };
     _getNft();
@@ -23,15 +27,12 @@ const ExploreCard = ({ collection, flex }) => {
     <Link
       href={`/collection/${name.replace(/\s/g, "-")}?id=${id}`}
       style={{ width: flex ? "24em" : "auto" }}
-      className={classes.container}
-    >
+      className={classes.container}>
       <div className={classes.innerContainer}>
         <div className={classes.wrapper}>
-          <div className={classes.innerWrapper}>
-            <img src={imageUrl} alt="" />
-          </div>
+          <div className={classes.innerWrapper}>{imageUrl && <img src={imageUrl} alt="" />}</div>
           <div className={classes.innerImageContainer}>
-            <img src={imageUrl} alt="" />
+            {imageUrl && <img src={imageUrl} alt="" />}
           </div>
         </div>
       </div>

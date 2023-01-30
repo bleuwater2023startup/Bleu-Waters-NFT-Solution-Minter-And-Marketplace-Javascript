@@ -34,10 +34,7 @@ const ExploreCollection = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div
-        style={{ background: `url(${collectionBanner.src})` }}
-        className={classes.banner}
-      >
+      <div style={{ background: `url(${collectionBanner.src})` }} className={classes.banner}>
         <div className={classes.mainText}>Discover</div>
         <div className={classes.subText}>All Collection</div>
         <div className={classes.searchContainer}>
