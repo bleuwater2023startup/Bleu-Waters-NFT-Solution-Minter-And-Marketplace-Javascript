@@ -1,17 +1,50 @@
 import classes from "./Brand.module.css";
-import BrandImage from "../../../assets/brand2.png";
+import Lottie from "react-lottie";
+import * as animationData from "../../../assets/_brand.json";
+import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const Brand = () => {
+  const [isStopped, setIsStopped] = useState(false);
+  const containerRef = useRef(null);
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    let container = containerRef.current;
+    window.addEventListener("scroll", () => {
+      const { top, bottom } = container.getBoundingClientRect();
+      if (top > bottom / 2 - top) {
+        setIsStopped(true);
+      } else {
+        setIsStopped(false);
+      }
+    });
+  }, []);
+
   return (
-    <div className={classes.container}>
+    <div ref={containerRef} className={classes.container}>
       <div className={classes.mainText}>
-        Building and scaling NFT brand on web3 is hard! ! Let’s make it easy
-        with our solution
+        Building and scaling NFT brand on web3 is hard! ! Let’s make it easy with our solution
       </div>
       <div className={classes.subText}>
         We build Fully-featured ecosystem for NFT trading and protection
       </div>
-      <img className={classes.brandImage} src={BrandImage.src} alt="website" />
+      <Lottie
+        className={classes.brandImage}
+        options={defaultOptions}
+        isStopped={isStopped}
+        isPaused={false}
+      />
     </div>
   );
 };

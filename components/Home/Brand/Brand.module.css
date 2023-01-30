@@ -10,8 +10,8 @@
 }
 
 .brandImage {
-  width: 90vw;
-  max-width: 60em;
+  height: auto;
+  width: 100%;
 }
 
 .mainText {
