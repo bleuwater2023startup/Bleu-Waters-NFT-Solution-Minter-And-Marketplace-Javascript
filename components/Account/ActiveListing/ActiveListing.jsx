@@ -1,8 +1,10 @@
 import Paginate from "../../Paginate/Paginate";
 import NFTs from "../NFTs/NFTs";
 
-const ActiveListing = ({ nfts }) => {
-  const activeListedNfts = nfts.filter(({ txHistory }) => txHistory.length);
+const ActiveListing = ({ nfts: _nfts }) => {
+  const activeListedNfts = _nfts.filter(
+    ({ txHistory }) => txHistory.length && txHistory[0].txType === "Listing"
+  );
 
   return (
     <Paginate

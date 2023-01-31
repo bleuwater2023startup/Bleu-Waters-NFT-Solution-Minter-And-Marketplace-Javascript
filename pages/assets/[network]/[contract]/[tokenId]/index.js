@@ -97,19 +97,11 @@ const Asset = () => {
       {error ? (
         <>something went wrong</>
       ) : loading ? (
-        <>loading</>
+        <>loading...</>
       ) : (
         <>
-          <NFTInfo
-            collection={data.collection}
-            ipfsData={nftDetails}
-            refetch={refetch}
-            usd={usd}
-          />
-          <TabButton
-            tabs={tabArray}
-            onClick={(e) => setActiveTab(tabArray[e])}
-          />
+          <NFTInfo collection={data.collection} ipfsData={nftDetails} refetch={refetch} usd={usd} />
+          <TabButton tabs={tabArray} onClick={(e) => setActiveTab(tabArray[e])} />
           {tabs(data.collection, nftDetails, usd)[activeTab]}
           <SimilarNFT />
         </>

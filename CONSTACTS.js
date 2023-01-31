@@ -103,7 +103,7 @@ export const NFT_MINTER_FACTORY_ABI = [
   },
 ];
 
-export const NFT_MINTER_FACTORY = "0x5CB37377bed97bA7Ddc9453A33c4f257c5886148";
+export const NFT_MINTER_FACTORY = "0x46513FE2928BC6a4Be2Ce8e66f5cFA971f6dA7f4";
 
 export const MINTER_ABI = [
   {
@@ -465,8 +465,7 @@ export const PAYMENT_SPLITTER_FACTORY_ABI = [
   },
 ];
 
-export const PAYMENT_SPLITTER_FACTORY =
-  "0x2a63A1fCAc00082E6E8E8D075B920d137B0cC22d";
+export const PAYMENT_SPLITTER_FACTORY = "0x2a63A1fCAc00082E6E8E8D075B920d137B0cC22d";
 
 export const PAYMENT_SPLITTER_ABI = [
   {
@@ -608,30 +607,6 @@ export const PAYMENT_SPLITTER_ABI = [
   {
     inputs: [
       {
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "releasable",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address payable",
         name: "account",
         type: "address",
@@ -640,30 +615,6 @@ export const PAYMENT_SPLITTER_ABI = [
     name: "release",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "released",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -1091,7 +1042,7 @@ export const ERC1155_SINGLE_MINT_ABI = [
 
 export const ERC1155_EXTENSION_ABI = [
   "function mint(address _to, uint256 _id, string memory _uri) public {}",
-  "function setRoyaltyInfo(address paymentSplitter, uint96 _royaltyFeesInBips) public {}",
+  "function setRoyaltyInfo(address _paymentSplitter, address[] _payees, uint96 _royaltyFeesInBips) public {}",
   "function royaltyInfo(uint256 /*_tokenId*/,uint256 _salePrice) external view{}",
   "function mintBatch(address _to, uint256[] memory _ids, uint256[] memory _amounts, string[] memory _uri)public {}",
 ];

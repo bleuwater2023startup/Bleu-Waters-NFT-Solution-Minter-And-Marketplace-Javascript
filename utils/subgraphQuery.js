@@ -78,12 +78,7 @@ export const GET_ACTIVE_LISTING = gql`
         nftAddress
         tokenId
         tokenURI
-        txHistory(
-          where: { txType: Listing }
-          orderBy: txDate
-          orderDirection: desc
-          first: 1
-        ) {
+        txHistory(orderBy: txDate, orderDirection: desc, first: 1) {
           from
           id
           price
@@ -112,11 +107,7 @@ export const GET_ACTIVE_LISTING = gql`
 
 export const GET_1of1_COLLECTIONS = gql`
   query ($_id: String) {
-    collections(
-      where: { type: Single, creator: $_id }
-      orderBy: createdAt
-      orderDirection: desc
-    ) {
+    collections(where: { type: Single, creator: $_id }, orderBy: createdAt, orderDirection: desc) {
       id
       name
       symbol
@@ -239,6 +230,23 @@ export const GET_SIMILAR_NFTS = gql`
         tokenId
         tokenURI
         nftAddress
+      }
+    }
+  }
+`;
+
+export const GET_ROYALTIES = gql`
+  query ($_account: String) {
+    royalties(where: { payees_: { account_contains: $_account } }) {
+      id
+      paymentSplitter
+      royaltyFeesInBips
+      payees {
+        account
+      }
+      collection {
+        id
+        name
       }
     }
   }

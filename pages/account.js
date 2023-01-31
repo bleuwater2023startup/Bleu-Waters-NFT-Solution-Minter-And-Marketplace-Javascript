@@ -74,24 +74,6 @@ const Account = () => {
         });
         break;
       default:
-        getCollectedNFTs({
-          variables: { _account: account },
-          notifyOnNetworkStatusChange: true,
-        });
-        getCreatedNFTs({
-          variables: { _account: account },
-          notifyOnNetworkStatusChange: true,
-        });
-        getActiveListing({
-          variables: { _account: account },
-          notifyOnNetworkStatusChange: true,
-        });
-        await new Promise((resolve) =>
-          setTimeout(() => {
-            setActiveTab(0);
-            resolve();
-          }, 500)
-        );
         break;
     }
   };
@@ -104,11 +86,11 @@ const Account = () => {
 
   const getCreatedNFTsCount = () => {
     if (account && data_created?.user) {
-      let nfts = data_created.user.collections.map(
-        (collection) => collection.nfts
-      );
-      nfts = [...nfts].flat();
-      return nfts.length;
+      if (data_created.user.collections) {
+        let nfts = data_created.user.collections.map((collection) => collection.nfts);
+        nfts = [...nfts].flat();
+        return nfts.length;
+      }
     }
   };
 
@@ -116,15 +98,40 @@ const Account = () => {
     if (account && data_activeListing?.user) {
       const _nfts = data_activeListing.user.nfts;
       const activeListedNfts = _nfts.filter(
-        ({ txHistory }) => txHistory.length
+        ({ txHistory }) => txHistory.length && txHistory[0].txType === "Listing"
       );
       return activeListedNfts.length;
     }
   };
 
+  const runAll = async () => {
+    getCollectedNFTs({
+      variables: { _account: account },
+      notifyOnNetworkStatusChange: true,
+    });
+    getCreatedNFTs({
+      variables: { _account: account },
+      notifyOnNetworkStatusChange: true,
+    });
+    getActiveListing({
+      variables: { _account: account },
+      notifyOnNetworkStatusChange: true,
+    });
+    await new Promise((resolve) =>
+      setTimeout(() => {
+        setActiveTab(0);
+        resolve();
+      }, 500)
+    );
+  };
+
   useEffect(() => {
     getActiveQuery(activeTab);
-  }, [activeTab, account]);
+  }, [activeTab]);
+
+  useEffect(() => {
+    runAll();
+  }, [account]);
 
   return (
     <div className={classes.container}>
@@ -134,9 +141,7 @@ const Account = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {name && hash && (
-        <CreateSuccessModal name={name} hash={hash} mintType={mintType} />
-      )}
+      {name && hash && <CreateSuccessModal name={name} hash={hash} mintType={mintType} />}
       <div className={classes.banner}></div>
       <div className={classes.innerContainer}>
         <AccountInfo />
@@ -145,28 +150,22 @@ const Account = () => {
             <div
               id="0"
               onClick={() => setActiveTab(0)}
-              className={`${classes.tab} ${activeTab === 0 && classes.active}`}
-            >
+              className={`${classes.tab} ${activeTab === 0 && classes.active}`}>
               <span>Collected</span>{" "}
               <span className={classes.count}>{getCollectedNFTsCount()}</span>
             </div>
             <div
               id="1"
               onClick={() => setActiveTab(1)}
-              className={`${classes.tab} ${activeTab === 1 && classes.active}`}
-            >
-              <span>Created</span>{" "}
-              <span className={classes.count}>{getCreatedNFTsCount()}</span>
+              className={`${classes.tab} ${activeTab === 1 && classes.active}`}>
+              <span>Created</span> <span className={classes.count}>{getCreatedNFTsCount()}</span>
             </div>
             <div
               id="2"
               onClick={() => setActiveTab(2)}
-              className={`${classes.tab} ${activeTab === 2 && classes.active}`}
-            >
+              className={`${classes.tab} ${activeTab === 2 && classes.active}`}>
               <span>Active Listing</span>
-              <span className={classes.count}>
-                {getActiveListingNFTsCount()}
-              </span>
+              <span className={classes.count}>{getActiveListingNFTsCount()}</span>
             </div>
           </div>
         </div>

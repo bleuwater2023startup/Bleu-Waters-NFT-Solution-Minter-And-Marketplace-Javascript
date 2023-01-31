@@ -7,7 +7,7 @@ const PINATA_API_SECRET = process.env.NEXT_PUBLIC_PINATA_API_SECRET;
 const PINATA_API_JWT = process.env.NEXT_PUBLIC_JWT;
 const pinata = new pinataSDK(PINATA_API_KEY, PINATA_API_SECRET);
 
-import { readContract, writeContract } from "../../utils";
+import { getWeb3Provider, readContract, writeContract } from "../../utils";
 import {
   ERC1155_EXTENSION_ABI,
   MINTER_ABI,
@@ -203,6 +203,7 @@ export const handleCreatePaymentSplitter = async ({
       paymentSplitterAddress,
       royaltyFee,
       walletProvider,
+      payees,
     });
     return res;
   }
@@ -240,13 +241,15 @@ export const handleSetRoyaltyInfo = async ({
   paymentSplitterAddress,
   royaltyFee,
   walletProvider,
+  payees,
 }) => {
   const options = {
     abi: ERC1155_EXTENSION_ABI,
     contractAddress: collectionAddress,
     functionName: "setRoyaltyInfo",
     params: {
-      paymentSplitter: paymentSplitterAddress,
+      _paymentSplitter: paymentSplitterAddress,
+      _payees: payees,
       _royaltyFeesInBips: royaltyFee * 100,
     },
   };
@@ -271,11 +274,7 @@ export const handleSetRoyaltyInfo = async ({
   }
 };
 
-export const handleApproveAll = async ({
-  collectionAddress,
-  walletProvider,
-  dispatch,
-}) => {
+export const handleApproveAll = async ({ collectionAddress, walletProvider, dispatch }) => {
   const options = {
     abi: MINTER_ABI,
     contractAddress: collectionAddress,
@@ -361,12 +360,7 @@ export const handleList = async ({
   }
 };
 
-export const getApprovedForAll = async ({
-  walletProvider,
-  nftAddress,
-  account,
-  dispatch,
-}) => {
+export const getApprovedForAll = async ({ walletProvider, nftAddress, account, dispatch }) => {
   const options = {
     abi: MINTER_ABI,
     contractAddress: nftAddress,
@@ -512,13 +506,7 @@ export const handleUpdateListing = async ({
   }
 };
 
-export const handleBuyNFT = async ({
-  tokenId,
-  value,
-  nftAddress,
-  dispatch,
-  walletProvider,
-}) => {
+export const handleBuyNFT = async ({ tokenId, value, nftAddress, dispatch, walletProvider }) => {
   const options = {
     abi: NFT_MARKETPLACE_ABI,
     contractAddress: NFT_MARKETPLACE,
@@ -611,12 +599,7 @@ export const handleWithdraw = async ({ walletProvider, dispatch }) => {
   }
 };
 
-export const getShares = async ({
-  splitterAddress,
-  walletProvider,
-  account,
-  dispatch,
-}) => {
+export const getShares = async ({ splitterAddress, walletProvider, account, dispatch }) => {
   const options = {
     abi: PAYMENT_SPLITTER_ABI,
     contractAddress: splitterAddress,
@@ -645,12 +628,65 @@ export const getShares = async ({
   return await res;
 };
 
-export const handleRelease = async ({
-  account,
-  splitterAddress,
-  walletProvider,
-  dispatch,
-}) => {
+export const getReleasable = async ({ splitterAddress, walletProvider, account, dispatch }) => {
+  const options = {
+    abi: PAYMENT_SPLITTER_ABI,
+    contractAddress: splitterAddress,
+    functionName: "releasable",
+    params: {
+      account,
+    },
+  };
+
+  const res = await readContract({
+    params: options,
+    walletProvider,
+    onError: (error) => {
+      dispatch(
+        setNotification({
+          type: "error",
+          message: error.message,
+        })
+      );
+    },
+    onSuccess: (tx) => {
+      console.log({ tx });
+    },
+  });
+
+  return await res;
+};
+
+export const getReleased = async ({ splitterAddress, walletProvider, account, dispatch }) => {
+  const options = {
+    abi: PAYMENT_SPLITTER_ABI,
+    contractAddress: splitterAddress,
+    functionName: "released",
+    params: {
+      account,
+    },
+  };
+
+  const res = await readContract({
+    params: options,
+    walletProvider,
+    onError: (error) => {
+      dispatch(
+        setNotification({
+          type: "error",
+          message: error.message,
+        })
+      );
+    },
+    onSuccess: (tx) => {
+      console.log({ tx });
+    },
+  });
+
+  return await res;
+};
+
+export const handleRelease = async ({ account, splitterAddress, walletProvider, dispatch }) => {
   const options = {
     abi: PAYMENT_SPLITTER_ABI,
     contractAddress: splitterAddress,
@@ -691,16 +727,13 @@ const uploadImageToIpfs = async (image) => {
     const data = new FormData();
     data.append("file", image);
     data.append("pinataOptions", '{"cidVersion": 0}');
-    const response = await fetch(
-      "https://api.pinata.cloud/pinning/pinFileToIPFS",
-      {
-        method: "post",
-        headers: {
-          Authorization: `Bearer ${PINATA_API_JWT}`,
-        },
-        body: data,
-      }
-    );
+    const response = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${PINATA_API_JWT}`,
+      },
+      body: data,
+    });
     return await response.json();
   } catch (error) {
     console.log(error);
@@ -708,12 +741,7 @@ const uploadImageToIpfs = async (image) => {
   }
 };
 
-const uploadMetadataToIpfs = async ({
-  image,
-  name,
-  description,
-  attributes,
-}) => {
+const uploadMetadataToIpfs = async ({ image, name, description, attributes }) => {
   // create metadata
   const tokenUriMetadata = {};
   tokenUriMetadata.name = name;
@@ -771,9 +799,7 @@ export const uploadCollectionToIpfs = async (metadata, dispatch) => {
         }, 1000)
       );
     } catch (error) {
-      dispatch(
-        setNotification({ ...ipfsErrorUploadMessage, message: error.message })
-      );
+      dispatch(setNotification({ ...ipfsErrorUploadMessage, message: error.message }));
       return null;
     }
   }
@@ -795,9 +821,7 @@ export const uploadSingleToIpfs = async (metadata, dispatch) => {
     dispatch(setNotification(ipfsSuccessUploadMessage));
     return data.url;
   } catch (error) {
-    dispatch(
-      setNotification({ ...ipfsErrorUploadMessage, message: error.message })
-    );
+    dispatch(setNotification({ ...ipfsErrorUploadMessage, message: error.message }));
     return null;
   }
 };

@@ -270,3 +270,8 @@ export const splitSuccessMessage = {
   type: "success",
   message: "Royalty split added successfully.",
 };
+
+export const withdrawMessage = {
+  title: "Sending fund to your wallet",
+  description: "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+};

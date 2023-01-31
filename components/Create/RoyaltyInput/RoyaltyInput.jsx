@@ -26,9 +26,7 @@ const RoyaltyInput = ({ name: name_, preview }) => {
         })
       );
     } else {
-      dispatch(
-        setMintData({ ...mintData, [name_]: [...mintData[name_], newSplit] })
-      );
+      dispatch(setMintData({ ...mintData, [name_]: [...mintData[name_], newSplit] }));
     }
   };
 
@@ -131,10 +129,7 @@ const RoyaltyInput = ({ name: name_, preview }) => {
                 <div className={classes.percent}>%</div>
               </div>
               {!preview && (
-                <div
-                  className={classes.closeIcon}
-                  onClick={() => handleRemoveSplit(id)}
-                >
+                <div className={classes.closeIcon} onClick={() => handleRemoveSplit(id)}>
                   <CloseIcon />
                 </div>
               )}

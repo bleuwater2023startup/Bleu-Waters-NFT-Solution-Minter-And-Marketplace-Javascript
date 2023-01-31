@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ethers } from "ethers";
+import { logError } from "./ipfs";
 import supportedChains from "./supportedChains";
 
 export const writeContract = async ({
@@ -13,9 +14,7 @@ export const writeContract = async ({
   const signer = provider.getSigner();
   const contract = new ethers.Contract(contractAddress, abi, signer);
   try {
-    const transactionResponse = await contract[functionName](
-      ...Object.values(params)
-    );
+    const transactionResponse = await contract[functionName](...Object.values(params));
     onSuccess(transactionResponse);
     return transactionResponse;
   } catch (error) {
@@ -23,19 +22,12 @@ export const writeContract = async ({
   }
 };
 
-export const readContract = async ({
-  params: fetchParams,
-  walletProvider,
-  onError,
-  onSuccess,
-}) => {
+export const readContract = async ({ params: fetchParams, walletProvider, onError, onSuccess }) => {
   const { contractAddress, abi, functionName, params } = fetchParams;
   const provider = getWeb3Provider(walletProvider);
   const contract = new ethers.Contract(contractAddress, abi, provider);
   try {
-    const transactionResponse = await contract[functionName](
-      ...Object.values(params)
-    );
+    const transactionResponse = await contract[functionName](...Object.values(params));
     onSuccess(transactionResponse);
     return transactionResponse;
   } catch (error) {
@@ -56,12 +48,7 @@ export const getContractTransferEvents = async ({
   return res.map((el) => el.args);
 };
 
-export const listenForTransferEvent = async ({
-  contractAddress,
-  abi,
-  onError,
-  onSuccess,
-}) => {
+export const listenForTransferEvent = async ({ contractAddress, abi, onError, onSuccess }) => {
   try {
     const provider = new ethers.providers.WebSocketProvider(
       process.env.NEXT_PUBLIC_POLYGON_ALCHEMY_WSS_URL
@@ -95,9 +82,7 @@ export const getWeb3Provider = (walletProvider) => {
   let provider;
   if (window.localStorage.getItem("walletpreference") === "metamask") {
     provider = new ethers.providers.Web3Provider(window.ethereum);
-  } else if (
-    window.localStorage.getItem("walletpreference") === "walletconnect"
-  ) {
+  } else if (window.localStorage.getItem("walletpreference") === "walletconnect") {
     provider = new ethers.providers.Web3Provider(walletProvider);
   } else {
     provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -105,11 +90,7 @@ export const getWeb3Provider = (walletProvider) => {
   return provider;
 };
 
-export const getContractOwner = async ({
-  contractAddress,
-  abi,
-  walletProvider,
-}) => {
+export const getContractOwner = async ({ contractAddress, abi, walletProvider }) => {
   const provider = getWeb3Provider(walletProvider);
   const contract = new ethers.Contract(contractAddress, abi, provider);
   return await contract.name();
@@ -137,7 +118,6 @@ export const getDate = (seconds) => {
 export const getDateTime = (seconds) => {
   let date = new Date(seconds * 1000);
   date = date.toString().split(" ");
-  console.log({ date });
   date = date.slice(1, 4);
   date = date.join(" ");
   return date;
@@ -150,7 +130,7 @@ export const getMaticUsdPrice = async (chainId) => {
     const { usd } = data["matic-network"];
     return usd;
   } catch (error) {
-    console.log(error.message);
+    logError(error);
     return 0;
   }
 };

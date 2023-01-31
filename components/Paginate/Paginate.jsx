@@ -33,8 +33,7 @@ const Paginate = ({ items, countPerPage = 20, renderItem, offsetHeight }) => {
   };
 
   const handleGoto = () => {
-    if (currentPageValue < 1 || currentPageValue > Object.keys(paginate).length)
-      return;
+    if (currentPageValue < 1 || currentPageValue > Object.keys(paginate).length) return;
     handleSetState({ currentPage: Number(currentPageValue) });
     document.documentElement.scrollTop = offsetHeight;
   };
@@ -54,7 +53,11 @@ const Paginate = ({ items, countPerPage = 20, renderItem, offsetHeight }) => {
 
   return (
     <>
-      {Object.keys(paginate).length && renderItem(paginate[currentPage])}
+      {Object.keys(paginate).length ? (
+        renderItem(paginate[currentPage])
+      ) : (
+        <div>Nothing to display</div>
+      )}
       {Object.keys(paginate).length ? (
         <Control
           controProps={{
