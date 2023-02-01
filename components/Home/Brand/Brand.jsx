@@ -44,6 +44,7 @@ const Brand = () => {
         options={defaultOptions}
         isStopped={isStopped}
         isPaused={false}
+        width="95%"
       />
     </div>
   );

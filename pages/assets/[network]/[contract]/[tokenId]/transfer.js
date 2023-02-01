@@ -43,11 +43,21 @@ const Transfer = () => {
   };
 
   const _handleTransfer = async () => {
+    if (!inputValue) return;
+
     if (account.toLowerCase() !== nftDetails.owner.id) {
       return dispatch(
         setNotification({
           type: "error",
           message: "You don't have the permission to tranfer this asset.",
+        })
+      );
+    }
+    if (account.toLowerCase() === inputValue.toLowerCase()) {
+      return dispatch(
+        setNotification({
+          type: "error",
+          message: "You cannot transfer to the owner account.",
         })
       );
     }
@@ -125,11 +135,13 @@ const Transfer = () => {
             <TransferSuccessModal
               asset={{ name: "test token" }}
               tx={transfer.res}
+              receiver={inputValue}
             />
           )}
           {transfer.error && (
             <TransferErrorModal
               asset={{ name: "test token" }}
+              receiver={inputValue}
               onClose={handleClose}
               handleTransfer={_handleTransfer}
             />
@@ -142,11 +154,7 @@ const Transfer = () => {
 
           <div className={classes.innerContainer}>
             <div className={classes.assetContainer}>
-              <img
-                src={formatIpfsUrl(nftDetails.image)}
-                alt=""
-                className={classes.asset}
-              />
+              <img src={formatIpfsUrl(nftDetails.image)} alt="" className={classes.asset} />
             </div>
             <div className={classes.details}>
               <div className={classes.label}>Reciever address</div>

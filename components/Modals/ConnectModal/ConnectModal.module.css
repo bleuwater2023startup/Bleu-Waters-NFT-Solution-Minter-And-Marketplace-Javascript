@@ -123,7 +123,6 @@
 
 @media screen and (max-width: 480px) {
   .wrapper {
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 3em 2em;
   }
 }

@@ -21,7 +21,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
   const [toggleCancelModal, setToggleCancelModal] = useState(false);
   const [toggleUpdateListingModal, setToggleUpdateListingModal] = useState(false);
   const [togglePurchaseNFTModal, setTogglePurchaseNFTModal] = useState(false);
-  const { chainid, name, nfts } = collection;
+  const { name, nfts } = collection;
   const { tokenId, owner, txHistory, nftAddress } = nfts[0];
   const { price: etherPrice, txType } = txHistory[0];
   const router = useRouter();
@@ -96,6 +96,13 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
     const { nftAddress, tokenId, txHistory } = ipfsData;
     const { price: etherPrice } = txHistory[0];
     const price = ethers.utils.formatEther(etherPrice);
+    if (!account)
+      return dispatch(
+        setNotification({
+          type: "error",
+          message: "Please connect your wallet to continue.",
+        })
+      );
 
     setTogglePurchaseNFTModal(false);
     dispatch(
@@ -138,6 +145,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
           onClose={() => setToggleUpdateListingModal(false)}
           onPriceChange={_handleUpdateListing}
           nft={ipfsData}
+          currentPrice={price}
         />
       )}
       {togglePurchaseNFTModal && (
@@ -157,7 +165,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
           <div className={classes.collectionName}>{name}</div>
           <div className={classes.collectionId}>{ipfsData?.name}</div>
           {isOwner() ? (
-            <div>You</div>
+            <div className={classes.owner_}>Owned by you</div>
           ) : (
             <div className={classes.innerContainer}>
               <div className={classes.icon}></div>

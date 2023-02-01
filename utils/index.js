@@ -134,3 +134,19 @@ export const getMaticUsdPrice = async (chainId) => {
     return 0;
   }
 };
+
+export const getEstimatedGasPrice = async ({ walletProvider, account }) => {
+  const provider = getWeb3Provider(walletProvider);
+  const balance = await provider.getBalance(account);
+  const gasPrice = await provider.getGasPrice();
+  const extimatedGasPrice = await provider.estimateGas({
+    // Wrapped ETH address
+    to: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+
+    // `function deposit() payable`
+    data: "0xd0e30db0",
+
+    // 1 ether
+    value: parseEther("1.0"),
+  });
+};

@@ -5,7 +5,7 @@ import CloseIcon from "../../../assets/icon-close.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const TransferSuccessModal = ({ asset, tx }) => {
+const TransferSuccessModal = ({ asset, tx, receiver }) => {
   const router = useRouter();
 
   return (
@@ -18,7 +18,11 @@ const TransferSuccessModal = ({ asset, tx }) => {
           <SuccessIcon />
         </div>
         <div className={classes.heading}>Transfer Success!</div>
-        <div className={classes.description}>{`You've successfully transfered ${asset.name}`}</div>
+        <div className={classes.description}>
+          <span>{`You've successfully transfered`}</span>
+          <span className={classes.name}>{asset.name} to </span>
+          <span className={classes.address}>{receiver}</span>
+        </div>
         <a
           className={classes.linkBtn}
           href={`https://mumbai.polygonscan.com/tx/${tx.transactionHash}`}

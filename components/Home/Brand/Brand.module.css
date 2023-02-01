@@ -9,11 +9,6 @@
   /* background: linear-gradient(180deg, #ffffff00 0%, #F4F6FF 102.52%); */
 }
 
-.brandImage {
-  height: auto;
-  width: 100%;
-}
-
 .mainText {
   max-width: 48em;
   font-weight: 500;
@@ -28,18 +23,6 @@
   font-size: 2.2rem;
   margin-bottom: 2em;
   text-align: center;
-}
-
-@media screen and (max-width: 1200px) {
-  .brandImage {
-    max-width: 48em;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .brandImage {
-    max-width: 42em;
-  }
 }
 
 @media screen and (max-width: 680px) {

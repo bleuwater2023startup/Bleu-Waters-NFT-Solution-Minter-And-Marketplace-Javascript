@@ -3,16 +3,24 @@ import CloseIcon from "../../../assets/icon-close.svg";
 import { useState } from "react";
 import Button from "../../Button/Button";
 
-const UpdateListingModal = ({ onClose, onPriceChange, nft }) => {
+const UpdateListingModal = ({ onClose, onPriceChange, nft, currentPrice }) => {
   const [listPrice, setListPrice] = useState("");
+  const [error, setError] = useState(false);
 
   const handleChangePrice = () => {
+    if (!listPrice || !Number(listPrice)) return;
+    if (Number(listPrice) >= Number(currentPrice)) return;
     onPriceChange(listPrice);
   };
 
   const handlePriceChange = (e) => {
     if (Number(e.target.value) < 0 || isNaN(Number(e.target.value))) return setListPrice("");
     setListPrice(e.target.value);
+    if (Number(e.target.value) >= Number(currentPrice)) {
+      setError(true);
+    } else {
+      setError(false);
+    }
   };
 
   const getEarnings = () => {
@@ -43,6 +51,11 @@ const UpdateListingModal = ({ onClose, onPriceChange, nft }) => {
             <div className={classes.uint}>Matic</div>
           </div>
         </div>
+        {error && (
+          <div className={classes.error}>
+            {`"Price" must be less`} {currentPrice}
+          </div>
+        )}
         <div className={classes.priceDetailContainer}>
           <div className={classes.priceDetail}>
             <div>Service fee</div>

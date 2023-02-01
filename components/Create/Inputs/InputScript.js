@@ -291,7 +291,7 @@ export const createContractMessage = {
 
 export const splitMessage = {
   title: "Adding royalty split to your collection",
-  description: "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+  description: "Check your wallet. You'll be asked to confirm (2) transactions from your wallet.",
 };
 
 export const splitErrorMessage = {

@@ -70,7 +70,7 @@ const Sell = () => {
     if (!price) {
       return dispatch(
         setNotification({
-          type: "warning",
+          type: "info",
           message: "Please set list price",
         })
       );
@@ -112,19 +112,12 @@ const Sell = () => {
           <div className={classes.heading}>List NFT for sale</div>
           <div className={classes.innerContainer}>
             <div className={classes.assetContainer}>
-              <img
-                className={classes.asset}
-                src={formatIpfsUrl(nftDetails.image)}
-                alt="asset"
-              />
+              <img className={classes.asset} src={formatIpfsUrl(nftDetails.image)} alt="asset" />
               <div className={classes.name}>{nftDetails.name}</div>
               <div className={classes.description}>{data.collection.name}</div>
               {/* <div className={classes.price}>500 MATIC</div> */}
             </div>
-            <SaleDetails
-              onListButtonClick={handleListButtonClick}
-              collection={data.collection}
-            />
+            <SaleDetails onListButtonClick={handleListButtonClick} collection={data.collection} />
           </div>
         </div>
       )}

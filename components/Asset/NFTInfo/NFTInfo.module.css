@@ -148,6 +148,11 @@
 }
 
 /* .creator {} */
+.owner_ {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-dark);
+}
 
 .owner {
   font-weight: 600;
