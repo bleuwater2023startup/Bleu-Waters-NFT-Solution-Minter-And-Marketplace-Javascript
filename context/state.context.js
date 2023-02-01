@@ -27,6 +27,7 @@ const StateContextProvider = ({ children }) => {
 
   useEffect(() => {
     domMountRef.current += 1;
+    console.log(isDev);
   }, []);
 
   return <StateContext.Provider value={{ ...state, dispatch }}>{children}</StateContext.Provider>;
