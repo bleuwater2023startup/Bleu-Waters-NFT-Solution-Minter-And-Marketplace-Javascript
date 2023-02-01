@@ -13,7 +13,8 @@
 }
 
 .wrapper {
-  width: 28em;
+  width: 100%;
+  max-width: 28em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +71,7 @@
 .description {
   text-align: center;
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   max-width: 20em;
 }
 
@@ -88,7 +89,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 1em;
-  max-height: 14em;
+  max-height: 10em;
   overflow: auto;
   padding: 0.4em;
 }
@@ -99,15 +100,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 2em;
-  padding: 2em;
+  padding: 1em;
   background: #FFFFFF;
   border: 1px solid #E5E8EB;
   box-shadow: 26px 5px 18px rgba(93, 134, 194, 0.11);
-  border-radius: 21px;
+  border-radius: 1em;
 }
 
 .innerContainer {
   flex: 1;
+}
+
+.innerContainer * {
+  font-size: 0.875rem;
 }
 
 .selectButton {
@@ -156,6 +161,6 @@
 
   .contractName,
   .contractDescription {
-    font-size: 0.8rem;
+    font-size: 0.875rem;
   }
 }

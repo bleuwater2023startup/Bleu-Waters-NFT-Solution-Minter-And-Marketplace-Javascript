@@ -52,6 +52,7 @@
   border-radius: 0.6em;
   background: var(--bg-light);
   border: 1px solid var(--color-border);
+  display: none;
 }
 
 .link {
@@ -65,10 +66,9 @@
   color: var(--color-accent);
 }
 
-/* .link.active {
+.link.active {
   color: var(--color-accent);
-  border-bottom: 2px solid var(--color-accent);
-} */
+}
 
 .searchIcon {
   stroke: var(--color-dark);

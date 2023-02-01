@@ -42,7 +42,7 @@ export const getNftDetails = async ({ storedIpfsData, nfts }) => {
 
 export const logError = (error) => {
   console.log(
-    "error is coming =======================*********=======================************===================="
+    "error is coming =======================*********=======================************====================",
+    error.message
   );
-  console.log(error.message);
 };

@@ -21,11 +21,11 @@ export const data = [
   {
     name: "What Utility does the Bleuwaters NFT have?",
     description:
-      "Royalties are automatically paid out to wallet addresses once a sale is completed.",
+      "Holding our NFTs gives you exclusive access to our E-learning classess, Unpaid access to our IRL events, a 1hr One-on-one call with the team, Some swags and Giveaways.",
   },
   {
     name: "How is Royalty paid?",
     description:
-      "Holding our NFTs gives you exclusive access to our E-learning classess, Unpaid access to our IRL events, a 1hr One-on-one call with the team, Some swags and Giveaways.",
+      "Royalties are automatically paid out to wallet addresses once a sale is completed.",
   },
 ];

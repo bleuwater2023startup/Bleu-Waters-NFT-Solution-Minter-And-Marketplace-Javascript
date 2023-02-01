@@ -94,7 +94,7 @@
   background: var(--card-bg-accent-light);
   padding: 0.6em;
   border-radius: 0.8em;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -114,7 +114,7 @@
 
 .usdPrice {
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   margin-left: 0.4em;
 }
 

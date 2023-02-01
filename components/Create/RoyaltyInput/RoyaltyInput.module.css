@@ -51,6 +51,7 @@
   justify-content: space-between;
   gap: 2em;
   padding-right: 8em;
+  white-space: nowrap;
 }
 
 .required {
@@ -74,7 +75,7 @@
   align-items: center;
   justify-content: center;
   padding-left: 1em;
-  padding-right: 2em;
+  padding-right: 1em;
   border-left: 1px solid gainsboro;
   margin-left: 0.4em;
 }
@@ -85,14 +86,8 @@
 }
 
 .totalRoyalty {
-  border: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--card-bg);
-  padding: 0.8em;
-  border-radius: 0.6em;
   margin-bottom: 4em;
+  font-weight: 600;
 }
 
 .royalty {
@@ -105,7 +100,7 @@
 }
 
 .royalty input {
-  width: 6em;
+  width: 5em;
   flex: 1;
   padding: 0.8em;
   border: none;
@@ -154,6 +149,7 @@
 
 .address {
   flex: 1;
+  width: 100%;
   background: #F3F4F8;
   padding: 0.8em;
   border: none;
@@ -172,17 +168,6 @@
 .address:focus {
   outline: none;
   cursor: text;
-}
-
-.value {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.4em;
-}
-
-.value input {
-  width: 4em;
 }
 
 .closeIcon {

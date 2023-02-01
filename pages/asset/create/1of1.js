@@ -1,28 +1,30 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Inputs from "../../../components/Create/Inputs/Inputs";
-import {
-  existingContract,
-  newContract,
-} from "../../../components/Create/Inputs/InputsSections";
+import { existingContract, newContract } from "../../../components/Create/Inputs/InputsSections";
 import MintFlow from "../../../components/Create/MintFlow/MintFlow";
 import {
   existingContractFlow,
   newContractFlow,
 } from "../../../components/Create/MintFlow/MintFlowData";
+import { setMintData } from "../../../context/state.actions";
+import { StateContext } from "../../../context/state.context";
 import classes from "../../../styles/Create.module.css";
 
 const OneOfOneNFT = () => {
+  const { dispatch } = useContext(StateContext);
   const router = useRouter();
   const [step, setStep] = useState(0);
 
-  const flow =
-    router.query.address === "create-new"
-      ? newContractFlow
-      : existingContractFlow;
+  const flow = router.query.address === "create-new" ? newContractFlow : existingContractFlow;
 
-  const collection =
-    router.query.address === "create-new" ? newContract() : existingContract();
+  const collection = router.query.address === "create-new" ? newContract() : existingContract();
+
+  useEffect(() => {
+    let storedMintData = window.localStorage.getItem("mint_data");
+    storedMintData = JSON.parse(storedMintData);
+    dispatch(setMintData({ ...storedMintData, File: null }));
+  }, []);
 
   return (
     <div className={classes.container}>
@@ -35,7 +37,7 @@ const OneOfOneNFT = () => {
         />
         <Inputs
           collection={collection}
-          handleStep={() => setStep((s) => s + 1)}
+          handleStep={(val) => setStep((s) => (val ? val : s + 1))}
           flow={flow}
           stepId={step}
           mintType="Single"

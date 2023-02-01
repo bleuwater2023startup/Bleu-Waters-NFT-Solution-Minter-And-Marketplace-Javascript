@@ -19,6 +19,7 @@ export const INITIAL_STATE = {
     Description: "",
     Attributes: [],
     Royalty: [],
+    MintType: "",
   },
   notification: {
     type: "success", //enum error, success, warning, info,

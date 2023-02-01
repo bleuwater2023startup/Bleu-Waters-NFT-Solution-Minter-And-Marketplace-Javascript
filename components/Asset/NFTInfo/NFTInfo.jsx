@@ -10,15 +10,8 @@ import { formatIpfsUrl } from "../../../utils/ipfs";
 import { useContext, useState } from "react";
 import { StateContext } from "../../../context/state.context";
 import CancelListingModal from "../../Modals/CancelListingModal/CancelListingModal";
-import {
-  handleBuyNFT,
-  handleCancelListing,
-  handleUpdateListing,
-} from "../../Create/CreateScript";
-import {
-  setLoadingScreen,
-  setNotification,
-} from "../../../context/state.actions";
+import { handleBuyNFT, handleCancelListing, handleUpdateListing } from "../../Create/CreateScript";
+import { setLoadingScreen, setNotification } from "../../../context/state.actions";
 import UpdateListingModal from "../../Modals/UpdateListingModal/UpdateListingModal";
 import PurchaseNFTModal from "../../Modals/PurchaseNFTModal/PurchaseNFTModal";
 import { ethers } from "ethers";
@@ -26,8 +19,7 @@ import { ethers } from "ethers";
 const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
   const { account, dispatch, walletProvider } = useContext(StateContext);
   const [toggleCancelModal, setToggleCancelModal] = useState(false);
-  const [toggleUpdateListingModal, setToggleUpdateListingModal] =
-    useState(false);
+  const [toggleUpdateListingModal, setToggleUpdateListingModal] = useState(false);
   const [togglePurchaseNFTModal, setTogglePurchaseNFTModal] = useState(false);
   const { chainid, name, nfts } = collection;
   const { tokenId, owner, txHistory, nftAddress } = nfts[0];
@@ -157,11 +149,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
       )}
       <div className={classes.assetContainer}>
         {ipfsData ? (
-          <img
-            className={classes.asset}
-            src={formatIpfsUrl(ipfsData.image)}
-            alt={"asset"}
-          />
+          <img className={classes.asset} src={formatIpfsUrl(ipfsData.image)} alt={"asset"} />
         ) : null}
       </div>
       <div className={classes.infoContainer}>
@@ -190,19 +178,17 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
                     {isListed() && (
                       <div
                         onClick={() => setToggleUpdateListingModal(true)}
-                        className={classes.item}
-                      >
+                        className={classes.item}>
                         Change price
                       </div>
                     )}
-                    <Link
-                      href={`${router.asPath}/transfer`}
-                      className={classes.item}
-                    >
+                    <Link href={`${router.asPath}/transfer`} className={classes.item}>
                       Transfer NFT
                     </Link>
                     <div className={classes.item}>Approve NFT</div>
-                    <div className={classes.item}>Refresh</div>
+                    <div onClick={() => refetch()} className={classes.item}>
+                      Refresh
+                    </div>
                   </>
                 ) : (
                   <div onClick={() => refetch()} className={classes.item}>
@@ -215,10 +201,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
         </div>
         <div className={classes.subContainer2}>
           {isOwner() ? (
-            <Link
-              href={`${router.asPath}/transfer`}
-              className={classes.transfer}
-            >
+            <Link href={`${router.asPath}/transfer`} className={classes.transfer}>
               <TransferIcon />
               <div>Transfer</div>
             </Link>
@@ -235,10 +218,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
               <div className={classes._price}>{price} matic</div>
               <div>{(usd * price).toFixed(3)}</div>
             </div>
-            <div
-              onClick={() => setToggleCancelModal(true)}
-              className={classes.button}
-            >
+            <div onClick={() => setToggleCancelModal(true)} className={classes.button}>
               <Button accent>Cancel Listing</Button>
             </div>
           </div>
@@ -266,10 +246,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
               <div className={classes._price}>{price} matic</div>
               <div>usd</div>
             </div>
-            <div
-              onClick={() => setTogglePurchaseNFTModal(true)}
-              className={classes.button}
-            >
+            <div onClick={() => setTogglePurchaseNFTModal(true)} className={classes.button}>
               <Button accent>Buy</Button>
             </div>
           </div>

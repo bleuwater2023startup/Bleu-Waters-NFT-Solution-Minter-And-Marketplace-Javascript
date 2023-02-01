@@ -72,6 +72,11 @@
   border: 2px dashed var(--color-accent);
 }
 
+.fileName {
+  margin-top: 1em;
+  font-weight: 500;
+}
+
 .zipIcon {
   margin-bottom: 1em;
 }

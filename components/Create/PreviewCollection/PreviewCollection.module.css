@@ -114,7 +114,7 @@
 
 .info {
   flex: 30%;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 
 @media screen and (max-width: 480px) {

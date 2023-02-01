@@ -30,17 +30,16 @@ const FileInput = ({ name, preview, collection }) => {
 
     // const nameExtension = file.name.replace(/\.+\s*\./, ".").split(".");
     // setFilename(nameExtension.slice(0, nameExtension.length - 1).join("."));
-
     const res = await extractZip(file);
 
-    dispatch(setMintData({ ...mintData, [name]: res }));
-    console.log({ res });
+    dispatch(setMintData({ ...mintData, [name]: res, File_Name: file.name }));
   };
 
   const handleImageChange = (event) => {
     const image = event.target.files[0];
+    // const nameExtension = image.name.replace(/\.+\s*\./, ".").split(".");
     if (!image) return;
-    dispatch(setMintData({ ...mintData, [name]: image }));
+    dispatch(setMintData({ ...mintData, [name]: image, File_Name: image.name }));
   };
 
   return (
@@ -68,7 +67,15 @@ const FileInput = ({ name, preview, collection }) => {
         handleImageChange={handleImageChange}
         preview={preview}
       />
-      {!mintData[name] ? (
+      {mintData[name] ? (
+        <ImageUploadPreview
+          file={mintData[name]}
+          handleClick={handleClick}
+          collection={collection}
+        />
+      ) : preview && mintData.File_Name ? (
+        <div>{mintData.File_Name}</div>
+      ) : (
         <div className={classes.imageContainer}>
           <div onClick={handleClick} className={classes.wrapper}>
             <ZipIcon className={classes.zipIcon} />
@@ -81,13 +88,8 @@ const FileInput = ({ name, preview, collection }) => {
 
             <div className={classes.uploadBtn}>Click to select file</div>
           </div>
+          <div className={classes.fileName}>{mintData.File_Name}</div>
         </div>
-      ) : (
-        <ImageUploadPreview
-          file={mintData[name]}
-          handleClick={handleClick}
-          collection={collection}
-        />
       )}
       {collection && !preview && mintData.File && <PreviewInfo handlePreview={handlePreview} />}
     </div>

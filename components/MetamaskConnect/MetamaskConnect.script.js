@@ -1,4 +1,4 @@
-import { setAccount, setChainId, setModal } from "../../context/state.actions";
+import { setAccount, setChainId, setModal, setNotification } from "../../context/state.actions";
 import supportedChains, { switchChain } from "../../utils/supportedChains";
 
 export const subscribeToMetamaskEvents = ({ dispatch }) => {
@@ -53,6 +53,12 @@ export const checkMetamaskConnection = ({ dispatch }) => {
     }
     subscribeToMetamaskEvents({ dispatch });
   } else {
+    dispatch(
+      setNotification({
+        type: error,
+        message: "Metamask is not installed",
+      })
+    );
     console.log("Metamask not installed");
   }
 };
@@ -88,6 +94,12 @@ export const handleConnectToMetamask = async ({ dispatch }) => {
     }
     subscribeToMetamaskEvents({ dispatch });
   } else {
+    dispatch(
+      setNotification({
+        type: error,
+        message: "Metamask is not installed",
+      })
+    );
     console.log("Metamask not installed");
   }
 };

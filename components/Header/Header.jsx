@@ -53,13 +53,18 @@ const Header = () => {
       <div className={classes.link_connect_box}>
         <Link
           href="/asset/create"
-          className={`${classes.link} ${router.asPath === "/asset/create" && classes.active}`}>
+          className={`${classes.link} ${
+            router.asPath.includes("/asset/create") && classes.active
+          }`}>
           Create
         </Link>
         <Link
           href="/explore-collections"
           className={`${classes.link} ${
-            router.asPath === "/explore-collections" && classes.active
+            (router.asPath.includes("/explore-collections") ||
+              router.asPath.includes("/assets") ||
+              router.asPath.split("/")[1] === "collection") &&
+            classes.active
           }`}>
           Explore
         </Link>

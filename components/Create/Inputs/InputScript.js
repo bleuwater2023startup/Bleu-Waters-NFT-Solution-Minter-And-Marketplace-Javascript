@@ -5,7 +5,6 @@ import {
   setNotification,
 } from "../../../context/state.actions";
 import {
-  handleApproveAll,
   handleCreateCollection,
   handleCreatePaymentSplitter,
   handleMint,
@@ -111,6 +110,12 @@ export const _handleCreateRoyalty = async (createProps) => {
   });
   if (res) {
     dispatch(setNotification(splitSuccessMessage));
+    dispatch(
+      setMintData({
+        ...mintData,
+        ["Payment_Splitter_Address"]: res,
+      })
+    );
     handleStep();
   }
   dispatch(setLoadingScreen({}));
@@ -156,7 +161,7 @@ export const handleInvalidSingleFileInput = (dispatch) => {
   dispatch(
     setNotification({
       type: "error",
-      message: "Invalid input",
+      message: "Required fields should not be empty",
     })
   );
 };
@@ -170,7 +175,7 @@ export const handleInvalidCollectionFileInput = (dispatch) => {
   dispatch(
     setNotification({
       type: "error",
-      message: "Invalid input",
+      message: "Required fields should not be empty",
     })
   );
 };
@@ -183,7 +188,7 @@ export const handleInvalidCreateCollectionInput = (dispatch) => {
   dispatch(
     setNotification({
       type: "error",
-      message: "Invalid input",
+      message: "Required fields should not be empty",
     })
   );
 };
@@ -209,6 +214,34 @@ export const connectAccountNotification = (dispatch) => {
       message: "Please connect your wallet to continue.",
     })
   );
+};
+
+export const handleSession = ({ handleStep, dispatch, mintData }) => {
+  if (mintData["Skip_Royalty"]) {
+    dispatch(
+      setMintData({
+        ...mintData,
+        Royalty: [],
+        Skip_Royalty: false,
+        Payment_Splitter_Address: "null",
+      })
+    );
+    handleStep();
+    return;
+  }
+  if (mintData.Payment_Splitter_Address) {
+    handleStep(3);
+  } else if (mintData.IpfsUrl) {
+    if (mintData.MintType === "Collection") {
+      handleStep(2);
+    } else {
+      handleStep(1);
+    }
+  } else if (mintData["Collection Address"]) {
+    if (mintData.MintType !== "Single") {
+      handleStep(1);
+    }
+  }
 };
 
 export const validationErrorMessage = {

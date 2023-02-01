@@ -11,9 +11,7 @@ const UpdateListingModal = ({ onClose, onPriceChange, nft }) => {
   };
 
   const handlePriceChange = (e) => {
-    if (Number(e.target.value) < 0 || isNaN(Number(e.target.value)))
-      return setListPrice("");
-    console.log(typeof e.target.value);
+    if (Number(e.target.value) < 0 || isNaN(Number(e.target.value))) return setListPrice("");
     setListPrice(e.target.value);
   };
 
@@ -30,8 +28,8 @@ const UpdateListingModal = ({ onClose, onPriceChange, nft }) => {
         </div>
         <div className={classes.heading}>Change price</div>
         <div className={classes.description}>
-          New price must be less than previous. If you want increase price, you
-          should cancel it first and then put it on sale again
+          New price must be less than previous. If you want increase price, you should cancel it
+          first and then put it on sale again
         </div>
         <div className={classes.priceInput}>
           <div className={classes.label}>Set a price</div>

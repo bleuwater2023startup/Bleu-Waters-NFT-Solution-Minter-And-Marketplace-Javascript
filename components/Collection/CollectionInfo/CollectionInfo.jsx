@@ -68,14 +68,14 @@ const CollectionInfo = ({ collection }) => {
         <div>
           <div className={classes.value}>
             {Number(floor).toFixed(1)}
-            {supportedChains[parseInt(chainId)].symbol}
+            {supportedChains[parseInt(chainId)]?.symbol}
           </div>
           <div className={classes.property}>Floor</div>
         </div>
         <div>
           <div className={classes.value}>
             {Volume.toFixed(1)}
-            {supportedChains[parseInt(chainId)].symbol}
+            {supportedChains[parseInt(chainId)]?.symbol}
           </div>
           <div className={classes.property}>Volume</div>
         </div>

@@ -6,16 +6,15 @@ import { useContext, useState } from "react";
 import { chainIdToName } from "../../../utils/supportedChains";
 import { StateContext } from "../../../context/state.context";
 import { setMintData } from "../../../context/state.actions";
+import { INITIAL_STATE } from "../../../context/state.reducer";
 
 const SelectContractModal = ({ onClose, onContractSelect, collections }) => {
   const [searchValue, setSearchValue] = useState("");
-  const { dispatch, mintData } = useContext(StateContext);
+  const { dispatch } = useContext(StateContext);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
-
-  console.log({ collections });
 
   return (
     <div className={classes.container}>
@@ -25,8 +24,7 @@ const SelectContractModal = ({ onClose, onContractSelect, collections }) => {
         </div>
         <div className={classes.heading}>Select collection</div>
         <div className={classes.description}>
-          Click to select a collection you want to mint to or create a new
-          collection
+          Click to select a collection you want to mint to or create a new collection
         </div>
         <div className={classes.searchContainer}>
           <Search
@@ -40,37 +38,38 @@ const SelectContractModal = ({ onClose, onContractSelect, collections }) => {
           {collections.map(({ id, name, symbol, nfts, chainId }, idx) => (
             <div key={idx} className={classes.contract}>
               <div className={classes.innerContainer}>
-                <div
-                  className={classes.contractName}
-                >{`${name} (${symbol})`}</div>
+                <div className={classes.contractName}>{`${name} (${symbol})`}</div>
                 <div className={classes.contractDescription}>
-                  <div className={classes.itemCount}>{nfts.length}</div>
-                  <div className={classes.network}>
-                    {chainIdToName[chainId]}
-                  </div>
+                  <div className={classes.itemCount}>{nfts.length} NFTs</div>
+                  <div className={classes.network}>{`:${chainIdToName[chainId]}`}</div>
                 </div>
                 <div className={classes.royalty}>
-                  {`${nfts[0] ? nfts[0].royaltyInfo / 100 : 0}%`}
+                  {`${nfts[0] ? nfts[0].royaltyInfo / 100 : 0}% Royalty`}
                 </div>
               </div>
               <div
                 onClick={() => {
                   dispatch(
-                    setMintData({ ...mintData, "Collection Address": id })
+                    setMintData({
+                      ...INITIAL_STATE.mintData,
+                      "Collection Address": id,
+                      MintType: "Single",
+                    })
                   );
                   onContractSelect("existing");
                 }}
-                className={classes.selectButton}
-              >
+                className={classes.selectButton}>
                 Select
               </div>
             </div>
           ))}
         </div>
         <div
-          onClick={() => onContractSelect("create-new")}
-          className={classes.createButton}
-        >
+          onClick={() => {
+            dispatch(setMintData({ ...INITIAL_STATE.mintData, MintType: "Collection" }));
+            onContractSelect("create-new");
+          }}
+          className={classes.createButton}>
           <Button accent>Create new</Button>
         </div>
       </div>

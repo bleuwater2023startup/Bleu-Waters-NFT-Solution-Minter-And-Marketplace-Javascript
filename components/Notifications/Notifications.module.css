@@ -83,6 +83,26 @@
   background: var(--color-warning);
 }
 
+.closeIcon {
+  width: 1.2em;
+  height: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg);
+  border-radius: 50%;
+  position: absolute;
+  top: 0.4em;
+  right: 0.4em;
+  cursor: pointer;
+}
+
+.closeIcon svg {
+  width: 0.6em;
+  height: 0.6em;
+  stroke: var(--color-error);
+}
+
 @media screen and (max-width: 1200px) {
   .container {
     top: 5.2em;

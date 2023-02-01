@@ -6,6 +6,7 @@ import InfoIcon from "../../assets/n-info.svg";
 import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../../context/state.context";
 import { setNotification } from "../../context/state.actions";
+import CloseIcon from "../../assets/icon-close.svg";
 
 const Notifications = () => {
   const { notification, dispatch } = useContext(StateContext);
@@ -36,23 +37,20 @@ const Notifications = () => {
     <div className={classes.container}>
       {isVisible && (
         <div className={classes.notificationContainer}>
+          <div>{icons[type]}</div>
+          <div className={classes.text}>
+            {message.substring(0, 60)}
+            {message.length > 60 ? "..." : ""}
+          </div>
+          <div className={`${classes.line} ${classes[type]} ${isVisible && classes.active}`}></div>
           <div
             onClick={() => {
               clearInterval(timerId);
               setIsVisible(false);
             }}
-          >
-            {icons[type]}
+            className={classes.closeIcon}>
+            <CloseIcon />
           </div>
-          <div className={classes.text}>
-            {message.substring(0, 60)}
-            {message.length > 60 ? "..." : ""}
-          </div>
-          <div
-            className={`${classes.line} ${classes[type]} ${
-              isVisible && classes.active
-            }`}
-          ></div>
         </div>
       )}
     </div>

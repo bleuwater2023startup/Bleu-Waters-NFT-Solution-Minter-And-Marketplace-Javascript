@@ -21,7 +21,7 @@ const RoyaltyInput = ({ name: name_, preview }) => {
     if (!res) {
       dispatch(
         setNotification({
-          type: "warning",
+          type: "info",
           message: "Finish setting address and split amount to add more",
         })
       );
@@ -31,7 +31,7 @@ const RoyaltyInput = ({ name: name_, preview }) => {
   };
 
   const handleSkip = () => {
-    dispatch(setMintData({ ...mintData, ["Skip-Royalty"]: true }));
+    dispatch(setMintData({ ...mintData, ["Skip_Royalty"]: true }));
   };
 
   const handleChangeSplitAddress = (e) => {
@@ -74,21 +74,22 @@ const RoyaltyInput = ({ name: name_, preview }) => {
         <>
           <div className={classes.nameContainer}>
             <div className={classes.name}>Royalty Split</div>
-            <div onClick={handleSkip} className={classes.skip}>
-              <span>Skip this step</span>
-              <ArrowIcon />
-            </div>
+            {!mintData.Royalty.length && (
+              <div onClick={handleSkip} className={classes.skip}>
+                <span>Skip this step</span>
+                <ArrowIcon />
+              </div>
+            )}
           </div>
           <div className={classes.description}>
             Please, define each recipient’s wallet address and split amount.
           </div>
         </>
       )}
-      <div className={classes.totalRoyaltyLabel}>Royalty value</div>
-      <div className={classes.totalRoyalty}>
-        <div>{totalRoyaltyValue}</div>
-        <div className={classes.percent}>%</div>
-      </div>
+      <div className={classes.totalRoyaltyLabel}>Total royalty value</div>
+      <div className={classes.totalRoyalty}>{`${
+        isNaN(totalRoyaltyValue) ? 0 : totalRoyaltyValue
+      } %`}</div>
       <div className={classes.splitContainer}>
         {mintData[name_].map(({ id, address, value }, idx) => (
           <React.Fragment key={idx}>

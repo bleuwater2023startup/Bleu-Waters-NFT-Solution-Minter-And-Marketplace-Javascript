@@ -13,8 +13,6 @@ const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_SUBGRAPH_URL,
 });
 
-console.log(process.env.NEXT_PUBLIC_SUBGRAPH_URL);
-
 function MyApp({ Component, pageProps }) {
   return (
     <>
