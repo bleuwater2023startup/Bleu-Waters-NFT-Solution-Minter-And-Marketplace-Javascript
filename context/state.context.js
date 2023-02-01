@@ -16,14 +16,17 @@ const StateContextProvider = ({ children }) => {
   useEffect(() => {
     const initialState = JSON.stringify(INITIAL_STATE.mintData);
     const currentState = JSON.stringify(state.mintData);
-    if (initialState !== currentState || domMountRef.current >= 2) {
+    if (
+      initialState !== currentState || state.isDev
+        ? domMountRef.current >= 2
+        : domMountRef.current >= 1
+    ) {
       window.localStorage.setItem("mint_data", JSON.stringify(state.mintData));
     }
   }, [state.mintData]);
 
   useEffect(() => {
     domMountRef.current += 1;
-    console.log({ domMountRef });
   }, []);
 
   return <StateContext.Provider value={{ ...state, dispatch }}>{children}</StateContext.Provider>;

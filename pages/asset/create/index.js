@@ -32,6 +32,7 @@ const Create = () => {
   };
 
   const isSession = (data) =>
+    data &&
     Object.values(data).some((val) => {
       if (val !== null && typeof val === "object") {
         return Object.keys(val).length;

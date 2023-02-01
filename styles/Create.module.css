@@ -125,6 +125,7 @@
 @media screen and (max-width: 768px) {
   .mintTypeContainer {
     flex-direction: column;
+    align-items: center;
   }
 
   .container {
