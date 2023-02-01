@@ -20,11 +20,7 @@ const AttributeInput = ({ name, preview }) => {
   return (
     <div className={classes.container}>
       {add ? (
-        <AttributeModal
-          allAttributes={mintData[name]}
-          onSave={handleSave}
-          onClose={handleClose}
-        />
+        <AttributeModal allAttributes={mintData[name]} onSave={handleSave} onClose={handleClose} />
       ) : null}
       <div className={classes.innerContainer}>
         <div>
@@ -42,12 +38,13 @@ const AttributeInput = ({ name, preview }) => {
         )}
       </div>
       <div className={classes.attributeContainer}>
-        {mintData[name].map(({ trait_type, value }, idx) => (
-          <div key={idx} className={classes.attribute}>
-            <div className={classes.trait_type}>{trait_type}</div>
-            <div>{value}</div>
-          </div>
-        ))}
+        {mintData[name] &&
+          mintData[name].map(({ trait_type, value }, idx) => (
+            <div key={idx} className={classes.attribute}>
+              <div className={classes.trait_type}>{trait_type}</div>
+              <div>{value}</div>
+            </div>
+          ))}
       </div>
     </div>
   );

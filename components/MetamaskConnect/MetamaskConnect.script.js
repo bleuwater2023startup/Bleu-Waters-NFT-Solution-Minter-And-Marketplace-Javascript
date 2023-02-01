@@ -55,7 +55,7 @@ export const checkMetamaskConnection = ({ dispatch }) => {
   } else {
     dispatch(
       setNotification({
-        type: error,
+        type: "error",
         message: "Metamask is not installed",
       })
     );
@@ -96,7 +96,7 @@ export const handleConnectToMetamask = async ({ dispatch }) => {
   } else {
     dispatch(
       setNotification({
-        type: error,
+        type: "error",
         message: "Metamask is not installed",
       })
     );
