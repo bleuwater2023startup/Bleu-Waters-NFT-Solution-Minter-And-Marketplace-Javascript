@@ -17,6 +17,8 @@ const AttributeInput = ({ name, preview }) => {
     dispatch(setMintData({ ...mintData, [name]: value }));
   };
 
+  console.log({ attribute: mintData[name] });
+
   return (
     <div className={classes.container}>
       {add ? (
@@ -38,7 +40,7 @@ const AttributeInput = ({ name, preview }) => {
         )}
       </div>
       <div className={classes.attributeContainer}>
-        {mintData[name] &&
+        {mintData[name].length &&
           mintData[name].map(({ trait_type, value }, idx) => (
             <div key={idx} className={classes.attribute}>
               <div className={classes.trait_type}>{trait_type}</div>

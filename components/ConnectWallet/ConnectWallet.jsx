@@ -17,8 +17,7 @@ import Link from "next/link";
 import CopyText from "../CopyText/CopyTest";
 
 const ConnectWallet = () => {
-  const { dispatch, account, chainId, walletProvider } =
-    useContext(StateContext);
+  const { dispatch, account, chainId, walletProvider } = useContext(StateContext);
 
   const handleConnectModal = () => {
     dispatch(setModal(modalTypes.CONNECT_MODAL));
@@ -42,9 +41,7 @@ const ConnectWallet = () => {
       {account ? (
         <div className={classes.connected}>
           {chainId ? (
-            <div className={classes.chainIcon}>
-              {supportedChains[parseInt(chainId)].icon}
-            </div>
+            <div className={classes.chainIcon}>{supportedChains[parseInt(chainId)]?.icon}</div>
           ) : null}
           <div className={classes.account}>{formatAccount(account, 4, 5)}</div>
           <div className={classes.chevron}>
@@ -54,13 +51,9 @@ const ConnectWallet = () => {
             <div className={classes.dropdownInnerContainer}>
               <div className={classes.dropdown}>
                 <div className={classes.listItem}>
-                  <div className={classes.chain}>
-                    {supportedChains[parseInt(chainId)].name}
-                  </div>
+                  <div className={classes.chain}>{supportedChains[parseInt(chainId)]?.name}</div>
                   <div className={classes.address}>
-                    <CopyText message={account}>
-                      {formatAccount(account, 5, 4)}
-                    </CopyText>
+                    <CopyText message={account}>{formatAccount(account, 5, 4)}</CopyText>
                   </div>
                 </div>
                 <Link href="/account" className={classes.listItem}>

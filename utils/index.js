@@ -125,7 +125,7 @@ export const getDateTime = (seconds) => {
 
 export const getMaticUsdPrice = async (chainId) => {
   try {
-    const res = await fetch(supportedChains[parseInt(chainId)].livePrice);
+    const res = await fetch(supportedChains[parseInt(chainId)]?.livePrice);
     const data = await res.json();
     const { usd } = data["matic-network"];
     return usd;
