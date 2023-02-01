@@ -17,9 +17,8 @@ const StateContextProvider = ({ children }) => {
     const initialState = JSON.stringify(INITIAL_STATE.mintData);
     const currentState = JSON.stringify(state.mintData);
     if (
-      initialState !== currentState || state.isDev
-        ? domMountRef.current >= 2
-        : domMountRef.current >= 1
+      initialState !== currentState ||
+      (state.isDev ? domMountRef.current >= 2 : domMountRef.current >= 1)
     ) {
       window.localStorage.setItem("mint_data", JSON.stringify(state.mintData));
     }
@@ -27,7 +26,7 @@ const StateContextProvider = ({ children }) => {
 
   useEffect(() => {
     domMountRef.current += 1;
-    console.log(state.isDev);
+    console.log(state.isDev ? "Development" : "Production");
   }, []);
 
   return <StateContext.Provider value={{ ...state, dispatch }}>{children}</StateContext.Provider>;
