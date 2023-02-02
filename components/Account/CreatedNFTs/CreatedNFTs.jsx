@@ -1,11 +1,17 @@
+import { use, useEffect, useState } from "react";
 import ExploreCard from "../../Explore/ExploreCard/ExploreCard";
 import Paginate from "../../Paginate/Paginate";
 import NFTs from "../NFTs/NFTs";
 import classes from "./CreatedNFTs.module.css";
 
 const CreatedNFTs = ({ collections }) => {
-  let nfts = collections.map((collection) => collection.nfts);
-  nfts = [...nfts].flat();
+  const [nfts, setNfts] = useState([]);
+
+  useEffect(() => {
+    let _nfts = collections.map((collection) => collection.nfts);
+    _nfts = [..._nfts].flat();
+    setNfts(_nfts);
+  }, [collections]);
 
   return (
     <div className={classes.container}>
@@ -20,7 +26,7 @@ const CreatedNFTs = ({ collections }) => {
         offsetHeight={1160}
         countPerPage={20}
         items={nfts}
-        renderItem={(nfts) => <NFTs nfts={nfts} />}
+        renderItem={(_nfts) => <NFTs nfts={_nfts} />}
       />
     </div>
   );

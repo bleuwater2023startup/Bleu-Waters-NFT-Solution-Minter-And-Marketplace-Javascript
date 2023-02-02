@@ -2,7 +2,7 @@ import Link from "next/link";
 import classes from "./NFTCard.module.css";
 import { formatIpfsUrl } from "../../../utils/ipfs";
 import DotsIcon from "../../../assets/icon-dots.svg";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { chainIdToName } from "../../../utils/supportedChains";
 import { StateContext } from "../../../context/state.context";
 import { ethers } from "ethers";

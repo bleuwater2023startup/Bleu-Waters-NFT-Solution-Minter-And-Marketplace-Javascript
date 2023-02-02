@@ -9,6 +9,7 @@ import { StateContext } from "../../../context/state.context";
 import NFTCard from "../NFTCard/NFTCard";
 import { useRouter } from "next/router";
 import { getMaticUsdPrice } from "../../../utils";
+import { getCollectionsBySearch } from "../../Explore/ExploreScript";
 
 const sortKey = [
   "Show all",
@@ -22,6 +23,7 @@ const NFTs = ({ nfts, activeListing }) => {
   const { dispatch } = useContext(StateContext);
   // const [active, setActive] = useState(0);
   const [nftDetails, setNftDetails] = useState(null);
+  const [filteredNftDetails, setFilteredNftDetails] = useState(null);
   const [usd, setUsd] = useState(0);
   const router = useRouter();
 
@@ -29,6 +31,17 @@ const NFTs = ({ nfts, activeListing }) => {
     const { ipfsData, details } = await getNftDetails({ storedIpfsData, nfts });
     dispatch(setIpfsData({ ...ipfsData, ...storedIpfsData }));
     setNftDetails(details);
+    setFilteredNftDetails(details);
+  };
+
+  const handleSearchChange = (e) => {
+    if (!nftDetails) return;
+    const res = getCollectionsBySearch({
+      collections: nftDetails,
+      searchTerm: e.target.value,
+      params: ["name", "id", "tokenId", "nftAddress", "description"],
+    });
+    setFilteredNftDetails(res);
   };
 
   useEffect(() => {
@@ -79,11 +92,16 @@ const NFTs = ({ nfts, activeListing }) => {
           </div>
         </div> */}
         <div className={classes.searchContainer}>
-          <Search faint placeholder="Search by name, amount..." value={""} onChange={() => {}} />
+          <Search faint placeholder="Search by name, amount..." onChange={handleSearchChange} />
         </div>
       </div>
       <div className={classes.nftContainer}>
-        {nftDetails && nftDetails.map((nft, idx) => <NFTCard key={idx} nft={nft} usd={usd} />)}
+        {filteredNftDetails &&
+          (filteredNftDetails.length ? (
+            filteredNftDetails.map((nft, idx) => <NFTCard key={idx} nft={nft} usd={usd} />)
+          ) : (
+            <div>Nothing to display</div>
+          ))}
       </div>
     </div>
   );
