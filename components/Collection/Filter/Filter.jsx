@@ -5,9 +5,44 @@ import FilterDropdownWrapper from "../FilterDropdownWrapper/FilterDropdownWrappe
 import classes from "./Filter.module.css";
 import { parseData } from "./FilterScript";
 import CloseIcon from "../../../assets/icon-close.svg";
+import { useState } from "react";
 
-const Filter = ({ nftDetails, setActiveFilter, activeFilter, onClose }) => {
+const Filter = ({
+  nftDetails,
+  setActiveFilter,
+  activeFilter,
+  onClose,
+  handleToggleChange,
+  handlePriceRange,
+}) => {
   const attributes = parseData(nftDetails);
+  const [inputValue, setInputValue] = useState({
+    min: "0",
+    max: "0",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (Number(e.target.value) < 0 || isNaN(Number(e.target.value))) {
+      return setInputValue({ ...inputValue, [name]: "" });
+    }
+    setInputValue({ ...inputValue, [name]: value });
+  };
+
+  const handleCancel = () => {
+    handlePriceRange({
+      min: "0",
+      max: "0",
+    });
+    setInputValue({
+      min: "0",
+      max: "0",
+    });
+  };
+
+  const handleApply = () => {
+    handlePriceRange(inputValue);
+  };
 
   const handleAttributeClick = (attribute, type) => {
     setActiveFilter((a) => {
@@ -34,11 +69,11 @@ const Filter = ({ nftDetails, setActiveFilter, activeFilter, onClose }) => {
         <div className={classes.statusContainer}>
           <div className={classes.status}>
             <div>Listed item only</div>
-            <ToggleButton onClick={(e) => console.log(e)} />
+            <ToggleButton onClick={(e) => handleToggleChange({ type: "item", state: e })} />
           </div>
           <div className={classes.status}>
             <div>Only community Listings</div>
-            <ToggleButton onClick={(e) => console.log(e)} />
+            <ToggleButton onClick={(e) => handleToggleChange({ type: "community", state: e })} />
           </div>
         </div>
       </FilterDropdownWrapper>
@@ -48,23 +83,35 @@ const Filter = ({ nftDetails, setActiveFilter, activeFilter, onClose }) => {
             <div className={classes.price}>
               <div className={classes.range}>Lowest</div>
               <div className={classes.priceInput}>
-                <input type="text" className={classes.input} placeholder="0" />
-                <div className={classes.tag}>MATIC</div>
+                <input
+                  type="text"
+                  name="min"
+                  value={inputValue.min}
+                  onChange={handleInputChange}
+                  className={classes.input}
+                />
+                <div className={classes.tag}>Matic</div>
               </div>
             </div>
             <div className={classes.price}>
               <div className={classes.range}>Highest</div>
               <div className={classes.priceInput}>
-                <input type="text" className={classes.input} placeholder="0" />
-                <div className={classes.tag}>MATIC</div>
+                <input
+                  type="text"
+                  name="max"
+                  value={inputValue.max}
+                  onChange={handleInputChange}
+                  className={classes.input}
+                />
+                <div className={classes.tag}>Matic</div>
               </div>
             </div>
           </div>
           <div className={classes.button}>
-            <Button dark outline>
+            <Button onClick={handleApply} height={2} dark outline>
               Apply
             </Button>
-            <Button dark outline>
+            <Button onClick={handleCancel} height={2} dark outline>
               Cancel
             </Button>
           </div>
@@ -77,8 +124,7 @@ const Filter = ({ nftDetails, setActiveFilter, activeFilter, onClose }) => {
               <div
                 key={idx}
                 className={classes.attributeContainer}
-                onClick={() => handleAttributeClick(attribute, type)}
-              >
+                onClick={() => handleAttributeClick(attribute, type)}>
                 <CheckboxV2 active={isActive(attribute, type)} />
                 <div className={classes.attribute}>
                   <div>{type}</div>

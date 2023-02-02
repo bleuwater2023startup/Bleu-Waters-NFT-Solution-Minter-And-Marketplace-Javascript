@@ -59,7 +59,7 @@ const Sell = () => {
       dispatch(
         setNotification({
           type: "success",
-          message: "NFT listed successfully",
+          message: "NFT listed successfully. Refresh tab to see updated changes.",
         })
       );
     }

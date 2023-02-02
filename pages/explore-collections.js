@@ -2,18 +2,26 @@ import Head from "next/head";
 import ExploreCard from "../components/Explore/ExploreCard/ExploreCard";
 import classes from "../styles/Explore.module.css";
 import collectionBanner from "../assets/collection-banner.png";
-// import ExploreCardEmpty from "../components/Explore/ExploreCardEmpty/ExploreCardEmpty";
 import Search from "../components/Search/Search";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../utils/subgraphQuery";
 import { useRouter } from "next/router";
+import { getCollectionsBySearch } from "../components/Explore/ExploreScript";
 
 const ExploreCollection = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [collections, setCollections] = useState(null);
+  const [filteredCollections, setFilteredCollections] = useState(null);
+
   const handleChange = (e) => {
+    const res = getCollectionsBySearch({
+      collections,
+      searchTerm: e.target.value,
+      params: ["id", "name"],
+    });
+    setFilteredCollections(res);
     setSearchValue(e.target.value);
-    console.log({ searchValue: e.target.value });
   };
 
   const router = useRouter();
@@ -25,6 +33,13 @@ const ExploreCollection = () => {
   useEffect(() => {
     refetch();
   }, [router.asPath]);
+
+  useEffect(() => {
+    if (data) {
+      setCollections(data.collections);
+      setFilteredCollections(data.collections);
+    }
+  }, [data]);
 
   return (
     <div className={classes.container}>
@@ -53,12 +68,14 @@ const ExploreCollection = () => {
           <>loading...</>
         ) : (
           <div className={classes.cardContainer}>
-            {data.collections
-              .filter((collection) => collection.nfts.length)
-              .map((collection, idx) => (
-                <ExploreCard key={idx} collection={collection} />
+            {filteredCollections &&
+              (filteredCollections.length ? (
+                filteredCollections
+                  .filter((collection) => collection.nfts.length)
+                  .map((collection, idx) => <ExploreCard key={idx} collection={collection} />)
+              ) : (
+                <div>Nothing to display</div>
               ))}
-            {/* <ExploreCardEmpty /> */}
           </div>
         )}
       </div>

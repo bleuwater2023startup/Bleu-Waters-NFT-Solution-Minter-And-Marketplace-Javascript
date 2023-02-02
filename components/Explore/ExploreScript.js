@@ -1,3 +1,4 @@
+import { formatEther } from "ethers/lib/utils";
 import { getFormatedPrice } from "../../utils";
 import supportedChains from "../../utils/supportedChains";
 
@@ -56,12 +57,16 @@ const sortByDateDescending = (col) => {
 };
 
 const sortByPriceAscending = (col) => {
-  const collection = [...col].sort((a, b) => Number(a.price) - Number(b.price));
+  const collection = [...col].sort(
+    (a, b) => Number(a.txHistory[0].price) - Number(b.txHistory[0].price)
+  );
   return collection;
 };
 
 const sortByPriceDescending = (col) => {
-  const collection = [...col].sort((a, b) => Number(b.price) - Number(a.price));
+  const collection = [...col].sort(
+    (a, b) => Number(b.txHistory[0].price) - Number(a.txHistory[0].price)
+  );
   return collection;
 };
 
@@ -82,6 +87,7 @@ const sortByNameDescending = (col) => {
 };
 
 export const sortBy = ({ value, collections }) => {
+  if (!value || !collections) return collections;
   switch (value) {
     case "newest":
       return sortByDateAscending(collections);
@@ -89,10 +95,10 @@ export const sortBy = ({ value, collections }) => {
     case "oldest":
       return sortByDateDescending(collections);
 
-    case "highest price":
+    case "desc":
       return sortByPriceDescending(collections);
 
-    case "lowest price":
+    case "asc":
       return sortByPriceAscending(collections);
 
     case "a - z":
@@ -122,8 +128,7 @@ export const rangeBy = async ({ value, collections }) => {
   const result = await Promise.all(
     collections.map(async (col) => {
       const rate = await getFormatedPrice(
-        supportedChains[col.chain].coinGeckoLabel ||
-          supportedChains[col.chain].id
+        supportedChains[col.chain].coinGeckoLabel || supportedChains[col.chain].id
       );
       const price = Number(rate) * Number(col.price);
       console.log(price >= value.minPrice && price <= value.maxPrice);
@@ -132,6 +137,13 @@ export const rangeBy = async ({ value, collections }) => {
   );
 
   return result.filter((res) => res);
+};
+
+export const getCollectionsByPriceRange = ({ value, collections }) => {
+  return collections.filter((col) => {
+    let price = Number(formatEther(col.txHistory[0].price));
+    return price >= value.min && price <= value.max;
+  });
 };
 
 export const shuffle = (array) => {
@@ -175,18 +187,32 @@ export const getCollectionsByChain = ({ collections, chain, mainnet }) => {
     .forEach((chain) => {
       mapChainLabelToId[chain.chain] = chain;
     });
-  return collections.filter(
-    (col) => col.chain === mapChainLabelToId[chain].networkId
+  return collections.filter((col) => col.chain === mapChainLabelToId[chain].networkId);
+};
+
+export const getCollectionsBySearch = ({ collections, searchTerm, params }) => {
+  if (!collections || !params) return collections;
+  const value = searchTerm.toLowerCase();
+  return collections.filter((col) =>
+    params.some(
+      (p) =>
+        col[p]?.toLowerCase().includes(value) ||
+        col[p]?.toLowerCase().replace(/\s/g, "").includes(value)
+    )
   );
 };
 
-export const getCollectionsBySearch = ({ collections, search }) => {
-  if (!collections.length) return;
-  const value = search.trim().toLocaleLowerCase();
+export const getCollectionsByListed = ({ collections }) => {
+  if (!collections) return collections;
+  return collections.filter((col) => col.txHistory[0].txType === "Listing");
+};
+
+export const getCollectionsByCommunityListed = ({ collections }) => {
+  if (!collections) return collections;
   return collections.filter(
     (col) =>
-      col.name.toLowerCase().includes(value) ||
-      col.description.toLowerCase().includes(value)
+      col.txHistory[0].txType === "Listing" &&
+      col.txHistory.filter((tx) => tx.txType === "Listing").length > 1
   );
 };
 

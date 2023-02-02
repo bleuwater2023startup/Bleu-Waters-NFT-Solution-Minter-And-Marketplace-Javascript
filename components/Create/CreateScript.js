@@ -777,7 +777,6 @@ const uploadToIpfs = async (metadata) => {
 
 const storeNft = async (nftstorage, i) => {
   const data = await nftstorage.store(i);
-  console.log({ url: data.url });
   return data.url;
 };
 

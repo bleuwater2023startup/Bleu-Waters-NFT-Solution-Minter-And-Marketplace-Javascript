@@ -13,27 +13,72 @@ import { useRouter } from "next/router";
 import CloseIcon from "../../../assets/icon-close.svg";
 import Filtericon from "../../../assets/icon-filter.svg";
 import PriceSort from "../PriceSort/PriceSort";
+import {
+  getCollectionsByCommunityListed,
+  getCollectionsByListed,
+  getCollectionsByPriceRange,
+  getCollectionsBySearch,
+  sortBy,
+} from "../../Explore/ExploreScript";
 
 const NFTs = ({ collection }) => {
-  const [searchValue, setSearchValue] = useState("");
   const [nftDetails, setNftDetails] = useState(null);
   const { dispatch } = useContext(StateContext);
   const [showFilter, setShowFilter] = useState(false);
   const [activeFilter, setActiveFilter] = useState([]);
   const [usd, setUsd] = useState(0);
+  const [isToggle, setIsToggle] = useState(false);
   const [filteredNftDetails, setFilteredNftDetails] = useState(null);
 
   const router = useRouter();
 
   const { nfts, name, chainId } = collection;
 
-  const handleChange = (value) => {
-    setSearchValue(value);
-    console.log({ value });
+  const handlePriceChange = (value) => {
+    const res = sortBy({ value, collections: isToggle ? filteredNftDetails : nftDetails });
+    setFilteredNftDetails(res);
   };
 
-  const handleAttributeClick = (id) => {
-    setActiveFilter((a) => a.filter((i, idx) => idx != id));
+  const handleSearchChange = (e) => {
+    if (!nftDetails) return;
+    const res = getCollectionsBySearch({
+      collections: nftDetails,
+      searchTerm: e.target.value,
+      params: ["name", "id", "tokenId", "nftAddress", "description"],
+    });
+    setFilteredNftDetails(res);
+  };
+
+  const handleAttributeClose = (id) => {
+    setActiveFilter((a) => a.filter((_, idx) => idx != id));
+  };
+
+  const handleToggleChange = (value) => {
+    if (value.state) {
+      let res;
+      if (value.type === "community") {
+        res = getCollectionsByCommunityListed({ collections: nftDetails });
+      } else {
+        res = getCollectionsByListed({ collections: nftDetails });
+      }
+      setIsToggle(true);
+      setFilteredNftDetails(res);
+    } else {
+      setIsToggle(false);
+      setFilteredNftDetails(nftDetails);
+    }
+  };
+
+  const handlePriceRange = (value) => {
+    if (value.min === value.max) {
+      setFilteredNftDetails(nftDetails);
+    } else {
+      const res = getCollectionsByPriceRange({
+        value,
+        collections: isToggle ? filteredNftDetails : nftDetails,
+      });
+      setFilteredNftDetails(res);
+    }
   };
 
   const _getNftDetails = async (storedIpfsData) => {
@@ -82,10 +127,10 @@ const NFTs = ({ collection }) => {
           </div>
         </div>
         <div className={classes.searchContainer}>
-          <Search faint placeholder="search" />
+          <Search faint placeholder="search" onChange={handleSearchChange} />
         </div>
         <div className={classes.selectContainer}>
-          <PriceSort onChange={handleChange} />
+          <PriceSort onChange={handlePriceChange} />
         </div>
       </div>
 
@@ -95,6 +140,8 @@ const NFTs = ({ collection }) => {
             nftDetails={nftDetails}
             setActiveFilter={setActiveFilter}
             activeFilter={activeFilter}
+            handlePriceRange={handlePriceRange}
+            handleToggleChange={handleToggleChange}
             onClose={() => setShowFilter(false)}
           />
         )}
@@ -103,7 +150,7 @@ const NFTs = ({ collection }) => {
             {activeFilter.map((active, idx) => (
               <div key={idx} className={classes.attribute}>
                 <div>{active}</div>
-                <div className={classes.closeIcon} onClick={() => handleAttributeClick(idx)}>
+                <div className={classes.closeIcon} onClick={() => handleAttributeClose(idx)}>
                   <CloseIcon />
                 </div>
               </div>

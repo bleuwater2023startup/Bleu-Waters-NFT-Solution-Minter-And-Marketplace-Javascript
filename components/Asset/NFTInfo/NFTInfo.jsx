@@ -129,6 +129,11 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
       );
     }
     dispatch(setLoadingScreen({}));
+    await new Promise((rs) =>
+      setTimeout(() => {
+        rs();
+      }, 3000)
+    );
     refetch();
   };
 
