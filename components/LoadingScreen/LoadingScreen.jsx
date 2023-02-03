@@ -1,7 +1,6 @@
 import classes from "./LoadingScreen.module.css";
 import { useContext } from "react";
 import { StateContext } from "../../context/state.context";
-// import LoadingIcon from "../../assets/icon-loading.svg";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const LoadingScreen = () => {

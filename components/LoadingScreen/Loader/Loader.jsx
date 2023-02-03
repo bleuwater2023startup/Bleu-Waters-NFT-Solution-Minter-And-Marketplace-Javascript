@@ -1,17 +1,13 @@
 import classes from "./Loader.module.css";
-import LoadingIcon from "../../assets/icon-loading.svg";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Loader = () => {
   return (
-    <>
-      {title && description && (
-        <div className={classes.container}>
-          <div className={classes.wrapper}>
-            <LoadingIcon className={classes.loadingIcon} />
-          </div>
-        </div>
-      )}
-    </>
+    <div className={classes.container}>
+      <div className={classes.wrapper}>
+        <CircularProgress style={{ width: "2em", height: "2em" }} />
+      </div>
+    </div>
   );
 };
 

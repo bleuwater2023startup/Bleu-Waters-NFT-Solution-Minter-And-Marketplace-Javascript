@@ -6,6 +6,7 @@ import ActiveListing from "../components/Account/ActiveListing/ActiveListing";
 import CollectedNFTs from "../components/Account/CollectedNFTs/CollectedNFTs";
 import CreatedNFTs from "../components/Account/CreatedNFTs/CreatedNFTs";
 import NoNFTs from "../components/Account/NoNFTs/NoNFTs";
+import Loader from "../components/LoadingScreen/Loader/Loader";
 import CreateSuccessModal from "../components/Modals/CreateSuccessModal/CreateSuccessModal";
 import { StateContext } from "../context/state.context";
 import classes from "../styles/Account.module.css";
@@ -150,7 +151,7 @@ const Account = () => {
           error_collected ? (
             <>Failed to fetch results, please check your network and try again.</>
           ) : loading_collected ? (
-            <>loading...</>
+            <Loader />
           ) : data_collected.user ? (
             <CollectedNFTs nfts={data_collected.user.nfts} />
           ) : (
@@ -162,7 +163,7 @@ const Account = () => {
           error_created ? (
             <>Failed to fetch results, please check your network and try again.</>
           ) : loading_created ? (
-            <>loading...</>
+            <Loader />
           ) : data_created.user ? (
             <CreatedNFTs collections={data_created.user.collections} />
           ) : (
@@ -174,7 +175,7 @@ const Account = () => {
           error_activeListing ? (
             <>Failed to fetch results, please check your network and try again.</>
           ) : loading_activeListing ? (
-            <>loading...</>
+            <Loader />
           ) : data_activeListing.user ? (
             <ActiveListing nfts={data_activeListing.user.nfts} />
           ) : (

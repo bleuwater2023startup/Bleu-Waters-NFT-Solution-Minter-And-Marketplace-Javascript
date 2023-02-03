@@ -13,6 +13,10 @@
   flex-direction: column;
 }
 
+.container:hover {
+  box-shadow: 14px 15px 13px rgba(93, 134, 194, 0.14);
+}
+
 .imageContainer {
   height: 100%;
   display: flex;
@@ -38,10 +42,6 @@
   border-radius: 0.6em;
   transition: all 300ms;
   margin-bottom: -4px;
-}
-
-.container:hover {
-  box-shadow: 14px 15px 13px rgba(93, 134, 194, 0.14);
 }
 
 .details {

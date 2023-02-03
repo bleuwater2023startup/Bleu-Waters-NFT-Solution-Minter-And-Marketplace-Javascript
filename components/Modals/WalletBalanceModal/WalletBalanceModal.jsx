@@ -156,7 +156,7 @@ const WalletBalanceModal = ({ onClose, error, loading, data }) => {
                 </div>
               </div>
             ) : (
-              <div>---</div>
+              <div>- 0 -</div>
             )}
           </div>
           <div className={classes.innerContainer}>
@@ -195,7 +195,7 @@ const WalletBalanceModal = ({ onClose, error, loading, data }) => {
                     </div>
                   ))
                 ) : (
-                  <div>---</div>
+                  <div>- 0 -</div>
                 )}
               </div>
             )}

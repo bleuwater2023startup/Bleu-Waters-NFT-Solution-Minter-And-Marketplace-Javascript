@@ -18,6 +18,7 @@ import { StateContext } from "../../../../../context/state.context";
 import { setIpfsData } from "../../../../../context/state.actions";
 import { getNftDetails } from "../../../../../utils/ipfs";
 import { getMaticUsdPrice } from "../../../../../utils";
+import Loader from "../../../../../components/LoadingScreen/Loader/Loader";
 
 const Asset = () => {
   const [activeTab, setActiveTab] = useState(null);
@@ -97,7 +98,7 @@ const Asset = () => {
       {error ? (
         <>Failed to fetch results, please check your network and try again.</>
       ) : loading ? (
-        <>loading...</>
+        <Loader />
       ) : (
         <>
           <NFTInfo collection={data.collection} ipfsData={nftDetails} refetch={refetch} usd={usd} />

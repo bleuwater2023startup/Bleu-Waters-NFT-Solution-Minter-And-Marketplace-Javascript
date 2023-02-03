@@ -31,22 +31,23 @@ const AttributeInput = ({ name, preview }) => {
             Textual traits that shows up as rectangles on NFT page
           </div>
         </div>
-        {!preview && (
+        {!preview ? (
           <div className={classes.addAttributeBtn} onClick={() => setAdd(true)}>
             <Button dark outline height="1">
               Add Attribute
             </Button>
           </div>
-        )}
+        ) : null}
       </div>
       <div className={classes.attributeContainer}>
-        {mintData[name].length &&
-          mintData[name].map(({ trait_type, value }, idx) => (
-            <div key={idx} className={classes.attribute}>
-              <div className={classes.trait_type}>{trait_type}</div>
-              <div>{value}</div>
-            </div>
-          ))}
+        {mintData[name].length
+          ? mintData[name].map(({ trait_type, value }, idx) => (
+              <div key={idx} className={classes.attribute}>
+                <div className={classes.trait_type}>{trait_type}</div>
+                <div>{value}</div>
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );

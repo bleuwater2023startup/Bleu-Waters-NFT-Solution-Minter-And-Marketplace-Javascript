@@ -1,0 +1,77 @@
+.contianer {
+  width: 100%;
+  background: white;
+}
+
+.innerContainer {
+  width: 100%;
+  margin-top: -6em;
+  margin-bottom: 4em;
+  padding: 0 1em;
+}
+
+.collectionLogo {
+  width: 12em;
+  height: 12em;
+}
+
+.DetailContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.innerDetailContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.imageContainer {
+  background: white;
+  border-radius: 0.6em;
+  padding: 0.6em;
+  z-index: 1;
+}
+
+.collectionDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1em;
+  flex: 1;
+  padding: 0.6em;
+}
+
+.description {
+  width: 100%;
+  max-width: 48em;
+  margin-bottom: 2em;
+  font-size: 1rem;
+  padding: 0.6em;
+  border-radius: 0.6em;
+}
+
+@media screen and (max-width: 1200px) {
+  .innerContainer {
+    margin-top: -4em;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .innerDetailContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .collectionName {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+}

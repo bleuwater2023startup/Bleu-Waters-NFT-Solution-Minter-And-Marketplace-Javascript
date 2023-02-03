@@ -14,6 +14,7 @@ import { useQuery } from "@apollo/client";
 import { StateContext } from "../../../../../context/state.context";
 import { formatIpfsUrl, getNftDetails } from "../../../../../utils/ipfs";
 import { handleList } from "../../../../../components/Create/CreateScript";
+import Loader from "../../../../../components/LoadingScreen/Loader/Loader";
 
 const Sell = () => {
   const [toggleListModal, setToggleListModal] = useState(false);
@@ -95,7 +96,7 @@ const Sell = () => {
       {error ? (
         <div>Failed to fetch results, please check your network and try again.</div>
       ) : loading || !nftDetails ? (
-        <div>loading...</div>
+        <Loader />
       ) : (
         <div className={classes.container}>
           {toggleListModal && (

@@ -16,6 +16,7 @@ import {
 } from "../../../../../context/state.actions";
 import { useQuery } from "@apollo/client";
 import { formatIpfsUrl, getNftDetails } from "../../../../../utils/ipfs";
+import Loader from "../../../../../components/LoadingScreen/Loader/Loader";
 
 const Transfer = () => {
   const { account, dispatch, walletProvider } = useContext(StateContext);
@@ -128,7 +129,7 @@ const Transfer = () => {
       {error ? (
         <div>Failed to fetch results, please check your network and try again.</div>
       ) : loading || !nftDetails ? (
-        <div>loading...</div>
+        <Loader />
       ) : (
         <div className={classes.container}>
           {transfer.success && (

@@ -7,6 +7,7 @@ import { StateContext } from "../../context/state.context";
 import { getNftDetails } from "../../utils/ipfs";
 import { GET_SIMILAR_NFTS } from "../../utils/subgraphQuery";
 import Button from "../Button/Button";
+import Loader from "../LoadingScreen/Loader/Loader";
 import classes from "./SimilarNFT.module.css";
 import SimilarNFTCard from "./SimilarNFTCard/SimilarNFTCard";
 
@@ -47,13 +48,13 @@ const SimilarNFT = () => {
         {error ? (
           <>Failed to fetch results, please check your network and try again.</>
         ) : loading ? (
-          <>loading</>
+          <Loader />
         ) : nftDetails ? (
           nftDetails.map((nft, idx) => (
             <SimilarNFTCard key={idx} nft={nft} chainId={data.collection.chainId} />
           ))
         ) : (
-          <div>loading...</div>
+          <Loader />
         )}
       </div>
       <div className={classes.viewCollection}>

@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import { GET_COLLECTIONS } from "../utils/subgraphQuery";
 import { useRouter } from "next/router";
 import { getCollectionsBySearch } from "../components/Explore/ExploreScript";
+import Loader from "../components/LoadingScreen/Loader/Loader";
 
 const ExploreCollection = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -49,36 +50,38 @@ const ExploreCollection = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div style={{ background: `url(${collectionBanner.src})` }} className={classes.banner}>
-        <div className={classes.mainText}>Discover</div>
-        <div className={classes.subText}>All Collection</div>
-        <div className={classes.searchContainer}>
-          <Search
-            value={searchValue}
-            onChange={handleChange}
-            placeholder="Search for collection"
-            faint
-          />
-        </div>
-      </div>
-      <div className={classes.innerContainer}>
-        {error ? (
-          <>Failed to fetch results, please check your network and try again.</>
-        ) : loading ? (
-          <>loading...</>
-        ) : (
-          <div className={classes.cardContainer}>
-            {filteredCollections &&
-              (filteredCollections.length ? (
-                filteredCollections
-                  .filter((collection) => collection.nfts.length)
-                  .map((collection, idx) => <ExploreCard key={idx} collection={collection} />)
-              ) : (
-                <div>Nothing to display</div>
-              ))}
+      {error ? (
+        <>Failed to fetch results, please check your network and try again.</>
+      ) : loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div style={{ background: `url(${collectionBanner.src})` }} className={classes.banner}>
+            <div className={classes.mainText}>Discover</div>
+            <div className={classes.subText}>All Collection</div>
+            <div className={classes.searchContainer}>
+              <Search
+                value={searchValue}
+                onChange={handleChange}
+                placeholder="Search for collection"
+                faint
+              />
+            </div>
           </div>
-        )}
-      </div>
+          <div className={classes.innerContainer}>
+            <div className={classes.cardContainer}>
+              {filteredCollections &&
+                (filteredCollections.length ? (
+                  filteredCollections
+                    .filter((collection) => collection.nfts.length)
+                    .map((collection, idx) => <ExploreCard key={idx} collection={collection} />)
+                ) : (
+                  <div>Nothing to display</div>
+                ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
