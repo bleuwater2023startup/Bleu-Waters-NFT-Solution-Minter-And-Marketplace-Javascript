@@ -15,7 +15,7 @@ const CollectionNFT = () => {
   useEffect(() => {
     let storedMintData = window.localStorage.getItem("mint_data");
     storedMintData = JSON.parse(storedMintData);
-    dispatch(setMintData({ ...storedMintData, MintType: "Collection", File: null }));
+    dispatch(setMintData({ ...mintData, ...storedMintData, MintType: "Collection", File: null }));
   }, []);
 
   return (

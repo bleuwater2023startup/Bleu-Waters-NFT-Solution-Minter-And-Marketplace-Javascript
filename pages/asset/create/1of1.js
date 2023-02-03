@@ -12,7 +12,7 @@ import { StateContext } from "../../../context/state.context";
 import classes from "../../../styles/Create.module.css";
 
 const OneOfOneNFT = () => {
-  const { dispatch } = useContext(StateContext);
+  const { dispatch, mintData } = useContext(StateContext);
   const router = useRouter();
   const [step, setStep] = useState(0);
 
@@ -23,7 +23,7 @@ const OneOfOneNFT = () => {
   useEffect(() => {
     let storedMintData = window.localStorage.getItem("mint_data");
     storedMintData = JSON.parse(storedMintData);
-    dispatch(setMintData({ ...storedMintData, File: null }));
+    dispatch(setMintData({ ...mintData, ...storedMintData, File: null }));
   }, []);
 
   return (

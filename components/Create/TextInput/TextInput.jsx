@@ -18,19 +18,10 @@ const TextInput = ({ type, name, description, required, preview }) => {
       </div>
       <div className={classes.description}>{description}</div>
       {type === "text" && (
-        <input
-          type="text"
-          value={mintData[name]}
-          onChange={handleChange}
-          disabled={preview}
-        />
+        <input type="text" value={mintData[name]} onChange={handleChange} disabled={preview} />
       )}
       {type === "text-area" && (
-        <textarea
-          value={mintData[name]}
-          onChange={handleChange}
-          disabled={preview}
-        />
+        <textarea value={mintData[name]} onChange={handleChange} disabled={preview} />
       )}
     </div>
   );
