@@ -95,7 +95,7 @@ const Asset = () => {
         <Arrow />
       </div>
       {error ? (
-        <>something went wrong</>
+        <>Failed to fetch results, please check your network and try again.</>
       ) : loading ? (
         <>loading...</>
       ) : (

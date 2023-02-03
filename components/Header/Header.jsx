@@ -8,7 +8,6 @@ import NotificationIcon from "../../assets/icon-notification.svg";
 import Logo from "../../assets/desktop-logo.svg";
 import LogoMobile from "../../assets/mobile-logo.svg";
 import HamburgerIcon from "../../assets/icon-hamburger.svg";
-import SearchIcon from "../../assets/icon-search.svg";
 import CloseIcon from "../../assets/icon-close.svg";
 import ChevronIcon from "../../assets/icon-chevron.svg";
 import Twitter from "../../assets/mobile-twitter-fill.svg";
@@ -20,18 +19,14 @@ import supportedChains from "../../utils/supportedChains";
 import { formatAccount } from "../../utils";
 import { useRouter } from "next/router";
 import { disconnectMetamask } from "../MetamaskConnect/MetamaskConnect.script";
+import GlobalSearch from "../GlobalSearch/GlobalSearch";
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const { account, chainId, walletProvider, dispatch } = useContext(StateContext);
-
-  const router = useRouter();
-
-  const handleChange = (e) => {
-    setSearchValue(e.target.value);
-    console.log({ searchValue: e.target.value });
-  };
+  const [toggleSearch, setToggleSearch] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const handleDisconnect = () => {
     if (walletProvider?.isWalletConnect) {
@@ -42,13 +37,28 @@ const Header = () => {
     setNavOpen(false);
   };
 
+  const handleToggleSearch = () => {
+    setToggleSearch(true);
+  };
+
+  const handleClose = (state) => {
+    if (state === "--force") return setToggleSearch(false);
+    if (isActive) return;
+    setToggleSearch(false);
+  };
+
   const navDesktop = (
     <div className={`${classes.container} ${classes.desktop}`}>
       <Link href="/">
         <Logo className={classes.logo} />
       </Link>
       <div className={classes.searchContainer}>
-        <Search value={searchValue} onChange={handleChange} placeholder="Search" accent />
+        <Search
+          disabled={toggleSearch}
+          onClick={handleToggleSearch}
+          placeholder="Search collections, accounts, and nfts"
+          accent
+        />
       </div>
       <div className={classes.link_connect_box}>
         <Link
@@ -83,8 +93,13 @@ const Header = () => {
       <Link href="/">
         <LogoMobile className={classes.logo} />
       </Link>
-      <div className={classes.icons}>
-        <SearchIcon className={classes.searchIcon} />
+      <div className={classes.searchAndNotificationContainer}>
+        <Search
+          disabled={toggleSearch}
+          onClick={handleToggleSearch}
+          placeholder="Search collections, accounts, and nfts"
+          accent
+        />
         <div className={classes.notificationIcon}>
           <NotificationIcon />
         </div>
@@ -158,6 +173,11 @@ const Header = () => {
 
   return (
     <>
+      <GlobalSearch
+        toggleSearch={toggleSearch}
+        setIsActive={setIsActive}
+        handleClose={handleClose}
+      />
       {navDesktop}
       {navMobile}
       {sidebar}

@@ -162,7 +162,7 @@ const WalletBalanceModal = ({ onClose, error, loading, data }) => {
           <div className={classes.innerContainer}>
             <div className={classes.property}>Royalties</div>
             {error ? (
-              <div>something went wrong</div>
+              <div>Failed to fetch results, please check your network and try again.</div>
             ) : loading || isRoyaltyLoading ? (
               <div>Loading...</div>
             ) : (

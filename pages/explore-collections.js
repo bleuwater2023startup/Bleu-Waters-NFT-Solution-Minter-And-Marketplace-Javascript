@@ -63,7 +63,7 @@ const ExploreCollection = () => {
       </div>
       <div className={classes.innerContainer}>
         {error ? (
-          <>something went wrong</>
+          <>Failed to fetch results, please check your network and try again.</>
         ) : loading ? (
           <>loading...</>
         ) : (

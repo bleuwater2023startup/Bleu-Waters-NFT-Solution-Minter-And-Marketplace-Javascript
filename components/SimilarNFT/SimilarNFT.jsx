@@ -29,9 +29,7 @@ const SimilarNFT = () => {
       nfts: data.collection.nfts,
     });
     dispatch(setIpfsData({ ...ipfsData, ...storedIpfsData }));
-    const _details = details.filter(
-      (d, idx) => idx < 10 && tokenId !== d.tokenId
-    );
+    const _details = details.filter((d, idx) => idx < 10 && tokenId !== d.tokenId);
     setNftDetails(_details);
   };
 
@@ -47,16 +45,12 @@ const SimilarNFT = () => {
       <div className={classes.heading}>You might also like this</div>
       <div className={classes.nfts}>
         {error ? (
-          <>something went wrong</>
+          <>Failed to fetch results, please check your network and try again.</>
         ) : loading ? (
           <>loading</>
         ) : nftDetails ? (
           nftDetails.map((nft, idx) => (
-            <SimilarNFTCard
-              key={idx}
-              nft={nft}
-              chainId={data.collection.chainId}
-            />
+            <SimilarNFTCard key={idx} nft={nft} chainId={data.collection.chainId} />
           ))
         ) : (
           <div>loading...</div>
@@ -67,8 +61,7 @@ const SimilarNFT = () => {
           href={`/collection/${data?.collection.name.replace(/\s/g, "-")}?id=${
             data?.collection.id
           }`}
-          className={classes.button}
-        >
+          className={classes.button}>
           <Button accent>View collection</Button>
         </Link>
       </div>

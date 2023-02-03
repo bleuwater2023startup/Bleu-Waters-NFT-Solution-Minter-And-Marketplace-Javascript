@@ -36,25 +36,19 @@ const Collection = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div
-        style={{ background: `url(${collectionBanner.src})` }}
-        className={classes.banner}
-      >
+      <div style={{ background: `url(${collectionBanner.src})` }} className={classes.banner}>
         <div className={classes.mainText}>Caught the Wave yet?</div>
         <div className={classes.subText}>Now is your chance</div>
       </div>
       <div className={classes.innerContainer}>
         {error ? (
-          <>something went wrong</>
+          <>Failed to fetch results, please check your network and try again.</>
         ) : loading ? (
           <>loading...</>
         ) : (
           <>
             <CollectionInfo collection={data.collection} />
-            <TabButton
-              tabs={tabArray}
-              onClick={(e) => setActiveTab(tabArray[e])}
-            />
+            <TabButton tabs={tabArray} onClick={(e) => setActiveTab(tabArray[e])} />
             {tabs(data.collection)[activeTab]}
           </>
         )}

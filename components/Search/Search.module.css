@@ -7,7 +7,7 @@
   height: 3em;
   padding: 0 1em;
   border-radius: 1em;
-  background: white;
+  background: var(--bg-light);
 }
 
 .container.accent {

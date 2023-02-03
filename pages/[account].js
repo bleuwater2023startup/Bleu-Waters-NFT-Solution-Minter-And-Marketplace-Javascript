@@ -1,5 +1,6 @@
 import { useLazyQuery } from "@apollo/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import AccountInfo from "../components/Account/AccountInfo/AccountInfo";
 import ActiveListing from "../components/Account/ActiveListing/ActiveListing";
@@ -17,8 +18,11 @@ import {
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState(-1);
-  const { createSuccessModal, account } = useContext(StateContext);
+  const { createSuccessModal } = useContext(StateContext);
   const { name, hash, mintType } = createSuccessModal;
+  const { query } = useRouter();
+
+  const account = query.account?.toLowerCase();
 
   const [
     getCollectedNFTs,

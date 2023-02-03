@@ -93,7 +93,7 @@ const Sell = () => {
   return (
     <>
       {error ? (
-        <div>something went wrong</div>
+        <div>Failed to fetch results, please check your network and try again.</div>
       ) : loading || !nftDetails ? (
         <div>loading...</div>
       ) : (

@@ -251,3 +251,31 @@ export const GET_ROYALTIES = gql`
     }
   }
 `;
+
+/**
+ * ############################################### Beginning of Search ##################################
+ */
+
+export const GET_SEARCH = gql`
+  query ($_value: String) {
+    Collection: collections(where: { name_contains: $_value }) {
+      id
+      name
+    }
+    Address: collections(where: { id: $_value }) {
+      id
+      name
+    }
+    Account: users(where: { id: $_value }) {
+      id
+    }
+    NFTs: nfts(where: { id: $_value }) {
+      nftAddress
+      tokenId
+      id
+      collection {
+        chainId
+      }
+    }
+  }
+`;
