@@ -20,6 +20,7 @@ import { formatAccount } from "../../utils";
 import { useRouter } from "next/router";
 import { disconnectMetamask } from "../MetamaskConnect/MetamaskConnect.script";
 import GlobalSearch from "../GlobalSearch/GlobalSearch";
+import SearchIcon from "../../assets/icon-search.svg";
 
 const Header = () => {
   const router = useRouter();
@@ -94,12 +95,7 @@ const Header = () => {
         <LogoMobile className={classes.logo} />
       </Link>
       <div className={classes.searchAndNotificationContainer}>
-        <Search
-          disabled={toggleSearch}
-          onClick={handleToggleSearch}
-          placeholder="Search collections, accounts, and nfts"
-          accent
-        />
+        <SearchIcon onClick={handleToggleSearch} className={classes.searchIcon} />
         <div className={classes.notificationIcon}>
           <NotificationIcon />
         </div>

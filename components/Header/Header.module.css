@@ -20,7 +20,7 @@
 }
 
 .searchAndNotificationContainer {
-  width: 100%;
+  width: max-content;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,6 +236,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .searchAndNotificationContainer {
+    gap: 1em;
+  }
+
   .logo {
     width: 8em;
   }

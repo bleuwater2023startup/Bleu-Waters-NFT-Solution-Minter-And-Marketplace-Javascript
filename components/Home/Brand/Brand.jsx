@@ -4,10 +4,12 @@ import * as animationData from "../../../assets/_brand.json";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Brand = () => {
   const [isStopped, setIsStopped] = useState(false);
   const containerRef = useRef(null);
+  const matches = useMediaQuery("(max-width:720px)");
 
   const defaultOptions = {
     loop: false,
@@ -44,7 +46,7 @@ const Brand = () => {
         options={defaultOptions}
         isStopped={isStopped}
         isPaused={false}
-        width="95%"
+        width={matches ? "100%" : "70%"}
       />
     </div>
   );

@@ -1,0 +1,16 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+
+  /* background: repeating-linear-gradient(30deg,
+      rgb(123, 213, 245) 100%,
+      rgb(120, 127, 246),
+      rgb(74, 222, 222) 200%) */
+}

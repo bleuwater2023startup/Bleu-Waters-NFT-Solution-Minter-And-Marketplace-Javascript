@@ -39,7 +39,7 @@
   height: 100%;
   width: 100%;
   z-index: -1;
-  background: rgb(0, 0, 0);
+  background: var(--bg-dark);
 }
 
 .textContainer {
@@ -107,7 +107,7 @@
 }
 
 .chevronIcon:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 @keyframes bounce {

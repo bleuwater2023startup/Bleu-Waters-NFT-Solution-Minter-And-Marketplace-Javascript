@@ -44,3 +44,16 @@
   line-height: 26px;
   height: 6em;
 }
+
+@media screen and (max-width: 680px) {
+  .container {
+    width: 20em;
+    flex: 0 0 auto;
+  }
+
+  .icon {
+    margin-top: -5.4em;
+    margin-bottom: 2em;
+    transition: all 400ms;
+  }
+}
