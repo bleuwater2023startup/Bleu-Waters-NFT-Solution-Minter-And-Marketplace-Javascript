@@ -2,7 +2,7 @@ import { useState } from "react";
 import SearchIcon from "../../assets/icon-search.svg";
 import classes from "./Search.module.css";
 
-const Search = ({ faint, onChange, placeholder, accent, onClick, disabled }) => {
+const Search = ({ faint, onChange, placeholder, accent, onClick, disabled, autoFocus }) => {
   const [value, setValue] = useState("");
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -17,7 +17,7 @@ const Search = ({ faint, onChange, placeholder, accent, onClick, disabled }) => 
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        autoFocus
+        autoFocus={autoFocus}
       />
     </div>
   );

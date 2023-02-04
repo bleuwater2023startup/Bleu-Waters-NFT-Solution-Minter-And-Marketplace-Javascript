@@ -38,7 +38,7 @@ const GlobalSearch = ({ toggleSearch, handleClose, setIsActive }) => {
             onMouseEnter={() => setIsActive(true)}
             onMouseLeave={() => setIsActive(false)}
             className={classes.mainSearchWrapper}>
-            <Search onChange={handleSearchChange} accent />
+            <Search onChange={handleSearchChange} accent autoFocus />
             <div className={classes.searchResult}>
               <div className={classes.category}>{category}</div>
               <div className={classes.resultContainer}>
