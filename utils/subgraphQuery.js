@@ -23,6 +23,9 @@ export const GET_USER_COLLECTED_NFTS = gql`
           txType
         }
         collection {
+          creator {
+            id
+          }
           name
           chainId
         }
@@ -57,6 +60,9 @@ export const GET_USER_CREATED_NFTS = gql`
             txType
           }
           collection {
+            creator {
+              id
+            }
             name
             chainId
           }
@@ -88,6 +94,9 @@ export const GET_ACTIVE_LISTING = gql`
           txType
         }
         collection {
+          creator {
+            id
+          }
           name
           chainId
         }
@@ -212,6 +221,9 @@ export const GET_NFT_DETAIL = gql`
           id
         }
         collection {
+          creator {
+            id
+          }
           name
           chainId
         }

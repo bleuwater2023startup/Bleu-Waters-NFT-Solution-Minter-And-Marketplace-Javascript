@@ -45,6 +45,39 @@ export const NFT_MINTER_FACTORY_ABI = [
   {
     inputs: [
       {
+        internalType: "string",
+        name: "_name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_symbol",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_creator",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_type",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_chainId",
+        type: "string",
+      },
+    ],
+    name: "createCollection",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "user",
         type: "address",
@@ -73,37 +106,9 @@ export const NFT_MINTER_FACTORY_ABI = [
     stateMutability: "view",
     type: "function",
   },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_symbol",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_type",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_chainId",
-        type: "string",
-      },
-    ],
-    name: "createCollection",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
 ];
 
-export const NFT_MINTER_FACTORY = "0x46513FE2928BC6a4Be2Ce8e66f5cFA971f6dA7f4";
+export const NFT_MINTER_FACTORY = "0x5423143CeF7704526Fb772699c8699Ca45FCC674";
 
 export const MINTER_ABI = [
   {
@@ -719,70 +724,6 @@ export const NFT_MARKETPLACE_ABI = [
         name: "tokenId",
         type: "uint256",
       },
-      {
-        internalType: "uint256",
-        name: "tokenAmount",
-        type: "uint256",
-      },
-    ],
-    name: "buyItem",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "cancelListing",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-    ],
-    name: "listItem",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
     ],
     name: "NftMarketplace__AlreadyListed",
     type: "error",
@@ -961,18 +902,34 @@ export const NFT_MARKETPLACE_ABI = [
       },
       {
         internalType: "uint256",
-        name: "newPrice",
+        name: "tokenAmount",
         type: "uint256",
       },
+      {
+        internalType: "string",
+        name: "deployer",
+        type: "string",
+      },
     ],
-    name: "updateListing",
+    name: "buyItem",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
-    inputs: [],
-    name: "withdrawProceeds",
+    inputs: [
+      {
+        internalType: "address",
+        name: "nftAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "cancelListing",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1032,6 +989,59 @@ export const NFT_MARKETPLACE_ABI = [
     stateMutability: "view",
     type: "function",
   },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "nftAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "listItem",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "nftAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "newPrice",
+        type: "uint256",
+      },
+    ],
+    name: "updateListing",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "withdrawProceeds",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
 ];
 
 export const NFT_MARKETPLACE = "0x76E14cCF7fC4C961dD8518D9d4e69a5A0e1B62F3";
@@ -1045,4 +1055,6 @@ export const ERC1155_EXTENSION_ABI = [
   "function setRoyaltyInfo(address _paymentSplitter, address[] _payees, uint96 _royaltyFeesInBips) public {}",
   "function royaltyInfo(uint256 /*_tokenId*/,uint256 _salePrice) external view{}",
   "function mintBatch(address _to, uint256[] memory _ids, uint256[] memory _amounts, string[] memory _uri)public {}",
+  "function setApprovalForTransfer(string memory creator, uint256 tokenId) external {}",
+  "function setApprovalForExternalTransfer(string memory _creator, uint256 _tokenId) external {}",
 ];

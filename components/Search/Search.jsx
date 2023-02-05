@@ -9,7 +9,11 @@ const Search = ({ faint, onChange, placeholder, accent, onClick, disabled, autoF
     onChange(e);
   };
   return (
-    <div onClick={onClick} className={`${classes.container} ${accent && classes.accent}`}>
+    <div
+      onClick={onClick}
+      className={`${classes.container} ${accent && classes.accent} ${
+        disabled && classes.disabled
+      }`}>
       <SearchIcon className={`${classes.searchIcon} ${faint && classes.faint}`} />
       <input
         disabled={disabled}

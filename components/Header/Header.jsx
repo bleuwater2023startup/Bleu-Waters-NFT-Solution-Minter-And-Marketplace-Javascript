@@ -55,7 +55,7 @@ const Header = () => {
       </Link>
       <div className={classes.searchContainer}>
         <Search
-          disabled={toggleSearch}
+          disabled
           onClick={handleToggleSearch}
           placeholder="Search collections, accounts, and nfts"
           accent

@@ -89,12 +89,6 @@ const NFTs = ({ collection }) => {
   };
 
   useEffect(() => {
-    let storedIpfsData = window.localStorage.getItem("ipfs_data");
-    storedIpfsData = JSON.parse(storedIpfsData);
-    _getNftDetails(storedIpfsData);
-  }, []);
-
-  useEffect(() => {
     if (!nftDetails) return;
     const res = nftDetails.filter(({ attributes }) => {
       return attributes.some((a) => activeFilter.includes(`${a.trait_type}:${a.value}`));
@@ -114,6 +108,11 @@ const NFTs = ({ collection }) => {
     getUsd();
   }, [router.asPath]);
 
+  useEffect(() => {
+    let storedIpfsData = window.localStorage.getItem("ipfs_data");
+    storedIpfsData = JSON.parse(storedIpfsData);
+    _getNftDetails(storedIpfsData);
+  }, []);
   return (
     <div className={classes.container}>
       <div className={classes.control}>

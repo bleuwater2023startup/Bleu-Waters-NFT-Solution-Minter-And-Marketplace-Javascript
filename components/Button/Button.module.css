@@ -47,6 +47,19 @@
   filter: none;
 }
 
+.container.dark.outline.neutral {
+  border: 1px solid var(--color-border);
+  background: transparent;
+  filter: none;
+  font-size: 0.875rem;
+}
+
+.container.dark.outline.neutral:hover {
+  border: 1px solid var(--color-border);
+  background: var(--card-bg);
+  filter: none;
+}
+
 .container.dark.outline.outline_dark {
   border: 1px solid var(--color-border);
   background: var(--card-bg);

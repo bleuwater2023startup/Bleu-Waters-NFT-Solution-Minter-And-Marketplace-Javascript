@@ -37,13 +37,10 @@ const AccountInfo = () => {
       )}
       <div className={classes.logo}></div>
       <div className={classes.accountDetail}>
-        <div className={classes.name}>{formatAccount(account)}</div>
-        <div className={classes.address}>
+        <div className={classes.name}>
           <CopyText message={account}>{formatAccount(account)}</CopyText>
         </div>
-      </div>
-      <div onClick={handleClick} className={classes.walletIcon}>
-        <Button accent outline>
+        <Button onClick={handleClick} dark outline>
           Check wallet balance
         </Button>
       </div>

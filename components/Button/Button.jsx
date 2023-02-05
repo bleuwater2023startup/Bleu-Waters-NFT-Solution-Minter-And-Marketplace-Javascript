@@ -12,6 +12,7 @@ const Button = ({
   disabled,
   error,
   onClick,
+  neutral,
 }) => {
   const [clicked, setClicked] = useState(false);
   const heights = ["2.2em", "2.4em", "2.6em", "2.8em", "3em", "3.2em", "3.4em"];
@@ -25,7 +26,7 @@ const Button = ({
         dark && classes.dark
       } ${accent && classes.accent}  ${disabled && classes.disabled} ${error && classes.error} ${
         clicked && classes.clicked
-      }  ${outline_dark && classes.outline_dark}`}>
+      }  ${outline_dark && classes.outline_dark} ${neutral && classes.neutral}`}>
       {children}
     </div>
   );

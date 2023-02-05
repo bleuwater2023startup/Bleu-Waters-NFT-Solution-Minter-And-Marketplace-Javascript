@@ -10,22 +10,30 @@ import { formatIpfsUrl } from "../../../utils/ipfs";
 import { useContext, useState } from "react";
 import { StateContext } from "../../../context/state.context";
 import CancelListingModal from "../../Modals/CancelListingModal/CancelListingModal";
-import { handleBuyNFT, handleCancelListing, handleUpdateListing } from "../../Create/CreateScript";
+import {
+  handleBuyNFT,
+  handleCancelListing,
+  handleSetApprovalForExternalTransfer,
+  handleUpdateListing,
+} from "../../Create/CreateScript";
 import { setLoadingScreen, setNotification } from "../../../context/state.actions";
 import UpdateListingModal from "../../Modals/UpdateListingModal/UpdateListingModal";
 import PurchaseNFTModal from "../../Modals/PurchaseNFTModal/PurchaseNFTModal";
 import { ethers } from "ethers";
+import ApproveExternalTransferModal from "../../Modals/ApproveExternalTransferModal/ApproveExternalTransfer";
 
-const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
+const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
   const { account, dispatch, walletProvider } = useContext(StateContext);
   const [toggleCancelModal, setToggleCancelModal] = useState(false);
   const [toggleUpdateListingModal, setToggleUpdateListingModal] = useState(false);
   const [togglePurchaseNFTModal, setTogglePurchaseNFTModal] = useState(false);
-  const { name, nfts } = collection;
-  const { tokenId, owner, txHistory, nftAddress } = nfts[0];
+  const [toggleApproveTransferModal, setToggleApproveTransferModal] = useState(false);
+  const { name, nfts } = _collection;
+  const { tokenId, owner, txHistory, nftAddress, collection } = nfts[0];
   const { price: etherPrice, txType } = txHistory[0];
   const router = useRouter();
   const price = ethers.utils.formatEther(etherPrice);
+  const creator = collection.creator.id;
 
   const isOwner = () => {
     return account === owner.id;
@@ -39,7 +47,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
     setToggleCancelModal(false);
     dispatch(
       setLoadingScreen({
-        title: "Transaction in progress price...",
+        title: "Transaction in progress...",
         description:
           "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
       })
@@ -68,7 +76,7 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
     setToggleUpdateListingModal(false);
     dispatch(
       setLoadingScreen({
-        title: "Transaction in progress price...",
+        title: "Transaction in progress...",
         description:
           "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
       })
@@ -137,8 +145,42 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
     refetch();
   };
 
+  const _handleApproveTransfer = async () => {
+    const { nftAddress, tokenId } = ipfsData;
+    setToggleApproveTransferModal(false);
+    dispatch(
+      setLoadingScreen({
+        title: "Transaction in progress...",
+        description:
+          "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+      })
+    );
+    const res = await handleSetApprovalForExternalTransfer({
+      contractAddress: nftAddress,
+      tokenId: Number(tokenId),
+      dispatch,
+      walletProvider,
+    });
+    if (res) {
+      dispatch(
+        setNotification({
+          type: "success",
+          message: "NFT approved for trading outside this marketplace",
+        })
+      );
+      refetch();
+    }
+    dispatch(setLoadingScreen({}));
+  };
+
   return (
     <div className={classes.container}>
+      {toggleApproveTransferModal && (
+        <ApproveExternalTransferModal
+          onClose={() => setToggleApproveTransferModal(false)}
+          onApprove={_handleApproveTransfer}
+        />
+      )}
       {toggleCancelModal && (
         <CancelListingModal
           onClose={() => setToggleCancelModal(false)}
@@ -186,6 +228,11 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
             </div>
             <div className={classes.dropdownContainer}>
               <div className={classes.dropdown}>
+                {creator.toLowerCase() === account.toLowerCase() && (
+                  <div onClick={() => setToggleApproveTransferModal(true)} className={classes.item}>
+                    Approve NFT
+                  </div>
+                )}
                 {isOwner() ? (
                   <>
                     {isListed() && (
@@ -198,7 +245,6 @@ const NFTInfo = ({ collection, ipfsData, refetch, usd }) => {
                     <Link href={`${router.asPath}/transfer`} className={classes.item}>
                       Transfer NFT
                     </Link>
-                    <div className={classes.item}>Approve NFT</div>
                     <div onClick={() => refetch()} className={classes.item}>
                       Refresh
                     </div>

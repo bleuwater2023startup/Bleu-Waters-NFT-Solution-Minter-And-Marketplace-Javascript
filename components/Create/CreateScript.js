@@ -6,8 +6,9 @@ const PINATA_API_KEY = process.env.NEXT_PUBLIC_PINATA_API_KEY;
 const PINATA_API_SECRET = process.env.NEXT_PUBLIC_PINATA_API_SECRET;
 const PINATA_API_JWT = process.env.NEXT_PUBLIC_JWT;
 const pinata = new pinataSDK(PINATA_API_KEY, PINATA_API_SECRET);
+const CREATOR = process.env.NEXT_PUBLIC_PINATA_API_KEY; //NEXT_PUBLIC_CREATOR_PRIVATE
 
-import { getWeb3Provider, readContract, writeContract } from "../../utils";
+import { readContract, writeContract } from "../../utils";
 import {
   ERC1155_EXTENSION_ABI,
   MINTER_ABI,
@@ -43,6 +44,7 @@ export const handleCreateCollection = async ({
     params: {
       _name: contractName,
       _symbol: symbol,
+      _creator: CREATOR,
       _type: type,
       _chainId: chainId,
     },
@@ -54,7 +56,7 @@ export const handleCreateCollection = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -82,7 +84,7 @@ export const getUserCollections = async ({ walletProvider, account }) => {
     params: options,
     walletProvider,
     onError: (error) => {
-      console.log("=====================================>", error.message);
+      console.log("=====================================>", error.reason);
       return null;
     },
     onSuccess: (tx) => {
@@ -136,7 +138,81 @@ export const handleMint = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
+        })
+      );
+    },
+    onSuccess: (tx) => console.log("Waiting for transaction"),
+  });
+
+  if (txResponse) {
+    let res = await txResponse.wait();
+    return res;
+  }
+  return null;
+};
+
+export const handleSetApprovalForTransfer = async ({
+  walletProvider,
+  contractAddress,
+  tokenId,
+  dispatch,
+}) => {
+  const options = {
+    abi: ERC1155_EXTENSION_ABI,
+    contractAddress,
+    functionName: "setApprovalForTransfer",
+    params: {
+      _creator: CREATOR,
+      _tokenId: tokenId,
+    },
+  };
+
+  const txResponse = await writeContract({
+    params: options,
+    walletProvider,
+    onError: (error) => {
+      dispatch(
+        setNotification({
+          type: "error",
+          message: error.reason,
+        })
+      );
+    },
+    onSuccess: (tx) => console.log("Waiting for transaction"),
+  });
+
+  if (txResponse) {
+    let res = await txResponse.wait();
+    return res;
+  }
+  return null;
+};
+
+export const handleSetApprovalForExternalTransfer = async ({
+  walletProvider,
+  contractAddress,
+  tokenId,
+  dispatch,
+}) => {
+  const options = {
+    abi: ERC1155_EXTENSION_ABI,
+    contractAddress,
+    functionName: "setApprovalForExternalTransfer",
+    params: {
+      _creator: CREATOR,
+      _tokenId: tokenId,
+    },
+  };
+
+  const txResponse = await writeContract({
+    params: options,
+    walletProvider,
+    onError: (error) => {
+      dispatch(
+        setNotification({
+          type: "error",
+          message: error.reason,
         })
       );
     },
@@ -184,7 +260,7 @@ export const handleCreatePaymentSplitter = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -225,7 +301,7 @@ export const getPaymentSplitterAddress = async ({ walletProvider }) => {
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -262,7 +338,7 @@ export const handleSetRoyaltyInfo = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -293,7 +369,7 @@ export const handleApproveAll = async ({ collectionAddress, walletProvider, disp
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -348,7 +424,7 @@ export const handleList = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -379,7 +455,7 @@ export const getApprovedForAll = async ({ walletProvider, nftAddress, account, d
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -414,7 +490,7 @@ export const handleCancelListing = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -435,6 +511,15 @@ export const handleTransfer = async ({
   dispatch,
   walletProvider,
 }) => {
+  const res = await handleSetApprovalForTransfer({
+    contractAddress,
+    tokenId,
+    dispatch,
+    walletProvider,
+  });
+
+  if (!res) return;
+
   const options = {
     abi: MINTER_ABI,
     contractAddress,
@@ -455,7 +540,7 @@ export const handleTransfer = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -494,7 +579,7 @@ export const handleUpdateListing = async ({
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -516,6 +601,7 @@ export const handleBuyNFT = async ({ tokenId, value, nftAddress, dispatch, walle
       nftAddress,
       tokenId,
       tokenAmount: 1,
+      creator: CREATOR,
       value: {
         value: ethers.utils.parseEther(value),
       },
@@ -530,7 +616,7 @@ export const handleBuyNFT = async ({ tokenId, value, nftAddress, dispatch, walle
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -560,7 +646,7 @@ export const getProceeds = async ({ walletProvider, account, dispatch }) => {
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -587,7 +673,7 @@ export const handleWithdraw = async ({ walletProvider, dispatch }) => {
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -617,7 +703,7 @@ export const getShares = async ({ splitterAddress, walletProvider, account, disp
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -646,7 +732,7 @@ export const getReleasable = async ({ splitterAddress, walletProvider, account, 
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -675,7 +761,7 @@ export const getReleased = async ({ splitterAddress, walletProvider, account, di
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -702,7 +788,7 @@ export const handleRelease = async ({ account, splitterAddress, walletProvider, 
       dispatch(
         setNotification({
           type: "error",
-          message: error.message,
+          message: error.reason,
         })
       );
     },
@@ -799,7 +885,7 @@ export const uploadCollectionToIpfs = async (metadata, dispatch) => {
         }, 1000)
       );
     } catch (error) {
-      dispatch(setNotification({ ...ipfsErrorUploadMessage, message: error.message }));
+      dispatch(setNotification({ ...ipfsErrorUploadMessage, message: error.reason }));
       return null;
     }
   }
@@ -821,7 +907,7 @@ export const uploadSingleToIpfs = async (metadata, dispatch) => {
     dispatch(setNotification(ipfsSuccessUploadMessage));
     return data.url;
   } catch (error) {
-    dispatch(setNotification({ ...ipfsErrorUploadMessage, message: error.message }));
+    dispatch(setNotification({ ...ipfsErrorUploadMessage, message: error.reason }));
     return null;
   }
 };

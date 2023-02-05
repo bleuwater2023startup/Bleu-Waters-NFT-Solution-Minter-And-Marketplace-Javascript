@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ethers } from "ethers";
 import { logError } from "./ipfs";
 import supportedChains from "./supportedChains";
@@ -12,8 +11,8 @@ export const writeContract = async ({
   const { contractAddress, abi, functionName, params } = fetchParams;
   const provider = getWeb3Provider(walletProvider);
   const signer = provider.getSigner();
-  const contract = new ethers.Contract(contractAddress, abi, signer);
   try {
+    const contract = new ethers.Contract(contractAddress, abi, signer);
     const transactionResponse = await contract[functionName](...Object.values(params));
     onSuccess(transactionResponse);
     return transactionResponse;
@@ -25,8 +24,8 @@ export const writeContract = async ({
 export const readContract = async ({ params: fetchParams, walletProvider, onError, onSuccess }) => {
   const { contractAddress, abi, functionName, params } = fetchParams;
   const provider = getWeb3Provider(walletProvider);
-  const contract = new ethers.Contract(contractAddress, abi, provider);
   try {
+    const contract = new ethers.Contract(contractAddress, abi, provider);
     const transactionResponse = await contract[functionName](...Object.values(params));
     onSuccess(transactionResponse);
     return transactionResponse;

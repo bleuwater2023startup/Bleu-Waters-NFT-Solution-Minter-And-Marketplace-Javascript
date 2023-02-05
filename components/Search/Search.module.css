@@ -31,3 +31,7 @@
 .searchIcon.faint {
   stroke: var(--color-faint);
 }
+
+.container.disabled * {
+  cursor: pointer !important;
+}

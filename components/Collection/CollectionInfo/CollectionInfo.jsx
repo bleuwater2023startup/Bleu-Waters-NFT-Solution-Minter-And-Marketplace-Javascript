@@ -9,6 +9,7 @@ import CopyText from "../../CopyText/CopyTest";
 import { ethers } from "ethers";
 
 const CollectionInfo = ({ collection }) => {
+  if (!collection) return null;
   const { name, createdAt, creator, nfts, chainId, priceHistory, owners: _owners } = collection;
 
   const floor = priceHistory.length ? ethers.utils.formatEther(priceHistory[0].price) : 0;
