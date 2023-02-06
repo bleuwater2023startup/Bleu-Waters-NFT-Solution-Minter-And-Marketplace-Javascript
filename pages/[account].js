@@ -17,10 +17,11 @@ import {
   GET_USER_CREATED_NFTS,
 } from "../utils/subgraphQuery";
 
-const Account = () => {
+const _Account = () => {
   const [activeTab, setActiveTab] = useState(-1);
   const { createSuccessModal } = useContext(StateContext);
   const { name, hash, mintType } = createSuccessModal;
+
   const { query } = useRouter();
 
   const account = query.account?.toLowerCase();
@@ -125,9 +126,8 @@ const Account = () => {
 
       {name && hash && <CreateSuccessModal name={name} hash={hash} mintType={mintType} />}
       <div className={classes.banner}></div>
-      <AccountInfo />
-
       <div className={classes.innerContainer}>
+        <AccountInfo />
         <div className={classes.tabContainer}>
           <div className={classes.tabs}>
             <div
@@ -151,6 +151,9 @@ const Account = () => {
               <span className={classes.count}>{getActiveListingNFTsCount()}</span>
             </div>
           </div>
+        </div>
+        <div onClick={runAll} className={classes.refreshBtn}>
+          Refresh
         </div>
         {activeTab === 0 && account ? (
           error_collected ? (
@@ -192,4 +195,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default _Account;
