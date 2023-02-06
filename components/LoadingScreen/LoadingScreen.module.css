@@ -14,7 +14,7 @@
 
 .wrapper {
   width: 100%;
-  max-width: 24em;
+  max-width: 28em;
   height: 24em;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
 .description {
   text-align: center;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 0.875rem;
   line-height: 23px;
 }
 

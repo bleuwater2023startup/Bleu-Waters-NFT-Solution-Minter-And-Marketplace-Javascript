@@ -15,6 +15,7 @@ let description = [
 const FileInput = ({ name, preview, collection }) => {
   const inputRef = useRef(null);
   const { dispatch, mintData } = useContext(StateContext);
+  const [isDrag, setIsDrag] = useState(false);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -27,9 +28,6 @@ const FileInput = ({ name, preview, collection }) => {
   const handleFileChange = async (event) => {
     let file = event.target.files[0];
     if (!file) return;
-
-    // const nameExtension = file.name.replace(/\.+\s*\./, ".").split(".");
-    // setFilename(nameExtension.slice(0, nameExtension.length - 1).join("."));
 
     let res;
     try {
@@ -57,6 +55,63 @@ const FileInput = ({ name, preview, collection }) => {
     dispatch(setMintData({ ...mintData, [name]: image, File_Name: image.name }));
   };
 
+  const isAccept = (file) => {
+    const accept_collection = ["json", "zip"];
+    const accept_1of1 = ["png"];
+    const nameExtension = file.name.replace(/\.+\s*\./, ".").split(".");
+    const ext = nameExtension[nameExtension.length - 1];
+    return collection
+      ? accept_collection.includes(ext.toLowerCase())
+      : accept_1of1.includes(ext.toLowerCase());
+  };
+
+  const handleDrag = (event) => {
+    event.preventDefault();
+    setIsDrag(true);
+  };
+
+  const handleDragEnd = (event) => {
+    event.preventDefault();
+    setIsDrag(false);
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    setIsDrag(false);
+    if (event.dataTransfer.items) {
+      const item = [...event.dataTransfer.items][0];
+      if (item.kind === "file") {
+        const file = item.getAsFile();
+        if (!isAccept(file))
+          return dispatch(
+            setNotification({
+              type: "error",
+              message: "Invalid file format",
+            })
+          );
+        if (collection) {
+          handleFileChange({ target: { files: [file] } });
+        } else {
+          handleImageChange({ target: { files: [file] } });
+        }
+      }
+    } else {
+      const file = [...event.dataTransfer.files][0];
+      if (!isAccept(file))
+        return dispatch(
+          setNotification({
+            type: "error",
+            message: "Invalid file format",
+          })
+        );
+      if (collection) {
+        handleFileChange({ target: { files: [file] } });
+      } else {
+        handleImageChange({ target: { files: [file] } });
+      }
+    }
+  };
+
   return (
     <div className={classes.container}>
       <div>
@@ -75,37 +130,39 @@ const FileInput = ({ name, preview, collection }) => {
           </>
         )}
       </div>
-      <Input
-        inputRef={inputRef}
-        collection={collection}
-        handleFileChange={handleFileChange}
-        handleImageChange={handleImageChange}
-        preview={preview}
-      />
-      {mintData[name] ? (
-        <ImageUploadPreview
-          file={mintData[name]}
-          handleClick={handleClick}
+      <div
+        className={classes.dropZone}
+        onDrop={handleDrop}
+        onDragOver={handleDrag}
+        onDragEnd={handleDragEnd}
+        onDragLeave={handleDragEnd}>
+        <Input
+          inputRef={inputRef}
           collection={collection}
+          handleFileChange={handleFileChange}
+          handleImageChange={handleImageChange}
+          preview={preview}
         />
-      ) : preview && mintData.File_Name ? (
-        <div>{mintData.File_Name}</div>
-      ) : (
-        <div className={classes.imageContainer}>
-          <div onClick={handleClick} className={classes.wrapper}>
-            <ZipIcon className={classes.zipIcon} />
-            {collection && (
-              <>
-                <div>Drag and drop your .ZIP file</div>
-                <div>or</div>
-              </>
-            )}
-
-            <div className={classes.uploadBtn}>Click to select file</div>
+        {mintData[name] ? (
+          <ImageUploadPreview
+            file={mintData[name]}
+            handleClick={handleClick}
+            collection={collection}
+          />
+        ) : preview && mintData.File_Name ? (
+          <div>{mintData.File_Name}</div>
+        ) : (
+          <div className={classes.imageContainer}>
+            <div onClick={handleClick} className={`${classes.wrapper} ${isDrag && classes.hover}`}>
+              <ZipIcon className={classes.zipIcon} />
+              <div>Drag and drop file</div>
+              <div>or</div>
+              <div className={classes.uploadBtn}>Click to select</div>
+            </div>
+            <div className={classes.fileName}>Recent uploads: {mintData.File_Name}</div>
           </div>
-          <div className={classes.fileName}>Uploads: {mintData.File_Name}</div>
-        </div>
-      )}
+        )}
+      </div>
       {collection && !preview && mintData.File && <PreviewInfo handlePreview={handlePreview} />}
     </div>
   );

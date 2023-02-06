@@ -7,11 +7,11 @@ import SelectContractModal from "../../../components/Modals/SelectContractModal/
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { GET_1of1_COLLECTIONS } from "../../../utils/subgraphQuery";
-import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
 import { StateContext } from "../../../context/state.context";
 import { setMintData } from "../../../context/state.actions";
 import { INITIAL_STATE } from "../../../context/state.reducer";
 import ResumeSessionModal from "../../../components/Modals/ResumeSessionModal/ResumeSessionModal";
+import Loader from "../../../components/LoadingScreen/Loader/Loader";
 
 const Create = () => {
   const [contractModal, setContractModal] = useState(false);
@@ -86,7 +86,7 @@ const Create = () => {
             collections={data.collections}
           />
         ) : (
-          <LoadingScreen show />
+          <Loader overlay />
         )
       ) : null}
       {resumeSession ? <ResumeSessionModal onClose={handleInit} session={resumeSession} /> : null}

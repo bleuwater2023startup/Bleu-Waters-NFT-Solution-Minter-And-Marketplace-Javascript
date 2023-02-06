@@ -17,8 +17,6 @@ const AttributeInput = ({ name, preview }) => {
     dispatch(setMintData({ ...mintData, [name]: value }));
   };
 
-  console.log({ attribute: mintData[name] });
-
   return (
     <div className={classes.container}>
       {add ? (
