@@ -16,20 +16,20 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <ErrorBoundary>
-        <StateContextProvider>
-          <ApolloProvider client={client}>
-            <div style={{ minHeight: "100vh" }}>
-              <Header />
+      <StateContextProvider>
+        <ApolloProvider client={client}>
+          <div style={{ minHeight: "100vh" }}>
+            <Header />
+            <ErrorBoundary>
               <Component {...pageProps} />
-            </div>
-            <Footer />
-            <Modals />
-            <Notifications />
-            <LoadingScreen />
-          </ApolloProvider>
-        </StateContextProvider>
-      </ErrorBoundary>
+            </ErrorBoundary>
+          </div>
+          <Footer />
+          <Modals />
+          <Notifications />
+          <LoadingScreen />
+        </ApolloProvider>
+      </StateContextProvider>
     </>
   );
 }

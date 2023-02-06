@@ -103,7 +103,7 @@ const FileInput = ({ name, preview, collection }) => {
 
             <div className={classes.uploadBtn}>Click to select file</div>
           </div>
-          <div className={classes.fileName}>{mintData.File_Name}</div>
+          <div className={classes.fileName}>Uploads: {mintData.File_Name}</div>
         </div>
       )}
       {collection && !preview && mintData.File && <PreviewInfo handlePreview={handlePreview} />}

@@ -21,13 +21,13 @@ const Banner = () => {
 
   return (
     <div className={classes.container}>
-      {/* <video muted={true} autoPlay onPlaying={handlePlaying} loop className={classes.bannerVideo}>
+      <video muted={true} autoPlay onPlaying={handlePlaying} loop className={classes.bannerVideo}>
         <source src="/wavy-bg-2.mp4" type="video/mp4" />
         Your browser does not support HTML5 video.
-      </video> */}
-      {!isPlaying && true && <WavyBg />}
+      </video>
+      {!isPlaying && <WavyBg />}
 
-      {/* <div className={classes.overlay}></div> */}
+      <div className={classes.overlay}></div>
       <div className={classes.textContainer}>
         <div className={classes.mainText}>The wave is coming, be in control!</div>
         <div className={classes.subText}>

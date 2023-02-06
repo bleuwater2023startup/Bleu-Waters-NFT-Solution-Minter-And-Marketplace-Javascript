@@ -1,4 +1,5 @@
 import React from "react";
+import Error from "../Error/Error";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -21,14 +22,7 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       console.log("Error logs", this.state.hasError);
       // You can render any custom fallback UI
-      return (
-        <div>
-          <h2>Oops, there is an error!</h2>
-          <button type="button" onClick={() => this.setState({ hasError: false })}>
-            Try again?
-          </button>
-        </div>
-      );
+      return <Error onClick={() => this.setState({ hasError: false })} />;
     }
 
     // Return children components in case of no error
