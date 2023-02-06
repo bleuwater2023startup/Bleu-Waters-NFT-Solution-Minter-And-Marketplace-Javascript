@@ -10,7 +10,7 @@ const WavyBg = () => {
     from: { light: 0 },
     reset: false,
     reverse: flip,
-    delay: 3000,
+    delay: 2000,
     onRest: () => setFlip(!flip),
     config: { duration: 5000 },
   });
