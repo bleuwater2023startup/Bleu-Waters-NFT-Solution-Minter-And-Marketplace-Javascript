@@ -6,7 +6,7 @@ const PINATA_API_KEY = process.env.NEXT_PUBLIC_PINATA_API_KEY;
 const PINATA_API_SECRET = process.env.NEXT_PUBLIC_PINATA_API_SECRET;
 const PINATA_API_JWT = process.env.NEXT_PUBLIC_JWT;
 const pinata = new pinataSDK(PINATA_API_KEY, PINATA_API_SECRET);
-const CREATOR = process.env.NEXT_PUBLIC_PINATA_API_KEY; //NEXT_PUBLIC_CREATOR_PRIVATE
+const CREATOR = process.env.NEXT_PUBLIC_CREATOR_PRIVATE;
 
 import { readContract, writeContract } from "../../utils";
 import {
