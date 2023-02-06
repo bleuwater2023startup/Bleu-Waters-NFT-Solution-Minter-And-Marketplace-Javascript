@@ -37,6 +37,7 @@ export const handleCreateCollection = async ({
   chainId,
   dispatch,
 }) => {
+  console.log({ CREATOR });
   const options = {
     abi: NFT_MINTER_FACTORY_ABI,
     contractAddress: NFT_MINTER_FACTORY,
