@@ -82,6 +82,17 @@
   font-size: 20px;
 }
 
+.imgPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+
+.imgPlaceholder img {
+  width: 80%;
+}
+
 @media screen and (max-width: 1024px) {
   .innerContainer {
     flex-direction: column;

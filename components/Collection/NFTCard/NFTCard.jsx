@@ -5,26 +5,50 @@ import classes from "./NFTCard.module.css";
 import { formatIpfsUrl } from "../../../utils/ipfs";
 import { chainIdToName } from "../../../utils/supportedChains";
 import { ethers } from "ethers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardLoader from "../../LoadingScreen/CardLoader/CardLoader";
+import imgPlaceholder from "../../../assets/img-placeholder.png";
 
 const NFTCard = ({ similarNFT, nft, chainId, usd }) => {
   const { nftAddress, tokenId, name, image, txHistory } = nft;
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [notLoaded, setNotLoaded] = useState(false);
+
   const currentTx = txHistory[0];
   const { txType, price: etherPrice } = currentTx;
   const price = ethers.utils.formatEther(etherPrice);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setNotLoaded(true);
+    }, 10000);
+  }, []);
+
   return (
     <>
-      {!imageLoaded && <CardLoader />}
+      {!imageLoaded && !notLoaded && <CardLoader />}
       <Link
         href={`/assets/${chainIdToName[chainId]}/${nftAddress}/${tokenId}`}
-        style={{ width: similarNFT ? "220px" : "auto", display: imageLoaded ? "flex" : "none" }}
+        style={{
+          width: similarNFT ? "220px" : "auto",
+          display: imageLoaded || notLoaded ? "flex" : "none",
+        }}
         className={classes.container}>
         <div className={classes.imageContainer}>
           <div className={classes.innerImageContainer}>
-            <img src={formatIpfsUrl(image)} onLoad={() => setImageLoaded(true)} alt="" />
+            <img
+              src={formatIpfsUrl(image)}
+              onLoad={() => {
+                setImageLoaded(true);
+                setNotLoaded(false);
+              }}
+              alt=""
+            />
+            {notLoaded && !imageLoaded && (
+              <div className={classes.imgPlaceholder}>
+                <img src={imgPlaceholder.src} alt="" />
+              </div>
+            )}
           </div>
         </div>
         <div className={classes.details}>

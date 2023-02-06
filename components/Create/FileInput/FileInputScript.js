@@ -1,4 +1,5 @@
 import JSZip from "jszip";
+import { formatIpfsUrl } from "../../../utils/ipfs";
 
 export const extractZip = async (file) => {
   let fileName = file.name;
@@ -27,7 +28,7 @@ export const extractZip = async (file) => {
       } else if (data.files[`${fileName}/${image}`]) {
         imgFile = data.files[`${fileName}/${image}`];
       } else {
-        return alert("Unsupported file format2");
+        return console.log("Unsupported file format2");
       }
       const uint8array = await imgFile.async("uint8array");
       const blob = new File([uint8array], `${idx + Date.now()}.${type}`, {
@@ -43,13 +44,31 @@ export const extractZip = async (file) => {
   );
 };
 
-// read a json file
+export const extractJson = async (file) => {
+  let reader = new FileReader();
+  reader.readAsText(file);
+  return await new Promise((resolve) => {
+    reader.onload = async (event) => {
+      let { data } = JSON.parse(event.target.result);
+      const res = await Promise.all(
+        data.map(async ({ image, name, description, attributes }) => {
+          const imgFile = await getFile(formatIpfsUrl(image));
+          return {
+            image: imgFile,
+            name,
+            description,
+            attributes,
+          };
+        })
+      );
+      resolve(res);
+    };
+  });
+};
 
-// const onReaderLoad = (event) => {
-//   let { data } = JSON.parse(event.target.result);
-//   setMetadata((m) => ({ ...m, [name]: data }));
-// };
-
-// let reader = new FileReader();
-// reader.onload = onReaderLoad;
-// reader.readAsText(event.target.files[0]);
+export const getFile = async (url, name = "image", type = "image/png") => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  const file = new File([blob], name, { type });
+  return file;
+};

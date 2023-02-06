@@ -98,3 +98,14 @@
 .container:hover .buttonContainer {
   display: flex;
 }
+
+.imgPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+
+.imgPlaceholder img {
+  width: 80%;
+}

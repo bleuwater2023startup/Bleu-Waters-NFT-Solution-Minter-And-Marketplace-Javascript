@@ -2,6 +2,7 @@ import classes from "./NFTInfo.module.css";
 import Button from "../../Button/Button";
 import ReloadIcon from "../../../assets/icon-reload.svg";
 import TransferIcon from "../../../assets/icon-transfer.svg";
+import imgPlaceholder from "../../../assets/img-placeholder.png";
 import DotsIcon from "../../../assets/icon-dots.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -28,6 +29,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
   const [toggleUpdateListingModal, setToggleUpdateListingModal] = useState(false);
   const [togglePurchaseNFTModal, setTogglePurchaseNFTModal] = useState(false);
   const [toggleApproveTransferModal, setToggleApproveTransferModal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { name, nfts } = _collection;
   const { tokenId, owner, txHistory, nftAddress, collection } = nfts[0];
   const { price: etherPrice, txType } = txHistory[0];
@@ -204,8 +206,19 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
       )}
       <div className={classes.assetContainer}>
         {ipfsData ? (
-          <img className={classes.asset} src={formatIpfsUrl(ipfsData.image)} alt={"asset"} />
+          <img
+            className={classes.asset}
+            style={{ display: imageLoaded ? "block" : "none" }}
+            onLoad={() => setImageLoaded(true)}
+            src={formatIpfsUrl(ipfsData.image)}
+            alt={"asset"}
+          />
         ) : null}
+        {!imageLoaded && (
+          <div className={classes.imgPlaceholder}>
+            <img src={imgPlaceholder.src} alt="" />
+          </div>
+        )}
       </div>
       <div className={classes.infoContainer}>
         <div className={classes.subContainer1}>

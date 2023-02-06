@@ -60,10 +60,16 @@
   filter: none;
 }
 
-.container.dark.outline.outline_dark {
-  border: 1px solid var(--color-border);
-  background: var(--card-bg);
+.container.dark.outline_dark {
+  border: 1px solid var(--color-dark);
+  background: var(--bg-light);
   filter: none;
+}
+
+.container.dark.outline_dark:hover {
+  border: 1px solid var(--color-dark);
+  background: var(--bg-light);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
 }
 
 .container.dark.outline:hover {

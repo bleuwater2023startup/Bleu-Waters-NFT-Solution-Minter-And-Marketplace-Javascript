@@ -13,6 +13,20 @@
   border: 1px solid #E5E8EB;
   box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
   border-radius: 1.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+
+.imgPlaceholder img {
+  width: 80%;
 }
 
 .asset {

@@ -40,9 +40,11 @@ const AccountInfo = () => {
         <div className={classes.name}>
           <CopyText message={account}>{formatAccount(account)}</CopyText>
         </div>
-        <Button onClick={handleClick} dark outline>
-          Check wallet balance
-        </Button>
+        <div>
+          <Button onClick={handleClick} dark outline_dark>
+            Wallet balance
+          </Button>
+        </div>
       </div>
     </div>
   );

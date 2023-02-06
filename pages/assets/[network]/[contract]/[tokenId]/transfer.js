@@ -1,5 +1,5 @@
 import classes from "../../../../../styles/Transfer.module.css";
-import nft from "../../../../../assets/nft.png";
+import imgPlaceholder from "../../../../../assets/img-placeholder.png";
 import Button from "../../../../../components/Button/Button";
 import TransferSuccessModal from "../../../../../components/Modals/TransferSuccessModal/TransferSuccessModal";
 import TransferErrorModal from "../../../../../components/Modals/TransferErrorModal/TransferErrorModal";
@@ -22,6 +22,7 @@ const Transfer = () => {
   const { account, dispatch, walletProvider } = useContext(StateContext);
   const [inputValue, setInputValue] = useState();
   const [nftDetails, setNftDetails] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [transfer, setTransfer] = useState({
     success: false,
     error: false,
@@ -155,7 +156,18 @@ const Transfer = () => {
 
           <div className={classes.innerContainer}>
             <div className={classes.assetContainer}>
-              <img src={formatIpfsUrl(nftDetails.image)} alt="" className={classes.asset} />
+              <img
+                className={classes.asset}
+                style={{ display: imageLoaded ? "block" : "none" }}
+                onLoad={() => setImageLoaded(true)}
+                src={formatIpfsUrl(nftDetails.image)}
+                alt=""
+              />
+              {!imageLoaded && (
+                <div className={classes.imgPlaceholder}>
+                  <img src={imgPlaceholder.src} alt="" />
+                </div>
+              )}
             </div>
             <div className={classes.details}>
               <div className={classes.label}>Reciever address</div>

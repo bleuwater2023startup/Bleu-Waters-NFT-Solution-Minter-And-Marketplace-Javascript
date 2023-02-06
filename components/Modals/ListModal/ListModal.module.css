@@ -144,6 +144,17 @@
   flex: 1;
 }
 
+.imgPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+
+.imgPlaceholder img {
+  width: 40%;
+}
+
 @media screen and (max-width: 540px) {
   .wrapper {
     max-width: 24em;

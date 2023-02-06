@@ -95,3 +95,14 @@
   margin-top: 3em;
   /* margin-left: 0.6em; */
 }
+
+.imgPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+
+.imgPlaceholder img {
+  width: 80%;
+}

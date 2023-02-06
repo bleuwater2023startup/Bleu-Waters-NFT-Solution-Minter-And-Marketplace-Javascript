@@ -1,10 +1,10 @@
 import classes from "./CardLoader.module.css";
 import Skeleton from "@mui/material/Skeleton";
 
-const CardLoader = () => {
+const CardLoader = ({ explore }) => {
   return (
     <div className={classes.container}>
-      <div className={classes.wrapper}>
+      <div style={{ width: explore ? "20em" : "100%" }} className={classes.wrapper}>
         <Skeleton animation="wave" variant="rounded" width="100%" height="100%" />
         <Skeleton animation="wave" variant="rounded" width="40%" height={30} />
         <Skeleton animation="wave" variant="rounded" width="70%" height={30} />

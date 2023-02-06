@@ -1,9 +1,9 @@
 import { useContext, useRef, useState } from "react";
 import classes from "./FileInput.module.css";
-import { extractZip } from "./FileInputScript";
+import { extractJson, extractZip } from "./FileInputScript";
 import ZipIcon from "../../../assets/icon-zip.svg";
 import { StateContext } from "../../../context/state.context";
-import { setMintData, setPreviewCollection } from "../../../context/state.actions";
+import { setMintData, setNotification, setPreviewCollection } from "../../../context/state.actions";
 import ImageUploadPreview from "../ImageUploadPreview/ImageUploadPreview";
 import PreviewInfo from "../PreviewCollection/PreviewInfo";
 
@@ -30,7 +30,22 @@ const FileInput = ({ name, preview, collection }) => {
 
     // const nameExtension = file.name.replace(/\.+\s*\./, ".").split(".");
     // setFilename(nameExtension.slice(0, nameExtension.length - 1).join("."));
-    const res = await extractZip(file);
+
+    let res;
+    try {
+      if (file.name.split(".").includes("json")) {
+        res = await extractJson(file);
+      } else {
+        res = await extractZip(file);
+      }
+    } catch (error) {
+      dispatch(
+        setNotification({
+          type: "error",
+          message: "Invalid file format.",
+        })
+      );
+    }
 
     dispatch(setMintData({ ...mintData, [name]: res, File_Name: file.name }));
   };
@@ -104,7 +119,7 @@ const Input = ({ inputRef, collection, handleFileChange, handleImageChange, prev
     onChange={collection ? handleFileChange : handleImageChange}
     style={{ display: "none" }}
     type="file"
-    accept={collection ? ".zip" : "image/png"}
+    accept={collection ? ".zip, .json" : "image/png"}
     disabled={preview}
   />
 );

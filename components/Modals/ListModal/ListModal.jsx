@@ -1,9 +1,12 @@
 import Button from "../../Button/Button";
 import classes from "./ListModal.module.css";
 import CloseIcon from "../../../assets/icon-close.svg";
+import imgPlaceholder from "../../../assets/img-placeholder.png";
 import { formatIpfsUrl } from "../../../utils/ipfs";
+import { useState } from "react";
 
 const ListModal = ({ onClose, onList, listPrice, nftDetails }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const {
     image,
     name,
@@ -21,7 +24,18 @@ const ListModal = ({ onClose, onList, listPrice, nftDetails }) => {
           {`You'll be asked to review and sign this list action from your wallet.`}
         </div>
         <div className={classes.assetContainer}>
-          <img src={formatIpfsUrl(image)} alt="" className={classes.asset} />
+          <img
+            className={classes.asset}
+            style={{ display: imageLoaded ? "block" : "none" }}
+            onLoad={() => setImageLoaded(true)}
+            src={formatIpfsUrl(image)}
+            alt=""
+          />
+          {!imageLoaded && (
+            <div className={classes.imgPlaceholder}>
+              <img src={imgPlaceholder.src} alt="" />
+            </div>
+          )}
           <div className={classes.detail}>
             <div className={classes.name}>
               <div className={classes.tokenName}>{name}</div>

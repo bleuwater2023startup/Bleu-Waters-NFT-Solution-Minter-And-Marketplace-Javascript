@@ -3,6 +3,7 @@ import SaleDetails from "../../../../../components/Asset/SaleDetails/SaleDetails
 import { useContext, useEffect, useState } from "react";
 import ListModal from "../../../../../components/Modals/ListModal/ListModal";
 import Arrow from "../../../../../assets/icon-arrow.svg";
+import imgPlaceholder from "../../../../../assets/img-placeholder.png";
 import { useRouter } from "next/router";
 import {
   setIpfsData,
@@ -20,6 +21,7 @@ const Sell = () => {
   const [toggleListModal, setToggleListModal] = useState(false);
   const [nftDetails, setNftDetails] = useState(null);
   const [listPrice, setListPrice] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { dispatch, walletProvider, account } = useContext(StateContext);
   const router = useRouter();
   const {
@@ -113,7 +115,18 @@ const Sell = () => {
           <div className={classes.heading}>List NFT for sale</div>
           <div className={classes.innerContainer}>
             <div className={classes.assetContainer}>
-              <img className={classes.asset} src={formatIpfsUrl(nftDetails.image)} alt="asset" />
+              <img
+                className={classes.asset}
+                style={{ display: imageLoaded ? "block" : "none" }}
+                onLoad={() => setImageLoaded(true)}
+                src={formatIpfsUrl(nftDetails.image)}
+                alt="asset"
+              />
+              {!imageLoaded && (
+                <div className={classes.imgPlaceholder}>
+                  <img src={imgPlaceholder.src} alt="" />
+                </div>
+              )}
               <div className={classes.name}>{nftDetails.name}</div>
               <div className={classes.description}>{data.collection.name}</div>
               {/* <div className={classes.price}>500 MATIC</div> */}

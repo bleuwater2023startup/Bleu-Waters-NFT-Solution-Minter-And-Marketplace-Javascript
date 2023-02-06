@@ -26,8 +26,9 @@ const Collection = () => {
     query: { id },
   } = router;
 
-  const { loading, error, data } = useQuery(GET_COLLECTION_NFTS, {
+  const { loading, error, data, refetch } = useQuery(GET_COLLECTION_NFTS, {
     variables: { _id: id },
+    notifyOnNetworkStatusChange: true,
   });
 
   return (
@@ -52,6 +53,9 @@ const Collection = () => {
             <div className={classes.innerContainer}>
               <CollectionInfo collection={data.collection} />
               <TabButton tabs={tabArray} onClick={(e) => setActiveTab(tabArray[e])} />
+              <div onClick={() => refetch()} className={classes.refreshBtn}>
+                Refresh
+              </div>
               {tabs(data.collection)[activeTab]}
             </div>
           </>

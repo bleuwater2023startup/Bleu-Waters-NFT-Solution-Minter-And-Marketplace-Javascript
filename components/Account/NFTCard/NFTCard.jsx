@@ -2,15 +2,17 @@ import Link from "next/link";
 import classes from "./NFTCard.module.css";
 import { formatIpfsUrl } from "../../../utils/ipfs";
 import DotsIcon from "../../../assets/icon-dots.svg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { chainIdToName } from "../../../utils/supportedChains";
 import { StateContext } from "../../../context/state.context";
 import { ethers } from "ethers";
 import CardLoader from "../../LoadingScreen/CardLoader/CardLoader";
+import imgPlaceholder from "../../../assets/img-placeholder.png";
 
 const NFTCard = ({ nft, usd }) => {
   const { account } = useContext(StateContext);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [notLoaded, setNotLoaded] = useState(false);
   const {
     nftAddress,
     tokenId,
@@ -25,15 +27,34 @@ const NFTCard = ({ nft, usd }) => {
 
   const baseLink = `/assets/${chainIdToName[chainId]}/${nftAddress}/${tokenId}`;
 
+  useEffect(() => {
+    setTimeout(() => {
+      setNotLoaded(true);
+    }, 10000);
+  }, []);
+
   return (
     <>
-      {!imageLoaded && <CardLoader />}
-      <div className={classes.container} style={{ display: imageLoaded ? "flex" : "none" }}>
+      {!imageLoaded && !notLoaded && <CardLoader />}
+      <Link
+        href={baseLink}
+        className={classes.container}
+        style={{ display: imageLoaded || notLoaded ? "flex" : "none" }}>
         <div className={classes.imageContainer}>
           <div className={classes.innerImageContainer}>
-            <Link href={baseLink}>
-              <img src={formatIpfsUrl(image)} onLoad={() => setImageLoaded(true)} alt="" />
-            </Link>
+            <img
+              src={formatIpfsUrl(image)}
+              onLoad={() => {
+                setImageLoaded(true);
+                setNotLoaded(false);
+              }}
+              alt=""
+            />
+            {notLoaded && !imageLoaded && (
+              <div className={classes.imgPlaceholder}>
+                <img src={imgPlaceholder.src} alt="" />
+              </div>
+            )}
           </div>
         </div>
         <div className={classes.details}>
@@ -80,7 +101,7 @@ const NFTCard = ({ nft, usd }) => {
             <div className={classes.tag}>Not listed</div>
           )}
         </div>
-      </div>
+      </Link>
     </>
   );
 };
