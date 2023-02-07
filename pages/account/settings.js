@@ -203,7 +203,7 @@ const ProfileSettings = () => {
               <input
                 type="text"
                 name="twitter"
-                placeholder="twitter url"
+                placeholder="Twitter url"
                 value={inputValue.twitter}
                 onChange={handleInputChange}
               />
@@ -213,7 +213,7 @@ const ProfileSettings = () => {
               <input
                 type="text"
                 name="instagram"
-                placeholder="instagram url"
+                placeholder="Instagram url"
                 value={inputValue.instagram}
                 onChange={handleInputChange}
               />
@@ -223,7 +223,7 @@ const ProfileSettings = () => {
               <input
                 type="text"
                 name="website"
-                placeholder="Your website url"
+                placeholder="Website url"
                 value={inputValue.website}
                 onChange={handleInputChange}
               />
