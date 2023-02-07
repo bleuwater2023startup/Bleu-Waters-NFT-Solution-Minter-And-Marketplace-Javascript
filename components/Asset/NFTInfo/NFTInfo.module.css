@@ -180,6 +180,10 @@
   font-size: 1rem;
 }
 
+.address:hover {
+  color: var(--color-dark-hover);
+}
+
 .transfer,
 .reload {
   display: flex;

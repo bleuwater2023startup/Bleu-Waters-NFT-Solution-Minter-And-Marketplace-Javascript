@@ -231,7 +231,9 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
               <div className={classes.icon}></div>
               <div className={classes.creator}>
                 <div className={classes.owner}>Current owner</div>
-                <div className={classes.address}>{formatAccount(owner.id)}</div>
+                <Link href={`/${owner.id}`} className={classes.address}>
+                  {formatAccount(owner.id)}
+                </Link>
               </div>
             </div>
           )}

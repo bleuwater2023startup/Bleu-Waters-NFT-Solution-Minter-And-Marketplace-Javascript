@@ -121,11 +121,13 @@ const AccountInfo = () => {
           <div className={classes.name}>
             <CopyText message={userAccount}>{formatAccount(userAccount)}</CopyText>
           </div>
-          <div>
-            <Button onClick={handleClick} dark outline_dark>
-              Earnings
-            </Button>
-          </div>
+          {isCurrentUser() ? (
+            <div>
+              <Button onClick={handleClick} dark outline_dark>
+                Earnings
+              </Button>
+            </div>
+          ) : null}
         </div>
       </div>
       <input
