@@ -141,8 +141,11 @@ const Header = () => {
           </Link>
         </div>
         <div className={classes.listItemContainer}>
-          <Link onClick={() => setNavOpen(false)} href="/" className={classes.listItem}>
-            <div>Support</div>
+          <Link
+            onClick={() => setNavOpen(false)}
+            href="/account/settings"
+            className={classes.listItem}>
+            <div>Settings</div>
             <ChevronIcon className={classes.chevronIcon} />
           </Link>
         </div>

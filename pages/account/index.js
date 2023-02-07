@@ -1,20 +1,20 @@
 import { useLazyQuery } from "@apollo/client";
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
-import AccountInfo from "../components/Account/AccountInfo/AccountInfo";
-import ActiveListing from "../components/Account/ActiveListing/ActiveListing";
-import CollectedNFTs from "../components/Account/CollectedNFTs/CollectedNFTs";
-import CreatedNFTs from "../components/Account/CreatedNFTs/CreatedNFTs";
-import NoNFTs from "../components/Account/NoNFTs/NoNFTs";
-import Loader from "../components/LoadingScreen/Loader/Loader";
-import CreateSuccessModal from "../components/Modals/CreateSuccessModal/CreateSuccessModal";
-import { StateContext } from "../context/state.context";
-import classes from "../styles/Account.module.css";
+import AccountInfo from "../../components/Account/AccountInfo/AccountInfo";
+import ActiveListing from "../../components/Account/ActiveListing/ActiveListing";
+import CollectedNFTs from "../../components/Account/CollectedNFTs/CollectedNFTs";
+import CreatedNFTs from "../../components/Account/CreatedNFTs/CreatedNFTs";
+import NoNFTs from "../../components/Account/NoNFTs/NoNFTs";
+import Loader from "../../components/LoadingScreen/Loader/Loader";
+import CreateSuccessModal from "../../components/Modals/CreateSuccessModal/CreateSuccessModal";
+import { StateContext } from "../../context/state.context";
+import classes from "../../styles/Account.module.css";
 import {
   GET_ACTIVE_LISTING,
   GET_USER_COLLECTED_NFTS,
   GET_USER_CREATED_NFTS,
-} from "../utils/subgraphQuery";
+} from "../../utils/subgraphQuery";
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState(-1);
@@ -120,9 +120,8 @@ const Account = () => {
       </Head>
 
       {name && hash && <CreateSuccessModal name={name} hash={hash} mintType={mintType} />}
-      <div className={classes.banner}></div>
+      <AccountInfo />
       <div className={classes.innerContainer}>
-        <AccountInfo />
         <div className={classes.tabContainer}>
           <div className={classes.tabs}>
             <div

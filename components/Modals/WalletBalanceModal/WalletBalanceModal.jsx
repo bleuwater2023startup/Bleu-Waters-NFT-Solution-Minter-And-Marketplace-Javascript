@@ -133,8 +133,8 @@ const WalletBalanceModal = ({ onClose, error, loading, data }) => {
         <div onClick={onClose} className={classes.closeIcon}>
           <CloseIcon />
         </div>
-        <div className={classes.heading}>Wallet Balance</div>
-        <div className={classes.subText}>Withdraw earnings to your wallet address</div>
+        <div className={classes.heading}>Your Earnings</div>
+        <div className={classes.subText}>Withdraw earnings to your wallet</div>
 
         <div className={classes.balanceContainer}>
           <div className={classes.innerContainer}>

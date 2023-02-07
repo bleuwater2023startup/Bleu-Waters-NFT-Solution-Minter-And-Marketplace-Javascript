@@ -1,19 +1,91 @@
 .container {
+  width: 100%;
+  margin-bottom: 4em;
+}
+
+.innerContainer {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
   gap: 1em;
   margin-top: -6em;
-  margin-bottom: 4em;
   position: relative;
+  padding: 2em;
+  padding-bottom: 0;
 }
 
-.logo {
+.profileBanner,
+.profileImage {
+  border: 1px solid var(--color-border);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: gray;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.profileBanner.active,
+.profileImage.active {
+  background: transparent;
+  border: transparent;
+}
+
+.profileBanner {
+  width: 100%;
+  height: 20em;
+}
+
+.profileImage {
   width: 12em;
   height: 12em;
-  background: var(--card-bg);
-  border: 1px solid var(--color-border);
   border-radius: 0.8em;
+}
+
+.profileBanner img,
+.profileImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileBanner.active .addIcon,
+.profileImage.active .addIcon {
+  opacity: 0.2;
+}
+
+.profileBanner.active:hover .addIcon,
+.profileImage.active:hover .addIcon {
+  opacity: 1;
+}
+
+.profileBanner:hover .addIcon svg,
+.profileImage:hover .addIcon svg {
+  transform: rotate(90deg);
+}
+
+.addIcon {
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  border-radius: 50%;
+}
+
+.addIcon svg {
+  height: 1em;
+  width: 1em;
+  stroke: var(--color-dark);
+  transition: transform 300ms;
 }
 
 .accountDetail {
@@ -41,7 +113,6 @@
 }
 
 .balanceContainer {
-  border: 1px solid red;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -49,21 +120,33 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .logo {
-    width: 10em;
-    height: 10em;
+  .profileBanner {
+    height: 20em;
   }
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 2em;
+    margin-bottom: 0;
   }
 
-  .logo {
+  .innerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profileBanner {
+    height: 16em;
+  }
+
+  .profileImage {
     width: 8em;
     height: 8em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .innerContainer {
+    padding: 1em;
   }
 }

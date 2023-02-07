@@ -1,0 +1,163 @@
+.container {
+  max-width: 48em;
+  margin: 0 auto;
+  margin-top: 4em;
+  margin-bottom: 6em;
+  padding: 1em;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+  margin-top: 4em;
+}
+
+.profileBanner,
+.profileImage {
+  border: 1px solid var(--color-border);
+  background: var(--card-bg);
+  border-radius: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: gray;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.profileBanner.active,
+.profileImage.active {
+  background: transparent;
+  border: transparent;
+}
+
+.profileBanner {
+  width: 100%;
+  height: 14em;
+}
+
+.profileImage {
+  width: 100%;
+  max-width: 8em;
+  height: 8em;
+  margin-top: -4em;
+  margin-left: 2em;
+}
+
+.profileBanner img,
+.profileImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileBanner.active .addIcon,
+.profileImage.active .addIcon {
+  opacity: 0.2;
+}
+
+.profileBanner.active:hover .addIcon,
+.profileImage.active:hover .addIcon {
+  opacity: 1;
+}
+
+.profileBanner:hover .addIcon svg,
+.profileImage:hover .addIcon svg {
+  transform: rotate(90deg);
+}
+
+.addIcon {
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  border-radius: 50%;
+}
+
+.addIcon svg {
+  height: 1em;
+  width: 1em;
+  stroke: var(--color-dark);
+  transition: transform 300ms;
+}
+
+.inputContainer section {
+  font-weight: 500;
+  width: 100%;
+}
+
+.inputContainer>div {
+  width: 100%;
+}
+
+.inputContainer>div label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.6em;
+}
+
+.inputContainer>div input {
+  width: 100%;
+  padding: 1em;
+  font-size: 1rem;
+  border-radius: 0.8em;
+  border: 1px solid var(--color-border);
+  outline: none;
+  background: var(--card-bg);
+}
+
+.inputContainer>div input:hover {
+  border: 1px solid var(--color-border-hover);
+}
+
+.inputContainer>div input:focus {
+  outline: 1px solid var(--color-accent);
+  border: 1px solid transparent;
+}
+
+.deleteImageButton {
+  width: 9em;
+  margin-top: 1em;
+}
+
+.saveButton {
+  align-self: flex-end;
+  max-width: 9em;
+}
+
+@media screen and (max-width: 480px) {
+  .heading {
+    font-size: 2.4rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .inputContainer>div label {
+    font-size: 1rem;
+  }
+}

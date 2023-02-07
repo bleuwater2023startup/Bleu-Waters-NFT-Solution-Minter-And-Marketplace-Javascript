@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import { getFile } from "../utils";
+// import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,8 +21,56 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Cloud Storage and get a reference to the service
+const storage = getStorage(app);
+// const analytics = getAnalytics(app);
 
 // Initialize Firebase
 // Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app);
+const db = getFirestore(app);
+
+export const createUserProfile = async (user) => {
+  try {
+    await setDoc(doc(db, "users", user.account), user);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const getUserProfile = async (account) => {
+  const docRef = doc(db, "users", account);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+};
+
+export const uploadImage = async ({ account, name, file }) => {
+  try {
+    const imageRef = ref(storage, `${account}/${name}.png`);
+    uploadBytes(imageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const getImage = async ({ account, name }) => {
+  try {
+    const url = await getDownloadURL(ref(storage, `${account}/${name}.png`));
+    return await getFile(url);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteImage = async ({ account, name }) => {
+  const imageRef = ref(storage, `${account}/${name}.png`);
+  await deleteObject(imageRef);
+};

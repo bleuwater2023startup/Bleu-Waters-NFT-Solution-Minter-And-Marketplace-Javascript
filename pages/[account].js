@@ -125,9 +125,8 @@ const _Account = () => {
       </Head>
 
       {name && hash && <CreateSuccessModal name={name} hash={hash} mintType={mintType} />}
-      <div className={classes.banner}></div>
+      <AccountInfo />
       <div className={classes.innerContainer}>
-        <AccountInfo />
         <div className={classes.tabContainer}>
           <div className={classes.tabs}>
             <div

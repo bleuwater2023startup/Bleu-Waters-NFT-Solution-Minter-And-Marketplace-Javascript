@@ -59,7 +59,9 @@ const ConnectWallet = () => {
                 <Link href="/account" className={classes.listItem}>
                   My NFTs
                 </Link>
-                <div className={classes.listItem}>Support</div>
+                <Link href="/account/settings" className={classes.listItem}>
+                  Settings
+                </Link>
                 <div className={classes.listItem} onClick={handleDisconnect}>
                   Disconnect wallet
                 </div>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import classes from "./NFTCard.module.css";
 import { formatIpfsUrl } from "../../../utils/ipfs";
 import DotsIcon from "../../../assets/icon-dots.svg";
@@ -8,6 +7,7 @@ import { StateContext } from "../../../context/state.context";
 import { ethers } from "ethers";
 import CardLoader from "../../LoadingScreen/CardLoader/CardLoader";
 import imgPlaceholder from "../../../assets/img-placeholder.png";
+import Link from "next/link";
 
 const NFTCard = ({ nft, usd }) => {
   const { account } = useContext(StateContext);
@@ -36,11 +36,10 @@ const NFTCard = ({ nft, usd }) => {
   return (
     <>
       {!imageLoaded && !notLoaded && <CardLoader />}
-      <Link
-        href={baseLink}
+      <div
         className={classes.container}
         style={{ display: imageLoaded || notLoaded ? "flex" : "none" }}>
-        <div className={classes.imageContainer}>
+        <Link href={baseLink} className={classes.imageContainer}>
           <div className={classes.innerImageContainer}>
             <img
               src={formatIpfsUrl(image)}
@@ -56,7 +55,7 @@ const NFTCard = ({ nft, usd }) => {
               </div>
             )}
           </div>
-        </div>
+        </Link>
         <div className={classes.details}>
           <div className={classes.withDots}>
             <div>
@@ -70,17 +69,17 @@ const NFTCard = ({ nft, usd }) => {
                   {account === ownerId ? (
                     <>
                       {txType === "Listing" ? (
-                        <Link href={`${baseLink}`} className={classes.item}>
+                        <div href={`${baseLink}`} className={classes.item}>
                           Cancel Listing
-                        </Link>
+                        </div>
                       ) : (
-                        <Link href={`${baseLink}/sell`} className={classes.item}>
+                        <div href={`${baseLink}/sell`} className={classes.item}>
                           List NFT
-                        </Link>
+                        </div>
                       )}
-                      <Link href={`${baseLink}/transfer`} className={classes.item}>
+                      <div href={`${baseLink}/transfer`} className={classes.item}>
                         Transfer NFT
-                      </Link>
+                      </div>
                     </>
                   ) : null}
                   <div className={classes.item}>Copy link</div>
@@ -94,14 +93,14 @@ const NFTCard = ({ nft, usd }) => {
               <div className={classes.usdValue}>${(usd * Number(price)).toFixed(3)}</div>
             </div>
           ) : account === ownerId ? (
-            <Link href={`${baseLink}/sell`} className={classes.tag_link}>
+            <div href={`${baseLink}/sell`} className={classes.tag_link}>
               List NFT
-            </Link>
+            </div>
           ) : (
             <div className={classes.tag}>Not listed</div>
           )}
         </div>
-      </Link>
+      </div>
     </>
   );
 };

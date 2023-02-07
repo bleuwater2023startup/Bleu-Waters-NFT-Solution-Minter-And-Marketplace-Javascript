@@ -149,3 +149,36 @@ export const getEstimatedGasPrice = async ({ walletProvider, account }) => {
     value: parseEther("1.0"),
   });
 };
+
+export const getDataUrl = async (file) => {
+  return new Promise((resolve, reject) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      resolve(reader.result);
+    };
+    reader.onerror = function (error) {
+      reject("Error: ", error);
+    };
+  });
+};
+
+export const dataURLToFile = (dataurl, filename = "image") => {
+  var arr = dataurl.split(","),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+};
+
+export const getFile = async (url, name = "image", type = "image/png") => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  const file = new File([blob], name, { type });
+  return file;
+};
