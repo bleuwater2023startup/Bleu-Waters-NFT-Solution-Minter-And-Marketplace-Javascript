@@ -9,6 +9,7 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_ROYALTIES } from "../../../utils/subgraphQuery";
 import { getImage, uploadImage } from "../../../firebase/firebase";
 import AddIcon from "../../../assets/icon-add.svg";
+import { useRouter } from "next/router";
 
 const IProfileImage = {
   profileBanner: null,
@@ -17,30 +18,32 @@ const IProfileImage = {
 const AccountInfo = () => {
   const { account } = useContext(StateContext);
   const [imageInput, setImageInput] = useState(IProfileImage);
+  const [toggleWalletBalanceModal, setToggleWalletBalanceModal] = useState(false);
+  const [userAccount, setUserAccount] = useState();
   const bannerRef = useRef(null);
   const imageRef = useRef(null);
-  const [toggleWalletBalanceModal, setToggleWalletBalanceModal] = useState(false);
+  const router = useRouter();
 
   const [getRoyaltyInfo, { error, loading, data }] = useLazyQuery(GET_ROYALTIES);
 
   const handleClick = async () => {
     setToggleWalletBalanceModal(true);
     getRoyaltyInfo({
-      variables: { _account: account },
+      variables: { _account: userAccount },
     });
   };
 
   const handleInputChange = async (event) => {
     const { name, files } = event.target;
     setImageInput((input) => ({ ...input, [name]: files[0] }));
-    if (files[0] && account) {
-      uploadImage({ account, name, file: files[0] });
+    if (files[0] && userAccount) {
+      uploadImage({ account: userAccount, name, file: files[0] });
     }
   };
 
-  const getProfileImage = async () => {
-    const profileBanner = await getImage({ account, name: "profileBanner" });
-    const profileImage = await getImage({ account, name: "profileImage" });
+  const getProfileImage = async (userAccount) => {
+    const profileBanner = await getImage({ account: userAccount, name: "profileBanner" });
+    const profileImage = await getImage({ account: userAccount, name: "profileImage" });
     if (profileBanner && profileImage) {
       setImageInput((input) => ({ ...input, profileBanner, profileImage }));
     } else {
@@ -48,11 +51,24 @@ const AccountInfo = () => {
     }
   };
 
+  const isCurrentUser = () => {
+    return userAccount === account;
+  };
+
   useEffect(() => {
     setToggleWalletBalanceModal(false);
     if (!account) return;
-    getProfileImage();
-  }, [account]);
+    if (router.query.account) {
+      setUserAccount(router.query.account);
+    } else {
+      setUserAccount(account);
+    }
+  }, [account, router.query.account]);
+
+  useEffect(() => {
+    if (!userAccount) return;
+    getProfileImage(userAccount);
+  }, [userAccount]);
 
   return (
     <div className={classes.container}>
@@ -65,33 +81,45 @@ const AccountInfo = () => {
         />
       )}
       <div
-        onClick={() => bannerRef.current.click()}
-        className={`${classes.profileBanner} ${imageInput.profileBanner && classes.active}`}>
+        onClick={() => {
+          isCurrentUser() ? bannerRef.current.click() : {};
+        }}
+        className={`${classes.profileBanner} ${isCurrentUser() && classes.hover} ${
+          imageInput.profileBanner && classes.active
+        }`}>
         {imageInput.profileBanner ? (
           <img src={URL.createObjectURL(imageInput.profileBanner)} alt="" />
         ) : (
-          <div>Profile Banner</div>
+          <div></div> //Profile Banner
         )}
-        <div className={classes.addIcon}>
-          <AddIcon />
-        </div>
-      </div>
-      <div className={classes.innerContainer}>
-        <div
-          onClick={() => imageRef.current.click()}
-          className={`${classes.profileImage} ${imageInput.profileImage && classes.active}`}>
-          {imageInput.profileImage ? (
-            <img src={URL.createObjectURL(imageInput.profileImage)} alt="" />
-          ) : (
-            <div>Profile Image</div>
-          )}
+        {isCurrentUser() ? (
           <div className={classes.addIcon}>
             <AddIcon />
           </div>
+        ) : null}
+      </div>
+      <div className={classes.innerContainer}>
+        <div
+          onClick={() => {
+            userAccount === account ? imageRef.current.click() : {};
+          }}
+          className={`${classes.profileImage} ${isCurrentUser() && classes.hover} ${
+            imageInput.profileImage && classes.active
+          }`}>
+          {imageInput.profileImage ? (
+            <img src={URL.createObjectURL(imageInput.profileImage)} alt="" />
+          ) : (
+            <div></div> //Profile Image
+          )}
+          {isCurrentUser() ? (
+            <div className={classes.addIcon}>
+              <AddIcon />
+            </div>
+          ) : null}
         </div>
         <div className={classes.accountDetail}>
           <div className={classes.name}>
-            <CopyText message={account}>{formatAccount(account)}</CopyText>
+            <CopyText message={userAccount}>{formatAccount(userAccount)}</CopyText>
           </div>
           <div>
             <Button onClick={handleClick} dark outline_dark>

@@ -25,13 +25,17 @@
   color: gray;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
 }
 
 .profileBanner.active,
 .profileImage.active {
   background: transparent;
   border: transparent;
+}
+
+.profileBanner.hover,
+.profileImage.hover {
+  cursor: pointer;
 }
 
 .profileBanner {
