@@ -20,6 +20,7 @@ import {
   getCollectionsBySearch,
   sortBy,
 } from "../../Explore/ExploreScript";
+import Loader from "../../LoadingScreen/Loader/Loader";
 
 const NFTs = ({ collection }) => {
   const [nftDetails, setNftDetails] = useState(null);
@@ -164,7 +165,7 @@ const NFTs = ({ collection }) => {
               </div>
             ) : null}
           </div>
-          {filteredNftDetails && (
+          {filteredNftDetails ? (
             <Paginate
               items={filteredNftDetails}
               offsetHeight={860}
@@ -183,6 +184,8 @@ const NFTs = ({ collection }) => {
                 </div>
               )}
             />
+          ) : (
+            <Loader />
           )}
         </div>
       </div>
