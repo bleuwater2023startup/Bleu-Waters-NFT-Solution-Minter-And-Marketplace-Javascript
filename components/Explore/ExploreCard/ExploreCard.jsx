@@ -36,7 +36,7 @@ const ExploreCard = ({ collection, flex }) => {
     <>
       {!imageLoaded && !notLoaded && <CardLoader explore />}
       <Link
-        href={`/collection/${name.replace(/\s/g, "-")}?id=${id}`}
+        href={`/collection/${name.toLowerCase().replace(/\s/g, "-")}?id=${id}`}
         style={{
           width: flex ? "24em" : "auto",
           display: imageLoaded || notLoaded ? "flex" : "none",

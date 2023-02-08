@@ -2,15 +2,13 @@ import { useQuery } from "@apollo/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import collectionBanner from "../../assets/collection-banner.png";
-import TabButton from "../../components/Button/Tab/Tab";
-import Activities from "../../components/Collection/Activities/Activities";
-import CollectionInfo from "../../components/Collection/CollectionInfo/CollectionInfo";
-import NFTs from "../../components/Collection/NFTs/NFTs";
-import Loader from "../../components/LoadingScreen/Loader/Loader";
-// import ProfileLoader from "../../components/LoadingScreen/ProfileLoader/ProfileLoader";
-import classes from "../../styles/Collection.module.css";
-import { GET_COLLECTION_NFTS } from "../../utils/subgraphQuery";
+import TabButton from "../../../components/Button/Tab/Tab";
+import Activities from "../../../components/Collection/Activities/Activities";
+import CollectionInfo from "../../../components/Collection/CollectionInfo/CollectionInfo";
+import NFTs from "../../../components/Collection/NFTs/NFTs";
+import Loader from "../../../components/LoadingScreen/Loader/Loader";
+import classes from "../../../styles/Collection.module.css";
+import { GET_COLLECTION_NFTS } from "../../../utils/subgraphQuery";
 
 const Collection = () => {
   const [activeTab, setActiveTab] = useState(null);
@@ -42,16 +40,11 @@ const Collection = () => {
         {error ? (
           <>Failed to fetch results, please check your network and try again.</>
         ) : loading ? (
-          // <ProfileLoader />
           <Loader />
         ) : (
           <>
-            <div style={{ background: `url(${collectionBanner.src})` }} className={classes.banner}>
-              <div className={classes.mainText}>Caught the Wave yet?</div>
-              <div className={classes.subText}>Now is your chance</div>
-            </div>
+            <CollectionInfo collection={data.collection} />
             <div className={classes.innerContainer}>
-              <CollectionInfo collection={data.collection} />
               <TabButton tabs={tabArray} onClick={(e) => setActiveTab(tabArray[e])} />
               <div onClick={() => refetch()} className={classes.refreshBtn}>
                 Refresh

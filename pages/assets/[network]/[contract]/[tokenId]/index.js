@@ -10,7 +10,7 @@ import Utility from "../../../../../components/Asset/Utility/Utility";
 import TabButton from "../../../../../components/Button/Tab/Tab";
 import SimilarNFT from "../../../../../components/SimilarNFT/SimilarNFT";
 import classes from "../../../../../styles/Asset.module.css";
-import Arrow from "../../../../../assets/icon-arrow.svg";
+import BackIcon from "../../../../../assets/icon-arrow.svg";
 import { useRouter } from "next/router";
 import { GET_NFT_DETAIL } from "../../../../../utils/subgraphQuery";
 import { useQuery } from "@apollo/client";
@@ -93,7 +93,7 @@ const Asset = () => {
   return (
     <div className={classes.container}>
       <div onClick={() => router.back()} className={classes.arrow}>
-        <Arrow />
+        <BackIcon />
       </div>
       {error ? (
         <>Failed to fetch results, please check your network and try again.</>

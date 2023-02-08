@@ -51,7 +51,7 @@ export const getUserProfile = async (account) => {
 
 export const uploadImage = async ({ account, name, file }) => {
   try {
-    const imageRef = ref(storage, `${account}/${name}.png`);
+    const imageRef = ref(storage, `users/${account}/${name}.png`);
     uploadBytes(imageRef, file).then((snapshot) => {
       console.log("Uploaded a blob or file!");
     });
@@ -63,7 +63,7 @@ export const uploadImage = async ({ account, name, file }) => {
 
 export const getImage = async ({ account, name }) => {
   try {
-    const url = await getDownloadURL(ref(storage, `${account}/${name}.png`));
+    const url = await getDownloadURL(ref(storage, `users/${account}/${name}.png`));
     return await getFile(url);
   } catch (error) {
     console.log(error);
@@ -71,6 +71,54 @@ export const getImage = async ({ account, name }) => {
 };
 
 export const deleteImage = async ({ account, name }) => {
-  const imageRef = ref(storage, `${account}/${name}.png`);
+  const imageRef = ref(storage, `users/${account}/${name}.png`);
+  await deleteObject(imageRef);
+};
+
+// collection
+
+export const createCollectionProfile = async (collection) => {
+  try {
+    await setDoc(doc(db, "collections", collection.id), collection);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const getCollectionProfile = async (id) => {
+  const docRef = doc(db, "collections", id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+};
+
+export const uploadCollectionImage = async ({ id, name, file }) => {
+  try {
+    const imageRef = ref(storage, `collections/${id}/${name}.png`);
+    uploadBytes(imageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const getCollectionImage = async ({ id, name }) => {
+  try {
+    const url = await getDownloadURL(ref(storage, `collections/${id}/${name}.png`));
+    return await getFile(url);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCollectionImage = async ({ id, name }) => {
+  const imageRef = ref(storage, `collections/${id}/${name}.png`);
   await deleteObject(imageRef);
 };

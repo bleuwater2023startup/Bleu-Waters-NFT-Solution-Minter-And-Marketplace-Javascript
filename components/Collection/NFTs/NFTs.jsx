@@ -90,9 +90,10 @@ const NFTs = ({ collection }) => {
 
   useEffect(() => {
     if (!nftDetails) return;
-    const res = nftDetails.filter(({ attributes }) => {
-      return attributes.some((a) => activeFilter.includes(`${a.trait_type}:${a.value}`));
-    });
+    const res = nftDetails.filter(
+      ({ attributes }) =>
+        attributes && attributes.some((a) => activeFilter.includes(`${a.trait_type}:${a.value}`))
+    );
     if (res.length) {
       setFilteredNftDetails(res);
     } else {

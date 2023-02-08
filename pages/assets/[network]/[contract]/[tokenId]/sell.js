@@ -2,7 +2,7 @@ import classes from "../../../../../styles/Sell.module.css";
 import SaleDetails from "../../../../../components/Asset/SaleDetails/SaleDetails";
 import { useContext, useEffect, useState } from "react";
 import ListModal from "../../../../../components/Modals/ListModal/ListModal";
-import Arrow from "../../../../../assets/icon-arrow.svg";
+import BackIcon from "../../../../../assets/icon-arrow.svg";
 import imgPlaceholder from "../../../../../assets/img-placeholder.png";
 import { useRouter } from "next/router";
 import {
@@ -110,7 +110,7 @@ const Sell = () => {
             />
           )}
           <div onClick={() => router.back()} className={classes.arrow}>
-            <Arrow />
+            <BackIcon />
           </div>
           <div className={classes.heading}>List NFT for sale</div>
           <div className={classes.innerContainer}>

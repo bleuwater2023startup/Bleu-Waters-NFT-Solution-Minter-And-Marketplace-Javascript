@@ -3,6 +3,7 @@ import Button from "../../components/Button/Button";
 import { StateContext } from "../../context/state.context";
 import classes from "../../styles/ProfileSettings.module.css";
 import AddIcon from "../../assets/icon-add.svg";
+import BackIcon from "../../assets/icon-arrow.svg";
 import {
   createUserProfile,
   deleteImage,
@@ -12,6 +13,7 @@ import {
 } from "../../firebase/firebase";
 import Loader from "../../components/LoadingScreen/Loader/Loader";
 import { setNotification } from "../../context/state.actions";
+import { useRouter } from "next/router";
 
 const IUser = {
   username: "",
@@ -37,21 +39,34 @@ const ProfileSettings = () => {
 
   const bannerRef = useRef(null);
   const imageRef = useRef(null);
+  const router = useRouter();
 
   const handleInputChange = async (event) => {
     const { name, value, type, files } = event.target;
     if (type === "file") {
       setImageInput((input) => ({ ...input, [name]: files[0] }));
-      if (files[0] && account) {
-        uploadImage({ account, name, file: files[0] });
-      }
     } else {
       setInputValue((input) => ({ ...input, [name]: value }));
     }
   };
 
   const handleSave = async () => {
+    if (!account) return;
     setToggleLoader(true);
+    if (imageInput.profileBanner) {
+      await uploadImage({
+        account,
+        name: "profileBanner",
+        file: imageInput.profileBanner,
+      });
+    }
+    if (imageInput.profileImage) {
+      await uploadImage({
+        account,
+        name: "profileImage",
+        file: imageInput.profileImage,
+      });
+    }
     const res = await createUserProfile(inputValue);
     setToggleLoader(false);
     if (!res) {
@@ -93,10 +108,11 @@ const ProfileSettings = () => {
     }
     const profileBanner = await getImage({ account, name: "profileBanner" });
     const profileImage = await getImage({ account, name: "profileImage" });
-    if (profileBanner && profileImage) {
-      setImageInput((input) => ({ ...input, profileBanner, profileImage }));
-    } else {
-      setImageInput(IProfileImage);
+    if (profileBanner) {
+      setImageInput((input) => ({ ...input, profileBanner }));
+    }
+    if (profileImage) {
+      setImageInput((input) => ({ ...input, profileImage }));
     }
     setToggleInitLoader(false);
   };
@@ -108,6 +124,9 @@ const ProfileSettings = () => {
 
   return (
     <div className={classes.container}>
+      <div onClick={() => router.back()} className={classes.arrow}>
+        <BackIcon />
+      </div>
       {toggleInitLoader ? (
         <Loader />
       ) : (

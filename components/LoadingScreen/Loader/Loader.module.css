@@ -21,6 +21,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(50, 50, 86, 0.6);
+  background: transparent;
   z-index: 20;
 }

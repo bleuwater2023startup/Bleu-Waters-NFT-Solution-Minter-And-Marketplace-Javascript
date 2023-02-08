@@ -4,7 +4,7 @@ import Button from "../../../../../components/Button/Button";
 import TransferSuccessModal from "../../../../../components/Modals/TransferSuccessModal/TransferSuccessModal";
 import TransferErrorModal from "../../../../../components/Modals/TransferErrorModal/TransferErrorModal";
 import { useContext, useEffect, useState } from "react";
-import Arrow from "../../../../../assets/icon-arrow.svg";
+import BackIcon from "../../../../../assets/icon-arrow.svg";
 import { useRouter } from "next/router";
 import { handleTransfer } from "../../../../../components/Create/CreateScript";
 import { StateContext } from "../../../../../context/state.context";
@@ -149,7 +149,7 @@ const Transfer = () => {
             />
           )}
           <div onClick={() => router.back()} className={classes.arrow}>
-            <Arrow />
+            <BackIcon />
           </div>
           <div className={classes.heading}>Transfer item</div>
           <div className={classes.description}></div>

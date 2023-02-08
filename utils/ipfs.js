@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const formatIpfsUrl = (ipfsUrl) => ipfsUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
+export const formatIpfsUrl = (ipfsUrl) =>
+  ipfsUrl && ipfsUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
 
 export const getNft = async (tokenURI) => {
   if (tokenURI) {

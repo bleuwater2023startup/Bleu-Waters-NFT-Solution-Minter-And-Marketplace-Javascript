@@ -12,6 +12,7 @@
 .banner {
   width: 100%;
   height: 20em;
+  background-color: #0D99FF;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,7 +22,6 @@
   justify-content: center;
   gap: 1em;
   margin-bottom: 2em;
-  background: #0D99FF;
 }
 
 .mainText {
