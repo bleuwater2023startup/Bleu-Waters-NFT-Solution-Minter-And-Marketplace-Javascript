@@ -49,8 +49,8 @@ const Collection = () => {
               <div onClick={() => refetch()} className={classes.refreshBtn}>
                 Refresh
               </div>
-              {tabs(data.collection)[activeTab]}
             </div>
+            {tabs(data.collection)[activeTab]}
           </>
         )}
       </>

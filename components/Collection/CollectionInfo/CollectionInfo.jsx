@@ -66,8 +66,6 @@ const CollectionInfo = ({ collection }) => {
   return (
     <div className={classes.container}>
       <div className={classes.banner}>
-        <div className={classes.mainText}>Caught the Wave yet?</div>
-        <div className={classes.subText}>Now is your chance</div>
         {imageInput.collectionBanner ? (
           <img src={URL.createObjectURL(imageInput.collectionBanner)} alt="" />
         ) : (
