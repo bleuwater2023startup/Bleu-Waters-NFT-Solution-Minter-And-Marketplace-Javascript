@@ -1044,7 +1044,7 @@ export const NFT_MARKETPLACE_ABI = [
   },
 ];
 
-export const NFT_MARKETPLACE = "0x76E14cCF7fC4C961dD8518D9d4e69a5A0e1B62F3";
+export const NFT_MARKETPLACE = "0x93557dbA9fCc09EA198a473A6626b062d93CF223";
 
 export const ERC1155_SINGLE_MINT_ABI = [
   "function mint(address _to, uint256 _id, string memory _uri) public {}",
