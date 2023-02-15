@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ExploreCard from "../../Explore/ExploreCard/ExploreCard";
 import Paginate from "../../Paginate/Paginate";
 import NFTs from "../NFTs/NFTs";

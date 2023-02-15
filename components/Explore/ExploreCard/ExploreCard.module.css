@@ -27,7 +27,7 @@
 
 .wrapper {
   width: 100%;
-  max-height: 16em;
+  max-height: 14em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,35 +43,36 @@
 
 .innerWrapper>img {
   width: 100%;
-  max-height: 16em;
+  max-height: 14em;
   object-fit: cover;
   border-radius: 0.6em;
   transition: all 150ms;
   margin-bottom: -4px;
 }
 
-.container:hover .innerWrapper>img {
+.container:hover .innerWrapper img {
   transform: scale(1.1);
 }
 
 .innerImageContainer {
   width: 4em;
   height: 4em;
-  padding: 1px;
-  padding-top: 4px;
+  padding: 3px;
   background: var(--bg-light);
-  border-radius: 0.5em;
+  border-radius: 10px;
   position: absolute;
   bottom: -2em;
   left: 1em;
-  transition: all 300ms;
+  transition: all 200ms;
+  overflow: hidden;
+  box-shadow: 0 0 4px gray;
 }
 
 .innerImageContainer>img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 0.8em;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .container:hover .innerImageContainer {
@@ -108,5 +109,6 @@
 }
 
 .imgPlaceholder img {
-  width: 80%;
+  width: 60%;
+  transition: all 200ms;
 }

@@ -56,14 +56,14 @@ const ExploreCollection = () => {
         <Loader />
       ) : (
         <>
-          <div style={{ background: `url(${collectionBanner.src})` }} className={classes.banner}>
+          <div className={classes.banner}>
             <div className={classes.mainText}>Discover</div>
             <div className={classes.subText}>All Collection</div>
             <div className={classes.searchContainer}>
               <Search
                 value={searchValue}
                 onChange={handleChange}
-                placeholder="Search for collection"
+                placeholder="Search collection"
                 faint
               />
             </div>
