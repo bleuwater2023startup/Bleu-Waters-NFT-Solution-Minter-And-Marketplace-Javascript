@@ -69,17 +69,17 @@ const NFTCard = ({ nft, usd }) => {
                   {account === ownerId ? (
                     <>
                       {txType === "Listing" ? (
-                        <div href={`${baseLink}`} className={classes.item}>
+                        <Link href={`${baseLink}`} className={classes.item}>
                           Cancel Listing
-                        </div>
+                        </Link>
                       ) : (
-                        <div href={`${baseLink}/sell`} className={classes.item}>
+                        <Link href={`${baseLink}/sell`} className={classes.item}>
                           List NFT
-                        </div>
+                        </Link>
                       )}
-                      <div href={`${baseLink}/transfer`} className={classes.item}>
+                      <Link href={`${baseLink}/transfer`} className={classes.item}>
                         Transfer NFT
-                      </div>
+                      </Link>
                     </>
                   ) : null}
                   <div className={classes.item}>Copy link</div>
@@ -93,9 +93,9 @@ const NFTCard = ({ nft, usd }) => {
               <div className={classes.usdValue}>${(usd * Number(price)).toFixed(3)}</div>
             </div>
           ) : account === ownerId ? (
-            <div href={`${baseLink}/sell`} className={classes.tag_link}>
+            <Link href={`${baseLink}/sell`} className={classes.tag_link}>
               List NFT
-            </div>
+            </Link>
           ) : (
             <div className={classes.tag}>Not listed</div>
           )}
