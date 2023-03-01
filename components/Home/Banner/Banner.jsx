@@ -1,9 +1,10 @@
 import Button from "../../Button/Button";
 import classes from "./Banner.module.css";
 import ChevronIcon from "../../../assets/icon-chevron.svg";
+import BannerImg from "../../../assets/banner.png";
 import Link from "next/link";
 import { useState } from "react";
-import WavyBg from "../WavyBg/WavyBg";
+// import WavyBg from "../WavyBg/WavyBg";
 // import vidBg from "../../../assets/videos/wavy-bg.mp4";
 
 const Banner = () => {
@@ -25,9 +26,9 @@ const Banner = () => {
         <source src="/wavy-bg-2.mp4" type="video/mp4" />
         Your browser does not support HTML5 video.
       </video> */}
-      {!isPlaying && <WavyBg />}
-
+      {/* {!isPlaying && <WavyBg />} */}
       <div className={classes.overlay}></div>
+      <img className={classes.overlay2} src={BannerImg.src} alt="" />
       <div className={classes.textContainer}>
         <div className={classes.mainText}>The wave is coming, be in control!</div>
         <div className={classes.subText}>
