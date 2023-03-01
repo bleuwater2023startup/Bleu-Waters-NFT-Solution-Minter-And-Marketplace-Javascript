@@ -34,11 +34,10 @@
   transform: scale(1.1);
 }
 
-
 .innerImageContainer img {
   width: 100%;
   max-width: 28em;
-  object-fit: cover;
+  max-height: 16em;
   border-radius: 0.6em;
   transition: all 300ms;
   margin-bottom: -4px;
@@ -177,4 +176,8 @@
 
 .imgPlaceholder img {
   width: 80%;
+}
+
+.imgPlaceholder+img {
+  display: none;
 }

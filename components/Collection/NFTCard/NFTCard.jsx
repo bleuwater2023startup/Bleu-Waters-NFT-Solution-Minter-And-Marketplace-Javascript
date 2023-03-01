@@ -36,6 +36,11 @@ const NFTCard = ({ similarNFT, nft, chainId, usd }) => {
         className={classes.container}>
         <div className={classes.imageContainer}>
           <div className={classes.innerImageContainer}>
+            {notLoaded && !imageLoaded && (
+              <div className={classes.imgPlaceholder}>
+                <img src={imgPlaceholder.src} alt="" />
+              </div>
+            )}
             <img
               src={formatIpfsUrl(image)}
               onLoad={() => {
@@ -44,11 +49,6 @@ const NFTCard = ({ similarNFT, nft, chainId, usd }) => {
               }}
               alt=""
             />
-            {notLoaded && !imageLoaded && (
-              <div className={classes.imgPlaceholder}>
-                <img src={imgPlaceholder.src} alt="" />
-              </div>
-            )}
           </div>
         </div>
         <div className={classes.details}>

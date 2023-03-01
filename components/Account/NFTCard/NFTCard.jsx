@@ -41,6 +41,11 @@ const NFTCard = ({ nft, usd }) => {
         style={{ display: imageLoaded || notLoaded ? "flex" : "none" }}>
         <Link href={baseLink} className={classes.imageContainer}>
           <div className={classes.innerImageContainer}>
+            {notLoaded && !imageLoaded && (
+              <div className={classes.imgPlaceholder}>
+                <img src={imgPlaceholder.src} alt="" />
+              </div>
+            )}
             <img
               src={formatIpfsUrl(image)}
               onLoad={() => {
@@ -49,11 +54,6 @@ const NFTCard = ({ nft, usd }) => {
               }}
               alt=""
             />
-            {notLoaded && !imageLoaded && (
-              <div className={classes.imgPlaceholder}>
-                <img src={imgPlaceholder.src} alt="" />
-              </div>
-            )}
           </div>
         </Link>
         <div className={classes.details}>

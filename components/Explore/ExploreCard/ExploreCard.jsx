@@ -73,48 +73,48 @@ const ExploreCard = ({ collection, flex }) => {
       <Link
         href={`/collection/${name.toLowerCase().replace(/\s/g, "-")}?id=${id}`}
         style={{
-          width: flex ? "22em" : "auto",
+          width: flex ? "calc(26 * 16px)" : "auto",
           display: imageLoaded || notLoaded ? "flex" : "none",
         }}
         className={classes.container}>
-        <div className={classes.innerContainer}>
-          <div className={classes.wrapper}>
-            <div className={classes.innerWrapper}>
-              {(imageUrl || imageInput.collectionBanner) && (
-                <img
-                  src={
-                    imageInput.collectionBanner
-                      ? URL.createObjectURL(imageInput.collectionBanner)
-                      : imageUrl
-                  }
-                  onLoad={() => {
-                    setImageLoaded(true);
-                    setNotLoaded(false);
-                  }}
-                  alt=""
-                />
-              )}
-              {notLoaded && !imageLoaded && (
-                <div className={classes.imgPlaceholder}>
-                  <img src={imgPlaceholder.src} alt="asset" />
-                </div>
-              )}
-            </div>
-            <div className={classes.innerImageContainer}>
-              {imageUrl && imageLoaded && (
-                <img
-                  src={
-                    imageInput.collectionImage
-                      ? URL.createObjectURL(imageInput.collectionImage)
-                      : imageUrl
-                  }
-                  alt=""
-                />
-              )}
-              {notLoaded && !imageLoaded && <img src={imgPlaceholder.src} alt="asset" />}
-            </div>
+        {/* <div className={classes.innerContainer}> */}
+        <div className={classes.wrapper}>
+          <div className={classes.innerWrapper}>
+            {notLoaded && !imageLoaded && (
+              <div className={classes.imgPlaceholder}>
+                <img src={imgPlaceholder.src} alt="asset" />
+              </div>
+            )}
+            {(imageUrl || imageInput.collectionBanner) && (
+              <img
+                src={
+                  imageInput.collectionBanner
+                    ? URL.createObjectURL(imageInput.collectionBanner)
+                    : imageUrl
+                }
+                onLoad={() => {
+                  setImageLoaded(true);
+                  setNotLoaded(false);
+                }}
+                alt=""
+              />
+            )}
+          </div>
+          <div className={classes.innerImageContainer}>
+            {imageUrl && imageLoaded && (
+              <img
+                src={
+                  imageInput.collectionImage
+                    ? URL.createObjectURL(imageInput.collectionImage)
+                    : imageUrl
+                }
+                alt=""
+              />
+            )}
+            {notLoaded && !imageLoaded && <img src={imgPlaceholder.src} alt="asset" />}
           </div>
         </div>
+        {/* </div> */}
         <div className={classes.details}>
           <div className={classes.name}>{name}</div>
           <div>{nfts.length} items</div>

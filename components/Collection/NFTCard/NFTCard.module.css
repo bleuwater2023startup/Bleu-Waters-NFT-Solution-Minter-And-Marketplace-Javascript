@@ -38,6 +38,7 @@
   object-fit: cover;
   border-radius: 0.6rem;
   transition: all 300ms;
+  max-height: 16em;
 }
 
 .container:hover img {
@@ -108,4 +109,8 @@
 
 .imgPlaceholder img {
   width: 80%;
+}
+
+.imgPlaceholder+img {
+  display: none;
 }

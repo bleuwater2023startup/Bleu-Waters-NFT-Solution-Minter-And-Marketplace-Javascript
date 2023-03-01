@@ -44,9 +44,12 @@
 }
 
 .profileImage {
-  width: 12em;
-  height: 12em;
+  width: calc(12 * 16px);
+  height: calc(12 * 16px);
   border-radius: 0.8em;
+  background: var(--bg-light) !important;
+  box-shadow: 0 0 2px gray;
+  padding: 4px;
 }
 
 .profileBanner img,
@@ -54,6 +57,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.profileImage img {
+  border-radius: 0.8em;
 }
 
 .profileBanner.active .addIcon,
