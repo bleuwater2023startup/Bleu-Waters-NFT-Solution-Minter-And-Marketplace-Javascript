@@ -1,18 +1,18 @@
 import classes from "./CollectionInfo.module.css";
-import Instagram from "../../../assets/instagram.svg";
-import Twitter from "../../../assets/twitter.svg";
+import DotsIcon from "../../../assets/icon-dots.svg";
+import ShareIcon from "../../../assets/icon-share.svg";
 import EditIcon from "../../../assets/icon-edit.svg";
-import collectionLogo from "../../../assets/collection-logo.png";
-import collectionBanner from "../../../assets/collection-banner.png";
+import Logo from "../../../assets/logo-disabled.svg";
+import Badge from "../../../assets/icon-badge.svg";
 import { formatAccount, getDate } from "../../../utils";
 import supportedChains, { chainIdToName } from "../../../utils/supportedChains";
-import CopyText from "../../CopyText/CopyTest";
 import { ethers } from "ethers";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getCollectionImage, getCollectionProfile } from "../../../firebase/firebase";
+import Link from "next/link";
+import CopyText from "../../CopyText/CopyTest";
 
 const ICollection = {
   description: "",
@@ -69,7 +69,7 @@ const CollectionInfo = ({ collection }) => {
         {imageInput.collectionBanner ? (
           <img src={URL.createObjectURL(imageInput.collectionBanner)} alt="" />
         ) : (
-          <img src={collectionBanner.src} alt="" />
+          <Logo />
         )}
       </div>
       <div className={classes.innerContainer}>
@@ -82,15 +82,20 @@ const CollectionInfo = ({ collection }) => {
                 alt=""
               />
             ) : (
-              <img className={classes.collectionLogo} src={collectionLogo.src} alt="" />
+              <div className={classes.collectionLogo}>
+                <Logo />
+              </div>
             )}
             <div className={classes.collectionDetail}>
-              <div className={classes.collectionName}>{name}</div>
+              <div className={classes.collectionName}>
+                <div>{name}</div>
+                <Badge />
+              </div>
               <div className={classes.creator}>
                 <div className={classes.property}>Created by</div>
-                <div className={classes.value}>
-                  <CopyText message={creator.id}>{formatAccount(creator.id)}</CopyText>
-                </div>
+                <Link href={`/${creator.id}`} className={classes.value}>
+                  {formatAccount(creator.id)}
+                </Link>
               </div>
               <div className={classes.moreDetailContainer}>
                 <div>
@@ -108,16 +113,40 @@ const CollectionInfo = ({ collection }) => {
               </div>
             </div>
           </div>
-          <div className={classes.socialLinks}>
-            <a href={inputValue.twitter} target="_blank" rel="noreferrer noopener">
-              <Twitter />
-            </a>
-            <a href={inputValue.instagram} target="_blank" rel="noreferrer noopener">
-              <Instagram />
-            </a>
-            <Link href={`${targetPathname}/edit?id=${targetId}`}>
-              <EditIcon />
-            </Link>
+          <div className={classes.socialLinksContainer}>
+            <div className={classes.dropdownWrapper}>
+              <div className={classes.dotsIcon}>
+                <ShareIcon />
+              </div>
+              <div className={classes.dropdownContainer}>
+                <div className={classes.dropdown}>
+                  <div className={classes.item}>
+                    <div className={classes.content}>
+                      <CopyText message={window.location.href} icon>
+                        Copy link
+                      </CopyText>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={classes.dropdownWrapper}>
+              <div className={classes.dotsIcon}>
+                <DotsIcon />
+              </div>
+              <div className={classes.dropdownContainer}>
+                <div className={classes.dropdown}>
+                  <div className={classes.item}>
+                    <Link
+                      href={`${targetPathname}/edit?id=${targetId}`}
+                      className={classes.content}>
+                      <EditIcon />
+                      <div>Edit collection</div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className={classes.description}>

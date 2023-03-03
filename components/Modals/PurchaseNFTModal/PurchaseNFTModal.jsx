@@ -38,7 +38,7 @@ const PurchaseNFTModal = ({ onClose, onPurchaseClick, nft }) => {
         </div>
         <div className={classes.info}>
           <InfoIcon />
-          <div>You get a Waitlist spot plus other perks</div>
+          <div>You will get a Waitlist spot plus other perks</div>
         </div>
         <div className={classes.priceDetail}>
           <span>{price} matic</span>

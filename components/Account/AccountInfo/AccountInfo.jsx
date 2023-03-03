@@ -119,7 +119,9 @@ const AccountInfo = () => {
         </div>
         <div className={classes.accountDetail}>
           <div className={classes.name}>
-            <CopyText message={userAccount}>{formatAccount(userAccount)}</CopyText>
+            <CopyText message={userAccount} icon>
+              {formatAccount(userAccount)}
+            </CopyText>
           </div>
           {isCurrentUser() ? (
             <div>

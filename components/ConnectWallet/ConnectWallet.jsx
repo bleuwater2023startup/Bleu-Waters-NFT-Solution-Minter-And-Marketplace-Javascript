@@ -53,7 +53,9 @@ const ConnectWallet = () => {
                 <div className={classes.listItem}>
                   <div className={classes.chain}>{supportedChains[parseInt(chainId)]?.name}</div>
                   <div className={classes.address}>
-                    <CopyText message={account}>{formatAccount(account, 5, 4)}</CopyText>
+                    <CopyText message={account} icon>
+                      {formatAccount(account, 5, 4)}
+                    </CopyText>
                   </div>
                 </div>
                 <Link href="/account" className={classes.listItem}>

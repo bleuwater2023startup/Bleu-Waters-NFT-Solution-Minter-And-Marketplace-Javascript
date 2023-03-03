@@ -4,6 +4,7 @@ import ReloadIcon from "../../../assets/icon-reload.svg";
 import TransferIcon from "../../../assets/icon-transfer.svg";
 import imgPlaceholder from "../../../assets/img-placeholder.png";
 import DotsIcon from "../../../assets/icon-dots.svg";
+import ShareIcon from "../../../assets/icon-share.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { formatAccount } from "../../../utils";
@@ -22,6 +23,8 @@ import UpdateListingModal from "../../Modals/UpdateListingModal/UpdateListingMod
 import PurchaseNFTModal from "../../Modals/PurchaseNFTModal/PurchaseNFTModal";
 import { ethers } from "ethers";
 import ApproveExternalTransferModal from "../../Modals/ApproveExternalTransferModal/ApproveExternalTransfer";
+import CopyText from "../../CopyText/CopyTest";
+import Tooltip from "../../Tooltip/Tooltip";
 
 const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
   const { account, dispatch, walletProvider } = useContext(StateContext);
@@ -237,6 +240,20 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
               </div>
             </div>
           )}
+          <div className={`${classes.dropdownInfo} ${classes.share}`}>
+            <div className={classes.dotsIcon}>
+              <ShareIcon />
+            </div>
+            <div className={classes.dropdownContainer}>
+              <div className={classes.dropdown}>
+                <div className={classes.item}>
+                  <CopyText message={window.location.href} icon>
+                    Copy link
+                  </CopyText>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className={classes.dropdownInfo}>
             <div className={classes.dotsIcon}>
               <DotsIcon />
@@ -245,7 +262,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
               <div className={classes.dropdown}>
                 {creator.toLowerCase() === account.toLowerCase() && (
                   <div onClick={() => setToggleApproveTransferModal(true)} className={classes.item}>
-                    Approve NFT
+                    Approve NFT <Tooltip data="Approve this NFT to be sold on other marketplace" />
                   </div>
                 )}
                 {isOwner() ? (
@@ -290,7 +307,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
             <div className={classes.price}>
               <div>Price</div>
               <div className={classes._price}>{price} matic</div>
-              <div>{(usd * price).toFixed(3)}</div>
+              <div>{(usd * Number(price)).toFixed(3)}</div>
             </div>
             <div onClick={() => setToggleCancelModal(true)} className={classes.button}>
               <Button accent>Cancel Listing</Button>
@@ -318,7 +335,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
             <div className={classes.price}>
               <div>Price</div>
               <div className={classes._price}>{price} matic</div>
-              <div>usd</div>
+              <div>{(usd * Number(price)).toFixed(1)} usd</div>
             </div>
             <div onClick={() => setTogglePurchaseNFTModal(true)} className={classes.button}>
               <Button accent>Buy</Button>

@@ -5,10 +5,11 @@
   --color-faint: #A4A9B6;
   --color-accent: #0CAFFD;
   --color-accent-light: #138ac1;
-  --color-accent-dark: #0381ff;
+  --color-accent-dark: #0989c5;
   --bg-dark: linear-gradient(180deg, #0F96FF 0%, #4640FF 100%);
   --bg-dark-hover: linear-gradient(180deg, #0590fa 0%, #3932fe 100%);
   --bg-light: #FFFFFF;
+  --bg-gray: #E5E8EB;
   --card-bg: #F3F4F8;
   --card-bg-accent: #F5F7FC;
   --card-bg-accent-light: #D8ECFF;
@@ -18,6 +19,7 @@
   --color-error: #F47257;
   --color-info: #0D99FF;
   --color-warning: #FFD100;
+  --tooltip-bg: #323256;
 }
 
 html,

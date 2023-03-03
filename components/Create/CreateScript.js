@@ -616,7 +616,7 @@ export const handleBuyNFT = async ({ tokenId, value, nftAddress, dispatch, walle
       dispatch(
         setNotification({
           type: "error",
-          message: error.reason,
+          message: error.reason || error.data.message,
         })
       );
     },

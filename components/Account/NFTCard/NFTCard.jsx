@@ -8,6 +8,7 @@ import { ethers } from "ethers";
 import CardLoader from "../../LoadingScreen/CardLoader/CardLoader";
 import imgPlaceholder from "../../../assets/img-placeholder.png";
 import Link from "next/link";
+import CopyText from "../../CopyText/CopyTest";
 
 const NFTCard = ({ nft, usd }) => {
   const { account } = useContext(StateContext);
@@ -82,7 +83,11 @@ const NFTCard = ({ nft, usd }) => {
                       </Link>
                     </>
                   ) : null}
-                  <div className={classes.item}>Copy link</div>
+                  <div className={classes.item}>
+                    <CopyText message={`${window.location.origin}/${baseLink}`} icon>
+                      Copy link
+                    </CopyText>
+                  </div>
                 </div>
               </div>
             </div>

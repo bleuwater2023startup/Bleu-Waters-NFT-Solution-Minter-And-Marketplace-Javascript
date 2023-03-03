@@ -3,12 +3,12 @@ import classes from "./Banner.module.css";
 import ChevronIcon from "../../../assets/icon-chevron.svg";
 import BannerImg from "../../../assets/banner.png";
 import Link from "next/link";
-import { useState } from "react";
-// import WavyBg from "../WavyBg/WavyBg";
+import WavyBg from "../WavyBg/WavyBg";
+// import { useState } from "react";
 // import vidBg from "../../../assets/videos/wavy-bg.mp4";
 
 const Banner = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
 
   const handleSlideDown = () => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -16,9 +16,9 @@ const Banner = () => {
     document.documentElement.style.scrollBehavior = "none";
   };
 
-  const handlePlaying = () => {
-    setIsPlaying(true);
-  };
+  // const handlePlaying = () => {
+  //   setIsPlaying(true);
+  // };
 
   return (
     <div className={classes.container}>
@@ -27,6 +27,7 @@ const Banner = () => {
         Your browser does not support HTML5 video.
       </video> */}
       {/* {!isPlaying && <WavyBg />} */}
+      <WavyBg />
       <div className={classes.overlay}></div>
       <img className={classes.overlay2} src={BannerImg.src} alt="" />
       <div className={classes.textContainer}>

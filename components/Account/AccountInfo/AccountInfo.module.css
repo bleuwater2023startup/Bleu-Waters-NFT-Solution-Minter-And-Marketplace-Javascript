@@ -17,7 +17,7 @@
 .profileBanner,
 .profileImage {
   border: 1px solid var(--color-border);
-  background: var(--card-bg);
+  background: var(--bg-gray);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,8 +47,7 @@
   width: calc(12 * 16px);
   height: calc(12 * 16px);
   border-radius: 0.8em;
-  background: var(--bg-light) !important;
-  box-shadow: 0 0 2px gray;
+  border: 1px solid var(--color-border);
   padding: 4px;
 }
 

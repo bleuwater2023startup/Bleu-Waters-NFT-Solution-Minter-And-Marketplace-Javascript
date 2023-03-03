@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import classes from "./CopyText.module.css";
 import CopyIcon from "../../assets/icon-copy.svg";
 
-const CopyText = ({ message, children }) => {
+const CopyText = ({ message, children, icon }) => {
   const [copied, setCopy] = useState(false);
 
   const copyRef = useRef(null);
@@ -19,16 +19,16 @@ const CopyText = ({ message, children }) => {
       className={classes.container}
       onMouseDown={() => setCopy(true)}
       onMouseUp={() => setCopy(false)}
-      onClick={() => handleCopy({ navigator, copy: copyRef.current })}
-    >
+      onClick={() => handleCopy({ navigator, copy: copyRef.current })}>
       {children}
-      <CopyIcon className={`${classes.copyIcon} ${copied && classes.active}`} />
-      <input
-        style={{ display: "none" }}
-        ref={copyRef}
-        type="text"
-        defaultValue={message}
-      />
+      {icon && (
+        <div className={classes.copyIconContainer}>
+          <div className={classes.tag}>{copied ? "Copied!" : "Copy"}</div>
+          <CopyIcon className={`${classes.copyIcon} ${copied && classes.active}`} />
+        </div>
+      )}
+
+      <input style={{ display: "none" }} ref={copyRef} type="text" defaultValue={message} />
     </div>
   );
 };
