@@ -85,6 +85,7 @@ const Edit = () => {
         })
       );
     }
+    document.documentElement.scrollTop = 0;
   };
 
   const init = async () => {
@@ -97,10 +98,11 @@ const Edit = () => {
     }
     const collectionBanner = await getCollectionImage({ id, name: "collectionBanner" });
     const collectionImage = await getCollectionImage({ id, name: "collectionImage" });
-    if (collectionBanner && collectionImage) {
-      setImageInput((input) => ({ ...input, collectionBanner, collectionImage }));
-    } else {
-      setImageInput(ICollectionImage);
+    if (collectionBanner) {
+      setImageInput((input) => ({ ...input, collectionBanner }));
+    }
+    if (collectionImage) {
+      setImageInput((input) => ({ ...input, collectionImage }));
     }
     setToggleInitLoader(false);
   };

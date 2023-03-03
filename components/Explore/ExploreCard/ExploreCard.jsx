@@ -26,8 +26,10 @@ const ExploreCard = ({ collection, flex }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [notLoaded, setNotLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const init = async (id) => {
+    setLoading(true);
     const data = await getCollectionProfile(id);
     if (data) {
       setInputValue(data);
@@ -42,6 +44,7 @@ const ExploreCard = ({ collection, flex }) => {
     if (collectionImage) {
       setImageInput((input) => ({ ...input, collectionImage }));
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -85,19 +88,27 @@ const ExploreCard = ({ collection, flex }) => {
                 <img src={imgPlaceholder.src} alt="asset" />
               </div>
             )}
-            {(imageUrl || imageInput.collectionBanner) && (
+            {imageInput.collectionBanner ? (
               <img
-                src={
-                  imageInput.collectionBanner
-                    ? URL.createObjectURL(imageInput.collectionBanner)
-                    : imageUrl
-                }
+                src={URL.createObjectURL(imageInput.collectionBanner)}
                 onLoad={() => {
                   setImageLoaded(true);
                   setNotLoaded(false);
                 }}
                 alt=""
               />
+            ) : (
+              imageUrl &&
+              !loading && (
+                <img
+                  src={imageUrl}
+                  onLoad={() => {
+                    setImageLoaded(true);
+                    setNotLoaded(false);
+                  }}
+                  alt=""
+                />
+              )
             )}
           </div>
           <div className={classes.innerImageContainer}>

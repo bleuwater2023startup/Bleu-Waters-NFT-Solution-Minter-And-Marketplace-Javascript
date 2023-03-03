@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import { getCollectionImage, getCollectionProfile } from "../../../firebase/firebase";
 import Link from "next/link";
 import CopyText from "../../CopyText/CopyTest";
+import { useContext } from "react";
+import { StateContext } from "../../../context/state.context";
 
 const ICollection = {
   description: "",
@@ -28,6 +30,7 @@ const ICollectionImage = {
 };
 
 const CollectionInfo = ({ collection }) => {
+  const { account } = useContext(StateContext);
   const [inputValue, setInputValue] = useState(ICollection);
   const [imageInput, setImageInput] = useState(ICollectionImage);
   const router = useRouter();
@@ -130,23 +133,25 @@ const CollectionInfo = ({ collection }) => {
                 </div>
               </div>
             </div>
-            <div className={classes.dropdownWrapper}>
-              <div className={classes.dotsIcon}>
-                <DotsIcon />
-              </div>
-              <div className={classes.dropdownContainer}>
-                <div className={classes.dropdown}>
-                  <div className={classes.item}>
-                    <Link
-                      href={`${targetPathname}/edit?id=${targetId}`}
-                      className={classes.content}>
-                      <EditIcon />
-                      <div>Edit collection</div>
-                    </Link>
+            {creator.id.toLowerCase() === account.toLowerCase() ? (
+              <div className={classes.dropdownWrapper}>
+                <div className={classes.dotsIcon}>
+                  <DotsIcon />
+                </div>
+                <div className={classes.dropdownContainer}>
+                  <div className={classes.dropdown}>
+                    <div className={classes.item}>
+                      <Link
+                        href={`${targetPathname}/edit?id=${targetId}`}
+                        className={classes.content}>
+                        <EditIcon />
+                        <div>Edit collection</div>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
         <div className={classes.description}>
