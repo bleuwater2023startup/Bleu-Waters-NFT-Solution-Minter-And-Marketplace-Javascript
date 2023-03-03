@@ -16,12 +16,12 @@ export const data = [
   {
     name: "Can I invest?",
     description:
-      "We are currently selling our collection of 5,555 NFT on Etherium Blockchain, holding more of our NFT gives you access to different perks and platform-based benefits as we move to onboard more users to web3.",
+      "We are currently selling our limited NFT collection on Ethereum Blockchain. If you are looking to invest you can buy into our investor NFT tier. Holding more of our NFT gives you access to different perks and platform-based benefits as we move to onboard more users to web3.",
   },
   {
     name: "What Utility does the Bleuwaters NFT have?",
     description:
-      "Holding our NFTs gives you exclusive access to our E-learning classess, Unpaid access to our IRL events, a 1hr One-on-one call with the team, Some swags and Giveaways.",
+      "Holding our NFTs gives you exclusive access to our E-learning classes, access to our IRL events, an hour One-on-one call with the team, and some merch.",
   },
   {
     name: "How is Royalty paid?",

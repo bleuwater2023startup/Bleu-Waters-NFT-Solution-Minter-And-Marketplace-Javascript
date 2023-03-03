@@ -40,7 +40,9 @@ const MintFlow = ({ collection, contract, flow, stepId, offset }) => {
           <div className={classes.detail}>
             <div className={classes.name}>{collection ? "Upload collection" : "Upload Art"}</div>
             <div className={classes.description}>
-              Upload a .json file containing your art and metadata
+              {collection
+                ? "Upload a .json file containing your art and metadata"
+                : "Upload an image file"}
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { formatAccount, getDuration } from "../../../utils";
 import { ethers } from "ethers";
 import { formatIpfsUrl } from "../../../utils/ipfs";
 
-const sortKey = ["Show all", "Sales", "Listeds", "Transfers", "Minteds"];
+const sortKey = ["Show all", "Sales", "Listings", "Transfers", "Mintings"];
 const sortValue = ["All", "Sale", "Listing", "Transfer", "Minting"];
 
 const Activities = ({ collection }) => {
