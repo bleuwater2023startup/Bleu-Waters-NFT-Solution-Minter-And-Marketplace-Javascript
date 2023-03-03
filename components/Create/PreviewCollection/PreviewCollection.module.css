@@ -49,6 +49,14 @@
   cursor: pointer;
 }
 
+.arrow svg {
+  transition: transform 300ms;
+}
+
+.arrow:hover svg {
+  transform: translateX(-20%);
+}
+
 .assetContainer {
   width: 100%;
   display: grid;
@@ -86,7 +94,12 @@
   text-align: center;
   cursor: pointer;
   font-weight: 500;
+  border: 1px solid transparent;
   background: var(--card-bg);
+}
+
+.attrButton:hover {
+  border: 1px solid var(--color-border);
 }
 
 /* preview info section */

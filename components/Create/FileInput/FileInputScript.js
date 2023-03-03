@@ -31,7 +31,7 @@ export const extractZip = async (file) => {
         return console.log("Unsupported file format2");
       }
       const uint8array = await imgFile.async("uint8array");
-      const blob = new File([uint8array], `${idx + Date.now()}.${type}`, {
+      const blob = new File([uint8array], `img-${idx + Date.now()}`, {
         type: `image/${type}`,
       });
       return {

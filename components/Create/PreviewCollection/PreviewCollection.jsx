@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { setPreviewCollection } from "../../../context/state.actions";
 import { StateContext } from "../../../context/state.context";
 import PreviewCollectionModal from "../../Modals/PreviewCollectionModal/PreviewCollectionModal";
@@ -12,7 +12,7 @@ const PreviewCollection = ({ assets }) => {
   return (
     <div className={`${classes.container} ${assetId && classes.modal}`}>
       <div className={classes.innerContainer}>
-        {assetId && (
+        {assetId !== null && (
           <PreviewCollectionModal onClose={() => setAssetId(null)} asset={assets[assetId]} />
         )}
         <div onClick={() => dispatch(setPreviewCollection(false))} className={classes.arrow}>
