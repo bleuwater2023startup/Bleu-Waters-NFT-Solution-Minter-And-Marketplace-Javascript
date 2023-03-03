@@ -19,6 +19,18 @@
   margin-left: 0.2em;
 }
 
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  right: 1em;
+}
+
 .container input {
   padding: 1em;
   border-radius: 0.8em;

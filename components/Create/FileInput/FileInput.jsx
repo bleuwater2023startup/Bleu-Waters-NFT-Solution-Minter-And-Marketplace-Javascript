@@ -148,6 +148,7 @@ const FileInput = ({ name, preview, collection }) => {
             file={mintData[name]}
             handleClick={handleClick}
             collection={collection}
+            preview={preview}
           />
         ) : preview && mintData.File_Name ? (
           <div>{mintData.File_Name}</div>

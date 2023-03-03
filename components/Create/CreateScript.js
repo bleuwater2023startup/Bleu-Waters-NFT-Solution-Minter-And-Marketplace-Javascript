@@ -8,7 +8,7 @@ const PINATA_API_JWT = process.env.NEXT_PUBLIC_JWT;
 const pinata = new pinataSDK(PINATA_API_KEY, PINATA_API_SECRET);
 const CREATOR = process.env.NEXT_PUBLIC_CREATOR_PRIVATE;
 
-import { readContract, writeContract } from "../../utils";
+import { dataURLToFile, getDataUrl, readContract, writeContract } from "../../utils";
 import {
   ERC1155_EXTENSION_ABI,
   MINTER_ABI,
@@ -901,7 +901,7 @@ export const uploadSingleToIpfs = async (metadata, dispatch) => {
     const data = await nftstorage.store({
       name: Name,
       description: Description,
-      image: File,
+      image: dataURLToFile(await getDataUrl(File), `img-${Date.now()}`),
       attributes: transformedAttribute,
     });
     dispatch(setNotification(ipfsSuccessUploadMessage));

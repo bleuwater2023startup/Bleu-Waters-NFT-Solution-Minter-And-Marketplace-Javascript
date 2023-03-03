@@ -36,7 +36,7 @@ const UpdateListingModal = ({ onClose, onPriceChange, nft, currentPrice }) => {
         </div>
         <div className={classes.heading}>Change price</div>
         <div className={classes.description}>
-          New price must be less than previous. If you want increase price, you should cancel it
+          New price must be less than previous. If you want to increase price, you should cancel it
           first and then put it on sale again
         </div>
         <div className={classes.priceInput}>
@@ -71,7 +71,7 @@ const UpdateListingModal = ({ onClose, onPriceChange, nft, currentPrice }) => {
           </div>
         </div>
         <div className={classes.buttonContainer}>
-          <div className={classes.button}>
+          <div onClick={onClose} className={classes.button}>
             <Button dark outline>
               Cancel
             </Button>

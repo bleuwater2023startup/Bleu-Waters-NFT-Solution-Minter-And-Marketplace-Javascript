@@ -5,8 +5,8 @@ import TextInput from "../TextInput/TextInput";
 
 export const newCollection = () => [
   <>
-    <TextInput type="text" name="Contract Name" required />
-    <TextInput type="text" name="Symbol" required />
+    <TextInput type="text" name="Contract Name" required collection />
+    <TextInput type="text" name="Symbol" required collection />
   </>,
   <FileInput key={1} name="File" collection />,
   <RoyaltyInput key={2} name="Royalty" />,
@@ -18,8 +18,8 @@ export const newCollection = () => [
 
 export const newContract = () => [
   <>
-    <TextInput type="text" name="Contract Name" required />
-    <TextInput type="text" name="Symbol" required />
+    <TextInput type="text" name="Contract Name" required collection />
+    <TextInput type="text" name="Symbol" required collection />
   </>,
   <>
     <FileInput name="File" />

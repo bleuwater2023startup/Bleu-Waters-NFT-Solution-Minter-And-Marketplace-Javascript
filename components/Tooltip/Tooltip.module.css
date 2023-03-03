@@ -21,6 +21,10 @@
   justify-content: center;
 }
 
+.tooltip.left {
+  right: -1em;
+}
+
 .tooltip::before {
   position: absolute;
   bottom: 1px;
@@ -30,6 +34,10 @@
   border-color: var(--tooltip-bg) transparent transparent transparent;
   transform: translateY(100%);
   z-index: 1;
+}
+
+.tooltip.left::before {
+  right: 1.4em;
 }
 
 .container:hover .tooltip {

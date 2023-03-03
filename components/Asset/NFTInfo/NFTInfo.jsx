@@ -307,7 +307,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
             <div className={classes.price}>
               <div>Price</div>
               <div className={classes._price}>{price} matic</div>
-              <div>{(usd * Number(price)).toFixed(3)}</div>
+              <div>{(usd * Number(price)).toFixed(3)} usd</div>
             </div>
             <div onClick={() => setToggleCancelModal(true)} className={classes.button}>
               <Button accent>Cancel Listing</Button>
