@@ -19,6 +19,11 @@
   margin-left: 0.2em;
 }
 
+.optional {
+  font-weight: 400;
+  margin-left: 0.2em;
+}
+
 .inputContainer {
   position: relative;
   display: flex;

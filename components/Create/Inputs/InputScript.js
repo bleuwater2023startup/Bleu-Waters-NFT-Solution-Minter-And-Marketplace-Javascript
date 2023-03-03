@@ -4,6 +4,7 @@ import {
   setMintData,
   setNotification,
 } from "../../../context/state.actions";
+import { createCollectionProfile } from "../../../firebase/firebase";
 import {
   handleCreateCollection,
   handleCreatePaymentSplitter,
@@ -138,6 +139,14 @@ export const _handleMint = async (createProps) => {
     collectionAddress: mintData["Collection Address"],
   });
   if (res) {
+    try {
+      await createCollectionProfile({
+        id: mintData["Collection Address"].toLowerCase(),
+        description: mintData.Description,
+      });
+    } catch (error) {
+      console.log(error);
+    }
     dispatch(
       setCreateSuccessModal({
         name: mintData[mintType === "Collection" ? "Contract Name" : "Name"],

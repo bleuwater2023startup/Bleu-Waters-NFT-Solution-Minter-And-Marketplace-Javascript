@@ -4,7 +4,7 @@ import { StateContext } from "../../../context/state.context";
 import Tooltip from "../../Tooltip/Tooltip";
 import classes from "./TextInput.module.css";
 
-const TextInput = ({ type, name, description, required, preview, collection }) => {
+const TextInput = ({ type, name, description, required, optional, preview, collection }) => {
   const { mintData, dispatch } = useContext(StateContext);
   const handleChange = (e) => {
     let value = e.target.value;
@@ -16,6 +16,7 @@ const TextInput = ({ type, name, description, required, preview, collection }) =
       <div className={classes.name}>
         <span>{name}</span>
         {required && <span className={classes.required}>*</span>}
+        {optional && <span className={classes.optional}>{"(optional)"}</span>}
       </div>
       <div className={classes.description}>{description}</div>
       {type === "text" && (

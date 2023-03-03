@@ -8,7 +8,15 @@ export const newCollection = () => [
     <TextInput type="text" name="Contract Name" required collection />
     <TextInput type="text" name="Symbol" required collection />
   </>,
-  <FileInput key={1} name="File" collection />,
+  <>
+    <FileInput key={1} name="File" collection />,
+    <TextInput
+      type="text-area"
+      name="Description"
+      description="The description will be included on the item's detail page underneath its image."
+      optional
+    />
+  </>,
   <RoyaltyInput key={2} name="Royalty" />,
   <>
     <FileInput name="File" preview collection />
