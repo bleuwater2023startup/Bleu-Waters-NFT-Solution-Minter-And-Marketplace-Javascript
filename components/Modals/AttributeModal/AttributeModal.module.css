@@ -119,6 +119,10 @@
   border: 1px solid var(--color-border);
 }
 
+.attribute .value {
+  width: 50%;
+}
+
 .attribute input:hover {
   border: 1px solid var(--color-border-hover);
 }

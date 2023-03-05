@@ -70,7 +70,7 @@ const Asset = () => {
           <ItemDetails collection={collection} />
         </AssetDropdownWrapper>
         <AssetDropdownWrapper name="Utility">
-          <Utility collection={collection} />
+          <Utility ipfsData={ipfsData} />
         </AssetDropdownWrapper>
         <AssetDropdownWrapper name="Royalty">
           <Royalty />

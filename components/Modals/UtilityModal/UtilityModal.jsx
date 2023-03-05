@@ -1,84 +1,120 @@
 import classes from "./UtilityModal.module.css";
 import CloseIcon from "../../../assets/icon-close.svg";
-import AddIcon from "../../../assets/icon-add.svg";
 import { useState } from "react";
 import Button from "../../Button/Button";
+import Select from "../../Select/Select";
+import { useContext } from "react";
+import { StateContext } from "../../../context/state.context";
+import { setNotification } from "../../../context/state.actions";
 
-const UtilityModal = ({ handleSave, onClose, allAttributes }) => {
-  const [attributes, setAttributes] = useState(
-    allAttributes.length
-      ? allAttributes
-      : [{ id: Date.now(), trait_type: "", value: "" }]
+const utitilityListDuration = {
+  "Waitlist Spot": ["One time"],
+  "E-Learning Class": ["1 month", "3 months", "6 months"],
+  "One-on-one call": ["2 calls", "4 calls", "6 calls"],
+  "Protected NFTs": ["Infinity"],
+};
+
+const getUtilityDuration = (allUtilities) => {
+  return Object.keys(utitilityListDuration).filter((u) =>
+    allUtilities.every((au) => au.utility !== u)
   );
+};
 
-  const handleAddAttribute = () => {
-    const newAttribute = {
+const UtilityModal = ({ onSave, onClose, allUtilities }) => {
+  const { dispatch } = useContext(StateContext);
+  const [utilityList, setUtilityList] = useState(
+    allUtilities.length ? getUtilityDuration(allUtilities) : Object.keys(utitilityListDuration)
+  );
+  const [utilities, setUtilities] = useState(allUtilities.length ? allUtilities : []);
+
+  const handleAddUtility = (e) => {
+    const newUtilities = {
       id: Date.now(),
-      trait_type: "",
-      value: "",
+      utility: e,
+      duration: "",
     };
 
-    setAttributes((attributes) => [...attributes, newAttribute]);
+    setUtilityList((util) => util.filter((u) => u !== e));
+    setUtilities((utilities) => [...utilities, newUtilities]);
   };
 
-  const handleAttributeChange = (e) => {
+  const handleUtilityChange = (e) => {
     const { name, id, value } = e.target;
-    const newAttributes = attributes.map((attribute) =>
-      String(attribute.id) === id ? { ...attribute, [name]: value } : attribute
+    const newUtilities = utilities.map((utility) =>
+      String(utility.id) === id ? { ...utility, [name]: value } : utility
     );
 
-    setAttributes(newAttributes);
+    setUtilities(newUtilities);
   };
 
-  const handleRemoveAttribute = (id) => {
-    const newAttributes = attributes.filter((attribute) => attribute.id !== id);
-    setAttributes(newAttributes);
+  const handleRemoveUtility = (id) => {
+    const { utility } = utilities.find((utility) => utility.id === id);
+    const newUtilities = utilities.filter((utility) => utility.id !== id);
+    setUtilities(newUtilities);
+    setUtilityList((util) => [...util, utility]);
+  };
+
+  const handleSave = () => {
+    const isEmpty = utilities.find(({ duration }) => !duration);
+    if (isEmpty) {
+      dispatch(
+        setNotification({
+          type: "warning",
+          message: "Please set duration",
+        })
+      );
+    } else {
+      const newUtilities = utilities.filter(({ duration }) => duration);
+      onSave(newUtilities);
+      onClose();
+    }
   };
 
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <CloseIcon className={classes.closeIcon_round} onClick={onClose} />
-        <div className={classes.heading}>Add attribute</div>
-        <div className={classes.attributes}>
-          {attributes.map(({ id, trait_type, value }) => (
-            <div key={id} className={classes.attribute}>
+        <div onClick={onClose} className={classes.closeIcon_round}>
+          <CloseIcon />
+        </div>
+        <div className={classes.heading}>Add utility</div>
+        <div className={classes.utilities}>
+          {utilities.map(({ id, utility, duration }) => (
+            <div key={id} className={classes.utility}>
               <input
                 id={id}
-                name="trait_type"
-                value={trait_type}
-                onChange={handleAttributeChange}
-                placeholder="trait_type"
-                className={classes.key}
+                name="utility"
+                value={utility}
+                onChange={handleUtilityChange}
+                placeholder="Utility"
+                disabled
               />
-              <input
-                id={id}
-                name="value"
-                value={value}
-                onChange={handleAttributeChange}
-                placeholder="value"
-                className={classes.value}
-              />
-              <div
-                onClick={() => handleRemoveAttribute(id)}
-                className={classes.remAttribute}
-              >
-                <CloseIcon className={classes.closeIcon_square} />
+              <select value={duration} onChange={handleUtilityChange} name="duration" id={id}>
+                <option value="" selected disabled hidden>
+                  Set duration
+                </option>
+                {utitilityListDuration[utility].map((u) => (
+                  <option key={u} value={u}>
+                    {u}
+                  </option>
+                ))}
+              </select>
+              <div onClick={() => handleRemoveUtility(id)} className={classes.remUtility}>
+                <div className={classes.closeIcon_square}>
+                  <CloseIcon />
+                </div>
               </div>
             </div>
           ))}
         </div>
-        <div onClick={handleAddAttribute} className={classes.addIcon}>
-          <AddIcon />
-          <div>Add more</div>
+        <div className={classes.select}>
+          <Select
+            list={utilityList}
+            _default="Select utility"
+            onChange={(e) => handleAddUtility(e)}
+          />
         </div>
 
-        <div
-          onClick={() => {
-            handleSave(attributes), onClose();
-          }}
-          className={classes.button}
-        >
+        <div onClick={handleSave} className={classes.button}>
           <Button accent>Save</Button>
         </div>
       </div>

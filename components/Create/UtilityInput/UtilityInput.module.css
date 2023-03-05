@@ -7,21 +7,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 .name {
   font-weight: 600;
-  font-size: 16px;
-  line-height: 168%;
+  font-size: 1rem;
+  margin-bottom: 1em;
 }
 
 .description {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 168%;
+  font-size: 1rem;
 }
 
-.attributes {
+.attributeContainer {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -30,10 +29,17 @@
 }
 
 .attribute {
+  border: 1px solid var(--color-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 1em;
-  padding: 0.4em 0.8em;
+  padding: 0.6em 0.8em;
+  border-radius: 0.6em;
+}
+
+.utility {
+  color: var(--color-dark);
+  font-weight: 500;
 }

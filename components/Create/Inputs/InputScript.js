@@ -4,6 +4,7 @@ import {
   setMintData,
   setNotification,
 } from "../../../context/state.actions";
+import { INITIAL_STATE } from "../../../context/state.reducer";
 import { createCollectionProfile } from "../../../firebase/firebase";
 import {
   handleCreateCollection,
@@ -127,7 +128,7 @@ export const _handleMint = async (createProps) => {
 
   if (!account) return connectAccountNotification(dispatch);
 
-  dispatch(setLoadingScreen(mintMessage));
+  dispatch(setLoadingScreen(mintMessage1));
   const res = await handleMint({
     walletProvider,
     account,
@@ -139,13 +140,15 @@ export const _handleMint = async (createProps) => {
     collectionAddress: mintData["Collection Address"],
   });
   if (res) {
-    try {
-      await createCollectionProfile({
-        id: mintData["Collection Address"].toLowerCase(),
-        description: mintData.Description,
-      });
-    } catch (error) {
-      console.log(error);
+    if (mintType === "Collection") {
+      try {
+        await createCollectionProfile({
+          id: mintData["Collection Address"].toLowerCase(),
+          description: mintData.Description,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
     dispatch(
       setCreateSuccessModal({
@@ -203,17 +206,10 @@ export const handleInvalidCreateCollectionInput = (dispatch) => {
 };
 
 export const initMint = ({ dispatch }) => {
-  dispatch(
-    setMintData({
-      "Contract Name": "",
-      Symbol: "",
-      Name: "",
-      File: null,
-      Description: "",
-      Attributes: [],
-      Royalty: [],
-    })
-  );
+  const mintDataState = INITIAL_STATE.mintData;
+  delete mintDataState.MintType;
+  console.log(mintDataState);
+  dispatch(setMintData(mintDataState));
 };
 
 export const connectAccountNotification = (dispatch) => {
@@ -273,9 +269,14 @@ export const ipfsSuccessUploadMessage = {
   message: "Files uploaded successfully",
 };
 
-export const mintMessage = {
+export const mintMessage1 = {
   title: "Creating your NFT",
   description: "Check your wallet. You'll be asked to confirm this transaction from your wallet.",
+};
+
+export const mintMessage2 = {
+  title: "Finalizing",
+  description: "Thank you for your confirmation. chilax while we do our part.",
 };
 
 export const mintErrorMessage = {

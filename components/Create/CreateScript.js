@@ -25,6 +25,7 @@ import {
   ipfsErrorUploadMessage,
   ipfsSuccessUploadMessage,
   ipfsUploadMessage,
+  mintMessage2,
 } from "./Inputs/InputScript";
 import { ethers } from "ethers";
 
@@ -142,7 +143,9 @@ export const handleMint = async ({
         })
       );
     },
-    onSuccess: (tx) => console.log("Waiting for transaction"),
+    onSuccess: (tx) => {
+      dispatch(setLoadingScreen(mintMessage2));
+    },
   });
 
   if (txResponse) {
@@ -808,6 +811,13 @@ const transformAttribute = (attributes) => {
   }));
 };
 
+const transformUtility = (utilities) => {
+  return utilities.map((util) => ({
+    utility: util.utility,
+    duration: util.duration,
+  }));
+};
+
 const uploadImageToIpfs = async (image) => {
   try {
     await pinata.testAuthentication();
@@ -847,15 +857,17 @@ const uploadMetadataToIpfs = async ({ image, name, description, attributes }) =>
 };
 
 const uploadToIpfs = async (metadata) => {
-  const { File, Name, Description, Attributes } = metadata;
+  const { File, Name, Description, Attributes, Utilities } = metadata;
   const imageUrl = await uploadImageToIpfs(File);
   if (imageUrl) {
     const transformedAttribute = transformAttribute(Attributes);
+    const transformedUtility = transformUtility(Utilities);
     const res = await uploadMetadataToIpfs({
       name: Name,
       description: Description,
       image: imageUrl.IpfsHash,
       attributes: transformedAttribute,
+      utilities: transformedUtility,
     });
     return res;
   }
@@ -894,8 +906,9 @@ export const uploadCollectionToIpfs = async (metadata, dispatch) => {
 
 export const uploadSingleToIpfs = async (metadata, dispatch) => {
   const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY });
-  const { File, Name, Description, Attributes } = metadata;
+  const { File, Name, Description, Attributes, Utilities } = metadata;
   const transformedAttribute = transformAttribute(Attributes);
+  const transformedUtility = transformUtility(Utilities);
   dispatch(setLoadingScreen(ipfsUploadMessage));
   try {
     const data = await nftstorage.store({
@@ -903,6 +916,7 @@ export const uploadSingleToIpfs = async (metadata, dispatch) => {
       description: Description,
       image: dataURLToFile(await getDataUrl(File), `img-${Date.now()}`),
       attributes: transformedAttribute,
+      utilities: transformedUtility,
     });
     dispatch(setNotification(ipfsSuccessUploadMessage));
     return data.url;

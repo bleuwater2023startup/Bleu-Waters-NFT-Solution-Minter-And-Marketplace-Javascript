@@ -38,6 +38,10 @@ const Inputs = ({ collection, flow, handleStep, stepId, mintType }) => {
     handleSession(createProps);
   }, [mintData]);
 
+  // useEffect(() => {
+  //   document.documentElement.scrollTop = 0;
+  // },[]);
+
   return (
     <div className={`${classes.container} ${reset && classes.reset}`}>
       {collection[stepId]}

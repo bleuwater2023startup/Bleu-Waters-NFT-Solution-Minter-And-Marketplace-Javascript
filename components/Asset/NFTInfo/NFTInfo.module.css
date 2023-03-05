@@ -174,8 +174,11 @@
 /* .creator {} */
 .owner_ {
   font-size: 1rem;
-  font-weight: 400;
   color: var(--color-dark);
+}
+
+.owner_ span:last-child {
+  color: var(--color-accent);
 }
 
 .owner {
@@ -205,6 +208,11 @@
   background: var(--card-bg);
   border: 1px solid var(--color-border);
   cursor: pointer;
+}
+
+.transfer:hover,
+.reload:hover {
+  border: 1px solid var(--color-border-hover);
 }
 
 .price {

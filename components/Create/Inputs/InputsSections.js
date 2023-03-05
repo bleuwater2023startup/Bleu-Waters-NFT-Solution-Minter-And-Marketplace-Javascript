@@ -2,6 +2,7 @@ import AttributeInput from "../AttributeInput/AttributeInput";
 import FileInput from "../FileInput/FileInput";
 import RoyaltyInput from "../RoyaltyInput/RoyaltyInput";
 import TextInput from "../TextInput/TextInput";
+import UtilityInput from "../UtilityInput/UtilityInput";
 
 export const newCollection = () => [
   <>
@@ -34,6 +35,7 @@ export const newContract = () => [
     <TextInput type="text" name="Name" required />
     <TextInput type="text-area" name="Description" required />
     <AttributeInput name="Attributes" />
+    <UtilityInput name="Utilities" />
   </>,
   <RoyaltyInput key={3} name="Royalty" />,
   <>
@@ -41,6 +43,7 @@ export const newContract = () => [
     <TextInput type="text" name="Name" required preview />
     <TextInput type="text-area" name="Description" required preview />
     <AttributeInput name="Attributes" preview />
+    <UtilityInput name="Utilities" preview />
     <RoyaltyInput name="Royalty" preview />
   </>,
 ];
@@ -51,11 +54,13 @@ export const existingContract = () => [
     <TextInput type="text" name={"Name"} required />
     <TextInput type="text-area" name={"Description"} required />
     <AttributeInput name="Attributes" />
+    <UtilityInput name="Utilities" />
   </>,
   <>
     <FileInput name="File" preview />
     <TextInput type="text" name={"Name"} required preview />
     <TextInput type="text-area" name={"Description"} required preview />
     <AttributeInput name="Attributes" preview />
+    <UtilityInput name="Utilities" preview />
   </>,
 ];

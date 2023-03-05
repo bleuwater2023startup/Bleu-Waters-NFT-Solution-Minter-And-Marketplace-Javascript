@@ -19,6 +19,7 @@
 }
 
 .imageContainer {
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -27,6 +28,7 @@
 }
 
 .innerImageContainer {
+  width: 100%;
   border-radius: 0.6em;
   overflow: hidden;
 }
@@ -42,6 +44,7 @@
   border-radius: 0.6em;
   transition: all 300ms;
   margin-bottom: -4px;
+  object-fit: cover;
 }
 
 .details {

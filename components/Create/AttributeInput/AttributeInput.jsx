@@ -1,4 +1,4 @@
-import { use, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { setMintData } from "../../../context/state.actions";
 import { StateContext } from "../../../context/state.context";
 import Button from "../../Button/Button";

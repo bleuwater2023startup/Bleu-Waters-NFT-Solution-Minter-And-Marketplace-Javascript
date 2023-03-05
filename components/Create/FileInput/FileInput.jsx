@@ -151,7 +151,7 @@ const FileInput = ({ name, preview, collection }) => {
             preview={preview}
           />
         ) : preview && mintData.File_Name ? (
-          <div>{mintData.File_Name}</div>
+          <div> {`${mintData.File_Name}- Don't worry, your image is safe.`}</div>
         ) : (
           <div className={classes.imageContainer}>
             <div onClick={handleClick} className={`${classes.wrapper} ${isDrag && classes.hover}`}>

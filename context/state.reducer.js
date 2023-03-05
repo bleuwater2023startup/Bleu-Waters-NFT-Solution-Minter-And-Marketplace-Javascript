@@ -18,6 +18,7 @@ export const INITIAL_STATE = {
     File: null,
     Description: "",
     Attributes: [],
+    Utilities: [],
     Royalty: [],
     MintType: "",
   },

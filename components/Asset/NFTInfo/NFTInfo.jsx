@@ -228,7 +228,9 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
           <div className={classes.collectionName}>{name}</div>
           <div className={classes.collectionId}>{ipfsData?.name}</div>
           {isOwner() ? (
-            <div className={classes.owner_}>Owned by you</div>
+            <div className={classes.owner_}>
+              <span>Owned by</span> <span>you</span>
+            </div>
           ) : (
             <div className={classes.innerContainer}>
               <div className={classes.icon}></div>
@@ -278,12 +280,12 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
                       Transfer NFT
                     </Link>
                     <div onClick={() => refetch()} className={classes.item}>
-                      Refresh
+                      Refresh metadata
                     </div>
                   </>
                 ) : (
                   <div onClick={() => refetch()} className={classes.item}>
-                    Refresh
+                    Refresh metadata
                   </div>
                 )}
               </div>
@@ -299,7 +301,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
           ) : null}
           <div onClick={() => refetch()} className={classes.reload}>
             <ReloadIcon />
-            <div>Refresh</div>
+            <div>Refresh metadata</div>
           </div>
         </div>
         {isOwner() && isListed() ? (
