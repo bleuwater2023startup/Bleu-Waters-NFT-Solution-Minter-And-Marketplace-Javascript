@@ -262,7 +262,7 @@ const NFTInfo = ({ collection: _collection, ipfsData, refetch, usd }) => {
             </div>
             <div className={classes.dropdownContainer}>
               <div className={classes.dropdown}>
-                {creator.toLowerCase() === account.toLowerCase() && (
+                {creator.toLowerCase() === account?.toLowerCase() && (
                   <div onClick={() => setToggleApproveTransferModal(true)} className={classes.item}>
                     Approve NFT <Tooltip data="Approve this NFT to be sold on other marketplace" />
                   </div>
