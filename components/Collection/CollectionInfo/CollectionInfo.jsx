@@ -133,7 +133,7 @@ const CollectionInfo = ({ collection }) => {
                 </div>
               </div>
             </div>
-            {creator.id.toLowerCase() === account.toLowerCase() ? (
+            {creator.id.toLowerCase() === account?.toLowerCase() ? (
               <div className={classes.dropdownWrapper}>
                 <div className={classes.dotsIcon}>
                   <DotsIcon />
